@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Website Prestasi</title>
+    <link rel="stylesheet" href="assets/css/bootstrap.css">
+    <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
+    <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
+    <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
+    
+    <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
+</head>
+<body>
+    <div id="app">
+        <div id="sidebar" class='active'>
+            <div class="sidebar-wrapper active">
+    <div class="sidebar-header">
+        <img src="assets/images/image857.png" alt="" srcset="">
+    </div>
+    <div class="sidebar-menu">
+        <ul class="menu">
+            <li class='sidebar-title'>Main Menu</li>
+        
+            <li class="sidebar-item active ">
+                <a href="index.html" class='sidebar-link'>  
+                    <i data-feather="home" width="20"></i> 
+                    <span>Dashboard</span>
+                </a>
+                
+            </li>          
+        
+        
+            <li class="sidebar-item  has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i data-feather="file-plus" width="20"></i> 
+                    <span>Kelola Mahasiswa</span>
+                </a>
+                
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addmahasiswa.html">Tambah Data</a>
+                    </li>
+                    
+                    <li>
+                        <a href="addmahasiswa.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
+            
+            
+        </ul>
+    </div>
+    <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
+</div>
+        </div>
+        <div id="main">
+            <nav class="navbar navbar-header navbar-expand navbar-light">
+                <a class="sidebar-toggler" href="#"><span class="navbar-toggler-icon"></span></a>
+                <button class="btn navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+                    aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav d-flex align-items-center navbar-light ml-auto">
+                        <li class="dropdown nav-icon">
+                            <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                                
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right dropdown-menu-large">
+                                
+                            </div>
+                        </li>
+                        <li class="dropdown nav-icon mr-2">
+                            <a href="#" data-toggle="dropdown" class="nav-link  dropdown-toggle nav-link-lg nav-link-user">
+                                <div class="d-lg-inline-block">
+                                    <!--<i data-feather="mail"></i>-->
+                                </div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                            </div>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
+                                <div class="avatar mr-1">
+                                    <!--<div class="avatar bg-warning mr-3">
+                                    <span class="avatar-content">A</span>-->
+                                    
+                                    <img src="assets/images/avatar/avatar-s-1.png" alt="" srcset="">
+                                </div>
+                                <div class="d-none d-md-block d-lg-inline-block">Admin</div>
+                            </a>
+                            <div class="dropdown-menu dropdown-menu-right">
+                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            
+<div class="main-content container-fluid">
+    <div class="page-title">
+        <div class="row">
+            <div class="col-12 col-md-6 order-md-1 order-last">
+                <h3>Data Mahasiswa</h3>
+                <!--
+                <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
+                -->
+            </div>
+            <div class="col-12 col-md-6 order-md-2 order-first">
+                <nav aria-label="breadcrumb" class='breadcrumb-header'>
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Mahasiswa</li>
+                    </ol>
+                </nav>
+            </div>
+        </div>
+    </div>
+    <section class="section">
+        <div class="card">
+            <div class="card-header">
+                Data table
+            </div>
+            <div class="card-body">
+                <table class='table table-striped' id="table1" >
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>NIM</th>
+                            <th>Fakultas</th>
+                            <th>Program Studi</th>
+                            <th>Aksi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                       
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </section>
+</div>
+
+          
+        </div>
+    </div>
+    <script src="assets/js/feather-icons/feather.min.js"></script>
+    <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
+    <script src="assets/js/app.js"></script>
+    <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
+    <script src="assets/js/vendors.js"></script>
+    <script src="assets/js/main.js"></script>
+
+
+
+
+    <!--ajax-->
+    <script src="assets/vendors/simple-datatables/jquery.min.js"></script>
+    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
+    <script type="text/javascript" src="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.js"></script>-->
+    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
+
+
+
+    <script>
+        var arrayReturn = [];
+        let b1 = '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" >Edit</button>'
+        let b2 =  '<button data-toggle="tooltip" title="Trash" class="btn btn-dark round"">Hapus</button>'
+        
+
+            $.ajax({
+                url : "http://localhost:8085/lihatmahasiswa",
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+                    //console.log(data.length);
+					for (var i = 0, len = data.data.length; i < len; i++) {
+						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].
+                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi, b1+" "+b2]);
+					}
+                inittable(arrayReturn);
+                //console.log(data.data[i])
+                }
+            });
+            function inittable(data) {	
+            //console.log(data);
+            $('#table1').DataTable( {
+                "aaData": data
+            } );
+	}
+    </script>
+</body>
+</html>

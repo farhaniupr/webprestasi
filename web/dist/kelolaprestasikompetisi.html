@@ -130,7 +130,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Mahasiswa</h3>
+                <h3>Data Prestasi Kompetisi</h3>
                 <!--
                 <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
                 -->
@@ -139,7 +139,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Mahasiswa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Prestasi Kompetisi</li>
                     </ol>
                 </nav>
             </div>
@@ -154,10 +154,12 @@
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>NIM</th>
-                            <th>Fakultas</th>
-                            <th>Program Studi</th>
+                            <th>Nama Kegitan</th>
+                            <th>Penyelenggara</th>
+                            <th>Kategori Kelompok</th>
+                            <th>Sertifikat</th>
+                            <th>Surat Tugas</th>
+                            <th>Status</th>
                             <th>Aksi</th>
                         </tr>
                     </thead>
@@ -194,22 +196,22 @@
     <script src="assets/js/axios.min.js"></script>
     <script>
         var arrayReturn = [];
-        let b1 = '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" >Edit</button>'
-        let b2 =  '<button data-toggle="tooltip" title="Trash" class="btn btn-dark round"">Hapus</button>'
+        let b1 = '<button data-toggle="tooltip" class="btn btn-dark round" >Edit</button>'
+        let b2 =  '<button data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>'
         
 
             $.ajax({
-                url : "http://localhost:8085/lihatmahasiswa",
+                url : "http://localhost:8085/lihatprestasi",
                 async: true,
                 dataType: 'json',
                 success: function (data) {
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {
+                        
 						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].                      
-                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi, '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`http://localhost:5500/web/dist/editmahasiswa.html?id='+data.data[i].Idmhs+'`" >Edit</button>'+" "+'<button onclick="DeleteM('+data.data[i].Idmhs+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
+                        arrayReturn.push([data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].kategori_kegiatan, '<center>'+data.data[i].unggah_sertifikat+'<br></br><a class="btn btn-sm btn-warning" href="http://localhost:5500/web/dist/image/'+data.data[i].unggah_sertifikat+'">Lihat</a>', '<center>'+data.data[i].unggah_surat_tugas+'<br></br><a class="btn btn-sm btn-warning" href="http://localhost:5500/web/dist/image/'+data.data[i].unggah_surat_tugas+'">Lihat</a>', data.data[i].status, '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`http://localhost:5500/web/dist/editmahasiswa.html?id='+data.data[i].Idmhs+'`" >Edit</button>'+"<br></br> "+'<button onclick="DeleteM('+data.data[i].Idmhs+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
 					}
                 inittable(arrayReturn);
-                //console.log(data.data[i])
                 }
             });
 
@@ -233,16 +235,3 @@
     </script>
 </body>
 </html>
-
-
-<!--referensi 
-    //<button onclick="window.location.href='b.php'">Click me</button>
-    // location.href=`http://localhost:5500/editmahasiswa   
-    // GetOne('+data.data[i].Idmhs+')"
-
-    //
-    var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5"; //window.location.href
-    var url = new URL(url_string);
-    var c = url.searchParams.get("c");
-    console.log(c);
--->

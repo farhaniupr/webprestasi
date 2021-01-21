@@ -36,7 +36,7 @@ type Admin struct {
 }
 
 type Prestasinonkompetisi struct {
-	Idprestasinon    int        `json:"id_prestasi_non"`
+	Idprestasinon    int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi_non"`
 	Idmhs            int        `json:"id_mhs"`
 	Namakegiatan     string     `json:"nama_kegiatan"`
 	Tempatkegiatan   string     `json:"tempat_kegiatan"`
@@ -49,7 +49,7 @@ type Prestasinonkompetisi struct {
 }
 
 type Prestasi struct {
-	Idprestasi          int        `json:"id_prestasi"`
+	Idprestasi          int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi"`
 	Idmhs               int        `json:"id_mhs"`
 	Namakegiatan        string     `json:"nama_kegiatan"`
 	Namapenyelenggaraan string     `json:"nama_penyelenggaraan"`
@@ -63,7 +63,7 @@ type Prestasi struct {
 	Unggahsertifikat    string     `json:"unggah_sertifikat"`
 	Unggahsurattugas    string     `json:"unggah_surat_tugas"`
 	Unggahfoto          string     `json:"unggah_foto"`
-	Status              bool       `json:"status"`
+	Status              string     `json:"status"`
 }
 
 type Pengabdian struct {
@@ -72,7 +72,7 @@ type Pengabdian struct {
 	Namaprogram   string     `json:"nama_program"`
 	Tahunkegiatan *time.Time `json:"tahun_kegiatan"`
 	Unggahsurat   string     `json:"unggah_surat"`
-	Status        bool       `json:"status"`
+	Status        string     `json:"status"`
 }
 
 type Organisasi struct {
@@ -82,5 +82,5 @@ type Organisasi struct {
 	Jabatanmhs     string `json:"jabatan_mhs"`
 	Periode        string `json:"periode"`
 	Unggahsk       string `json:"unggahsk"`
-	Status         bool   `json:"status"`
+	Status         string `json:"status"`
 }

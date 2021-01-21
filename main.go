@@ -31,18 +31,22 @@ func main() {
 	//get 1 row
 	router.GET("/lihatmahasiswa/:idmhs", controller.GetOneMahasiswa)
 	router.GET("/lihatprodi/:kode_prodi", controller.GetOneProdi)
+	router.GET("/lihatprestasi/:id_prestasi", controller.GetOnePrestasi)
 
 	//insert
 	router.POST("/addmahasiswa", controller.AddMahasiswa)
 	router.POST("/addprodi", controller.AddProdi)
+	router.POST("/addprestasi", controller.AddPrestasi)
 
 	//edit
 	router.PUT("/editmahasiswa/:idmhs", controller.EditMahasiswa)
 	router.PUT("/editprodi/:kode_prodi", controller.EditProdi)
+	router.PUT("/editprestasi/:id_prestasi", controller.EditPrestasi)
 
 	//delete
 	router.DELETE("/deletemahasiswa/:idmhs", controller.DeleteMahasiswa)
 	router.DELETE("/deleteprodi/:kode_prodi", controller.DeleteProdi)
+	router.DELETE("/deleteprestasi/:id_prestasi", controller.DeletePrestasi)
 
 	router.Run(":8085")
 }

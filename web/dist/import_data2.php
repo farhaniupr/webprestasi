@@ -1,6 +1,6 @@
 <?php
 error_reporting(0);
-include '../config/koneksi.php';
+include './koneksi.php';
 require('spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
 require('spreadsheet-reader-master/SpreadsheetReader.php');
 
@@ -15,15 +15,15 @@ foreach ($Reader as $Key => $Row)
 {
  // import data excel mulai baris ke-2 (karena ada header pada baris 1)
  if ($Key < 1) continue;   
- $query=mysqli_query($conn, "INSERT INTO fakultas_prodi(kode_prodi,nama_fakultas,nama_prodi) VALUES ('".$Row[2]."', '".$Row[0]."','".$Row[1]."')");
+ $query=mysqli_query($conn, "INSERT INTO fakultasprodi(kodeprodi,namafakultas,namaprodi) VALUES ('".$Row[2]."', '".$Row[0]."','".$Row[1]."')");
 }
 
 if ($query){
     echo "<script> alert ('Data Mahasiswa Berhasil Diimport');
-    window.location='kelola_fakultas_prodi.php'</script>";
+    window.location='kelolaprodi.html'</script>";
 }else
 {
     echo "<script> alert ('Data Mahasiswa Gagal Diimport');
-    window.location='kelola_fakultas_prodi.php'</script>";
+    window.location='kelolaprodi.html'</script>";
 }
 ?>

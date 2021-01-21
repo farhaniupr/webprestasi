@@ -65,6 +65,15 @@ func GetOneProdi(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": prodi})
 }
 
+func GetOnePrestasi(c *gin.Context) {
+	var prestasi models.Prestasi
+	parprestasi := c.Param("id_prestasi")
+
+	models.DB.Where("id_prestasi = ?", parprestasi).First(&prestasi)
+
+	c.JSON(http.StatusOK, gin.H{"data": prestasi})
+}
+
 //Insert
 func AddMahasiswa(c *gin.Context) {
 	var mahasiswa models.Mahasiswa
@@ -86,6 +95,19 @@ func AddProdi(c *gin.Context) {
 		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
 	}
 	result := models.DB.Create(&prodi)
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func AddPrestasi(c *gin.Context) {
+	var prestasi models.Prestasi
+
+	if err := c.Bind(&prestasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+	result := models.DB.Create(&prestasi)
 	chech := result.RowsAffected
 	if chech == 1 {
 		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
@@ -139,6 +161,31 @@ func EditProdi(c *gin.Context) {
 	}
 }
 
+func EditPrestasi(c *gin.Context) {
+	var prestasi models.Prestasi
+
+	if err := c.Bind(&prestasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parprestasi string
+	parprestasi = c.Param("id_prestasi")
+
+	parprestasiConvert, err := strconv.Atoi(parprestasi)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+	prestasi.Idprestasi = parprestasiConvert
+
+	result := models.DB.Where("Idprestasi = ?", prestasi.Idprestasi).Updates(&prestasi)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
 //Delete
 func DeleteMahasiswa(c *gin.Context) {
 	var mahasiswa models.Mahasiswa
@@ -157,7 +204,6 @@ func DeleteMahasiswa(c *gin.Context) {
 	}
 }
 
-//Delete
 func DeleteProdi(c *gin.Context) {
 	var prodi models.Fakultasprodi
 
@@ -168,6 +214,23 @@ func DeleteProdi(c *gin.Context) {
 	parkopi := c.Param("kode_prodi")
 
 	result := models.DB.Where("kodeprodi=?", parkopi).Delete(&prodi)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func DeletePrestasi(c *gin.Context) {
+	var prestasi models.Prestasi
+
+	if err := c.Bind(&prestasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	parprestasi := c.Param("id_prestasi")
+
+	result := models.DB.Where("idprestasi=?", parprestasi).Delete(&prestasi)
 
 	chech := result.RowsAffected
 	if chech == 1 {

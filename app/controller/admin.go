@@ -1,12 +1,15 @@
 package controller
 
 import (
+	"fmt"
 	"net/http"
 	"prestasi/app/models"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
 
+//Get
 func GetMahasiswa(c *gin.Context) {
 	var mahasiswa []models.Mahasiswa
 	models.DB.Find(&mahasiswa)
@@ -41,4 +44,133 @@ func GetPrestasi(c *gin.Context) {
 	var prestasi []models.Prestasi
 	models.DB.Find(&prestasi)
 	c.JSON(http.StatusOK, gin.H{"data": prestasi})
+}
+
+//Get 1 Row
+func GetOneMahasiswa(c *gin.Context) {
+	var mahasiswa models.Mahasiswa
+	paridmhs := c.Param("idmhs")
+
+	models.DB.Where("idmhs = ?", paridmhs).First(&mahasiswa)
+
+	c.JSON(http.StatusOK, gin.H{"data": mahasiswa})
+}
+
+func GetOneProdi(c *gin.Context) {
+	var prodi models.Fakultasprodi
+	parkopi := c.Param("kode_prodi")
+
+	models.DB.Where("kodeprodi = ?", parkopi).First(&prodi)
+
+	c.JSON(http.StatusOK, gin.H{"data": prodi})
+}
+
+//Insert
+func AddMahasiswa(c *gin.Context) {
+	var mahasiswa models.Mahasiswa
+
+	if err := c.Bind(&mahasiswa); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+	result := models.DB.Create(&mahasiswa)
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func AddProdi(c *gin.Context) {
+	var prodi models.Fakultasprodi
+
+	if err := c.Bind(&prodi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+	result := models.DB.Create(&prodi)
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+//Edit
+func EditMahasiswa(c *gin.Context) {
+	var mahasiswa models.Mahasiswa
+
+	if err := c.Bind(&mahasiswa); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var paridmhs string
+	paridmhs = c.Param("idmhs")
+
+	paridmhsConvert, err := strconv.Atoi(paridmhs)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+
+	mahasiswa.Idmhs = paridmhsConvert
+
+	result := models.DB.Where("idmhs= ?", mahasiswa.Idmhs).Updates(&mahasiswa)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func EditProdi(c *gin.Context) {
+	var prodi models.Fakultasprodi
+
+	if err := c.Bind(&prodi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parkopi string
+	parkopi = c.Param("kode_prodi")
+
+	prodi.Kodeprodi = parkopi
+
+	result := models.DB.Where("kodeprodi = ?", prodi.Kodeprodi).Updates(&prodi)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+//Delete
+func DeleteMahasiswa(c *gin.Context) {
+	var mahasiswa models.Mahasiswa
+
+	if err := c.Bind(&mahasiswa); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	paridmhs := c.Param("idmhs")
+
+	result := models.DB.Where("idmhs=?", paridmhs).Delete(&mahasiswa)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+//Delete
+func DeleteProdi(c *gin.Context) {
+	var prodi models.Fakultasprodi
+
+	if err := c.Bind(&prodi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	parkopi := c.Param("kode_prodi")
+
+	result := models.DB.Where("kodeprodi=?", parkopi).Delete(&prodi)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
 }

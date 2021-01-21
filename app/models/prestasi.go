@@ -9,7 +9,7 @@ const (
 
 //gorm:"primary_key";auto_increment;not_null
 type Mahasiswa struct {
-	Idmhs          int    `json:"idmhs"`
+	Idmhs          int    `gorm:"primary_key";auto_increment;not_null json:"idmhs"`
 	Nama           string `json:"nama"`
 	Nim            string `json:"nim"`
 	Password       string `json:"password"`
@@ -23,9 +23,9 @@ type Mahasiswa struct {
 }
 
 type Fakultasprodi struct {
-	KodeProdi    string `json:"kode_prodi"`
-	NamaFakultas string `json:"nama_fakultas"`
-	NamaProdi    string `json:"nama_prodi"`
+	Kodeprodi    string `json:"kode_prodi"`
+	Namafakultas string `json:"nama_fakultas"`
+	Namaprodi    string `json:"nama_prodi"`
 }
 
 type Admin struct {

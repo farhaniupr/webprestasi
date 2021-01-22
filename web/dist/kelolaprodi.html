@@ -68,11 +68,23 @@
                 
             </li>
             
-            <li class="sidebar-item ">
-                <a href="kelolaprestasikompetisi.html" class='sidebar-link'>
+            <li class="sidebar-item has-sub">
+                <a href="#" class='sidebar-link'>
                     <i data-feather="file-plus" width="20"></i> 
                     <span>Kelola Prestasi Kompetisi</span>
                 </a>
+
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addprestasi.html">Tambah Data</a>
+                    </li>
+                    
+                    <li>
+                        <a href="kelolaprestasikompetisi.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>
                 
             </li>
         </ul>
@@ -158,16 +170,16 @@
                                
                                 <div class="col-md-6 mb-1">
                                     <form method="post" action="import_data2.php" enctype="multipart/form-data">
-                                    <fieldset>
-                                        <div class="input-group">
+                                    
+                                        <div class="form-group">
                                             <div class="custom-file">
                                                 <input type="file" class="custom-file-input" id="file" name="file">                                                
                                             </div>
-                                            <div class="input-group-append">
+                                            <div class="form-actions">
                                                 <button class="btn btn-primary" type="submit" name="preview">Submit</button>
                                             </div>
                                         </div>
-                                    </fieldset>
+                                  
                                     </form>
                                 </div>
                             </div>

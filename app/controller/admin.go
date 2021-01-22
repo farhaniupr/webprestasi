@@ -5,9 +5,30 @@ import (
 	"net/http"
 	"prestasi/app/models"
 	"strconv"
+	"time"
 
 	"github.com/gin-gonic/gin"
 )
+
+type Result struct {
+	Nama                string     `json:"nama"`
+	Idprestasi          int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi"`
+	Idmhs               int        `json:"id_mhs"`
+	Namakegiatan        string     `json:"nama_kegiatan"`
+	Namapenyelenggaraan string     `json:"nama_penyelenggaraan"`
+	URL                 string     `json:"url"`
+	Jumlah              int        `json:"jumlah"`
+	Kategorikegiatan    string     `json:"kategori_kegiatan"`
+	Tingkatkegiatan     string     `json:"tingkat_kegiatan"`
+	Hasilkegiatan       string     `json:"hasil_kegiatan"`
+	Tempatkegiatan      string     `json:"tempat_kegiatan"`
+	Tanggalawal         *time.Time `json:"tanggal_awal"`
+	Tanggalakhir        *time.Time `json:"tanggal_akhir"`
+	Unggahsertifikat    string     `json:"unggah_sertifikat"`
+	Unggahsurattugas    string     `json:"unggah_surat_tugas"`
+	Unggahfoto          string     `json:"unggah_foto"`
+	Status              string     `json:"status"`
+}
 
 //Get
 func GetMahasiswa(c *gin.Context) {
@@ -41,9 +62,12 @@ func GetPrestasiNon(c *gin.Context) {
 }
 
 func GetPrestasi(c *gin.Context) {
-	var prestasi []models.Prestasi
-	models.DB.Find(&prestasi)
-	c.JSON(http.StatusOK, gin.H{"data": prestasi})
+	//var prestasi []models.Prestasi
+	var result []Result
+
+	models.DB.Table("prestasis").Select("prestasis.idmhs, prestasis.namakegiatan, prestasis.jumlah, mahasiswas.nama, prestasis.idprestasi, prestasis.namapenyelenggaraan, prestasis.url, prestasis.kategorikegiatan, prestasis.tingkatkegiatan, prestasis.hasilkegiatan, prestasis.tempatkegiatan, prestasis.tanggalawal, prestasis.tanggalakhir, prestasis.unggahsertifikat, prestasis.unggahsurattugas, prestasis.unggahfoto, prestasis.status").
+		Joins("left join mahasiswas on mahasiswas.idmhs = prestasis.idmhs").Scan(&result)
+	c.JSON(http.StatusOK, gin.H{"data": result})
 }
 
 //Get 1 Row
@@ -66,12 +90,16 @@ func GetOneProdi(c *gin.Context) {
 }
 
 func GetOnePrestasi(c *gin.Context) {
-	var prestasi models.Prestasi
+	//var prestasi models.Prestasi
+	var result Result
 	parprestasi := c.Param("id_prestasi")
 
-	models.DB.Where("id_prestasi = ?", parprestasi).First(&prestasi)
+	//models.DB.Where("id_prestasi = ?", parprestasi).First(&prestasi)
 
-	c.JSON(http.StatusOK, gin.H{"data": prestasi})
+	models.DB.Table("prestasis").Select("prestasis.idmhs, prestasis.namakegiatan, mahasiswas.nama, prestasis.jumlah, prestasis.idprestasi, prestasis.namapenyelenggaraan, prestasis.url, prestasis.kategorikegiatan, prestasis.tingkatkegiatan, prestasis.hasilkegiatan, prestasis.tempatkegiatan, prestasis.tanggalawal, prestasis.tanggalakhir, prestasis.unggahsertifikat, prestasis.unggahsurattugas, prestasis.unggahfoto, prestasis.status").
+		Joins("left join mahasiswas on mahasiswas.idmhs = prestasis.idmhs").Where("idprestasi = ?", parprestasi).Scan(&result)
+
+	c.JSON(http.StatusOK, gin.H{"data": result})
 }
 
 //Insert

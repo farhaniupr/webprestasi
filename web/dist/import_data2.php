@@ -1,8 +1,8 @@
 <?php
 error_reporting(0);
 include './koneksi.php';
-require('spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
-require('spreadsheet-reader-master/SpreadsheetReader.php');
+require('./spreadsheet-reader-master/php-excel-reader/excel_reader2.php');
+require('./spreadsheet-reader-master/SpreadsheetReader.php');
 
 //upload data excel kedalam folder uploads
 $target_dir = "file/".basename($_FILES['file']['name']);

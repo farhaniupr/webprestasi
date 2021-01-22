@@ -54,6 +54,7 @@ type Prestasi struct {
 	Namakegiatan        string     `json:"nama_kegiatan"`
 	Namapenyelenggaraan string     `json:"nama_penyelenggaraan"`
 	URL                 string     `json:"url"`
+	Jumlah              int        `json:"jumlah"`
 	Kategorikegiatan    string     `json:"kategori_kegiatan"`
 	Tingkatkegiatan     string     `json:"tingkat_kegiatan"`
 	Hasilkegiatan       string     `json:"hasil_kegiatan"`

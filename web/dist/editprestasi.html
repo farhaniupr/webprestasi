@@ -170,6 +170,7 @@
                                             <label for="nama_mahasiswa">Nama Mahasiswa</label>
                                             <select name="nama_mhs" id="nama_mhs" class="form-select" >
                                                 
+                                                
                                             </select>
                                         </div>
                                     </div>
@@ -249,7 +250,7 @@
                                 </div>
                             </form>
 
-                            <form>
+                            <form method="post" action="unggah_surattugas.php" enctype="multipart/form-data">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="unggahsurattugas">Unggah Surat Tugas</label>
@@ -261,7 +262,7 @@
                                                     <span for="unggah_surat_tugas" class="form-file-text">File unggah surat tugas</span>
                                                     <span class="form-file-button">Browse</span>
                                                 </label>
-                                                
+                                                <input type="hidden" id="idprestasi" name="idprestasi"/>
                                             </div>
                                         </div>
                                         <div class="form-actions">
@@ -283,6 +284,7 @@
                                                     <span for="unggah_foto" class="form-file-text">File unggah foto</span>
                                                     <span class="form-file-button">Browse</span>
                                                 </label>
+                                                <input type="hidden" id="idprestasi1" name="idprestasi1"/>
                                             </div>
                                         </div>                                           
                                         <div class="form-actions">
@@ -293,7 +295,7 @@
                                 </div>
                             </form>
 
-                            <form>
+                            <form method="post" action="unggah_sertifikat.php" enctype="multipart/form-data">
                                 <div class="col-md-6 col-12">
                                     <div class="form-group">
                                         <label for="unggahsertifikat">Unggah Sertifikat</label>                                           
@@ -305,6 +307,7 @@
                                                     <span for="unggah_sertifikat" class="form-file-text">File unggah sertifikat</span>
                                                     <span class="form-file-button">Browse</span>
                                                 </label>
+                                                <input type="hidden" id="idprestasi2" name="idprestasi2"/>
                                             </div>
                                         </div>
                                         <div class="form-actions">
@@ -379,7 +382,10 @@
                 var dateakhir = moment(data.data.tanggal_akhir).format("YYYY-MM-DD")
 
                 //document.getElementById('nama_mhs').value = data.data.nama
-                $("#nama_mhs").val(data.data.id_mhs).change();
+                $("#nama_mhs").val(data.data.id_mhs).change()
+                document.getElementById('idprestasi').value = parseInt(data.data.Idprestasi, 10);
+                document.getElementById('idprestasi1').value = parseInt(data.data.Idprestasi, 10);
+                document.getElementById('idprestasi2').value = parseInt(data.data.Idprestasi, 10);
                 document.getElementById('kategorikegiatan').value = data.data.kategori_kegiatan
                 document.getElementById('tingkatkegiatan').value = data.data.tingkat_kegiatan
                 document.getElementById('namakegiatan').value = data.data.nama_kegiatan

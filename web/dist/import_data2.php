@@ -15,7 +15,7 @@ foreach ($Reader as $Key => $Row)
 {
  // import data excel mulai baris ke-2 (karena ada header pada baris 1)
  if ($Key < 1) continue;   
- $query=mysqli_query($conn, "INSERT INTO fakultasprodi(kodeprodi,namafakultas,namaprodi) VALUES ('".$Row[2]."', '".$Row[0]."','".$Row[1]."')");
+ $query=mysqli_query($conn, "INSERT INTO fakultasprodis(kodeprodi,namafakultas,namaprodi) VALUES ('".$Row[2]."', '".$Row[0]."','".$Row[1]."')");
 }
 
 if ($query){

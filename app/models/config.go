@@ -10,6 +10,9 @@ var DB *gorm.DB
 const (
 	//phpmyadmin xampp
 	MySQLDsn = `root:@tcp(localhost)/prestasi?parseTime=True&charset=utf8`
+
+	//mysql
+	//MySQLDsn = `user:YbcuGH4Ks@z6$@tcp(localhost)/prestasi?parseTime=True&charset=utf8`
 )
 
 func init() {

@@ -30,11 +30,13 @@
                 
             </li>          
         
+        
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i data-feather="file-plus" width="20"></i> 
                     <span>Kelola Prodi</span>
-                </a>                
+                </a>
+                
                 <ul class="submenu ">
                     
                     <li>
@@ -43,8 +45,10 @@
                     
                     <li>
                         <a href="kelolaprodi.html">Lihat Data</a>
-                    </li>                    
-                </ul>                
+                    </li>
+                    
+                </ul>
+                
             </li>
 
             <li class="sidebar-item  has-sub">
@@ -140,8 +144,8 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Mahasiswa</h3>
-                <p class="text-subtitle text-muted">Edit Data Mahasiswa</p>
+                <h3>Data Prestasi</h3>
+                <p class="text-subtitle text-muted">Tambah Data Mahasiswa</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
@@ -160,7 +164,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Form Edit Data</h4>
+                        <h4 class="card-title">Form Tambah Data</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -214,7 +218,7 @@
                                         </div>
                                     </div>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Edit</button>
+                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Tambah</button>
                                         <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
                                     </div>
                                 </div>
@@ -226,8 +230,10 @@
         </div>
     </section>
     <!-- // Basic multiple Column Form section end -->
-</div>        
-    </div>
+</div>
+
+            
+        </div>
     </div>
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -236,59 +242,7 @@
     <script src="assets/js/main.js"></script>
 
     <script src="assets/js/axios.min.js"></script>
-    <script>
-        //
-
-        var urls = window.location.href;
-        var url = new URL(urls);
-        var c = url.searchParams.get("id");
-        GetOne(c);
-
-        function GetOne(idmhs) {
-                axios.get(`http://localhost:8085/lihatmahasiswa/${idmhs}`)
-                .then(response => {
-                console.log(' lihat mahasiswa', response.data.data);                
-                
-                document.getElementById('nama').value = response.data.data.nama
-                document.getElementById('nim').value = response.data.data.nim
-                document.getElementById('nohp').value = response.data.data.nohp
-                document.getElementById('programstudi').value = response.data.data.programstudi
-                document.getElementById('fakultas').value = response.data.data.fakultas
-                document.getElementById('email').value = response.data.data.email
-                
-            })
-            .catch(error => console.error(error));
-        };
-
-        // edit mhs
-        const EditMahasiswa = (mhs) => {
-            axios.put(`http://localhost:8085/editmahasiswa/${mhs.Idmhs}`, mhs)
-                .then(response => {
-                    //const  editmhs = response.data.data;
-                    console.log(`PUT : mhs is edited`, mhs);
-                    console.log(response.data);
-                            
-                })
-                .catch(error => console.error(error));
-        };
-
-        // event listener for form submission
-        const form = document.querySelector('form');
-
-        const formEvent = form.addEventListener('submit', event => {
-            event.preventDefault();
-
-            const nama = document.querySelector('#nama').value;
-            const nim = document.querySelector('#nim').value;
-            const fakultas = document.querySelector('#fakultas').value;
-            const programstudi = document.querySelector('#programstudi').value;
-            const nohp = document.querySelector('#nohp').value;
-            const email = document.querySelector('#email').value;
-            const mhs = { Idmhs : parseInt(c,10), nama : nama, nim : nim, fakultas : fakultas, programstudi : programstudi, nohp : nohp, email : email };
-            EditMahasiswa(mhs);
-            location.reload();  
-            
-        });
-    </script>
+    <script src="assets/js/mahasiswa.js"></script>
+    
 </body>
 </html>

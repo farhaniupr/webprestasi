@@ -13,9 +13,13 @@ func main() {
 
 	cfg.AllowAllOrigins = true
 	cfg.AllowCredentials = true
+	cfg.AddAllowedHeaders("*")
 
-	cfg.AllowedMethods = []string{"GET", "POST", "PUT", "DELETE"}
+	cfg.AllowedMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	cfg.AllowedHeaders = []string{"Authorization", "Origin", "Accept", "X-Requested-With", " Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers"}
+
+	//cfg.AllowAllOrigins =
+
 	router.Use(cors.New(cfg))
 	//router.Use(gin.Logger())
 	///router.Use(gin.Recovery())

@@ -49,31 +49,31 @@ type Prestasinonkompetisi struct {
 }
 
 type Prestasi struct {
-	Idprestasi          int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi"`
-	Idmhs               int        `json:"id_mhs"`
-	Namakegiatan        string     `json:"nama_kegiatan"`
-	Namapenyelenggaraan string     `json:"nama_penyelenggaraan"`
-	URL                 string     `json:"url"`
-	Jumlah              int        `json:"jumlah"`
-	Kategorikegiatan    string     `json:"kategori_kegiatan"`
-	Tingkatkegiatan     string     `json:"tingkat_kegiatan"`
-	Hasilkegiatan       string     `json:"hasil_kegiatan"`
-	Tempatkegiatan      string     `json:"tempat_kegiatan"`
-	Tanggalawal         *time.Time `json:"tanggal_awal"`
-	Tanggalakhir        *time.Time `json:"tanggal_akhir"`
-	Unggahsertifikat    string     `json:"unggah_sertifikat"`
-	Unggahsurattugas    string     `json:"unggah_surat_tugas"`
-	Unggahfoto          string     `json:"unggah_foto"`
-	Status              string     `json:"status"`
+	Idprestasi          int    `gorm:"primary_key";auto_increment;not_null json:"id_prestasi"`
+	Idmhs               int    `json:"id_mhs"`
+	Namakegiatan        string `json:"nama_kegiatan"`
+	Namapenyelenggaraan string `json:"nama_penyelenggaraan"`
+	URL                 string `json:"url"`
+	Jumlah              int    `json:"jumlah"`
+	Kategorikegiatan    string `json:"kategori_kegiatan"`
+	Tingkatkegiatan     string `json:"tingkat_kegiatan"`
+	Hasilkegiatan       string `json:"hasil_kegiatan"`
+	Tempatkegiatan      string `json:"tempat_kegiatan"`
+	Tanggalawal         string `json:"tanggal_awal"`
+	Tanggalakhir        string `json:"tanggal_akhir"`
+	Unggahsertifikat    string `json:"unggah_sertifikat"`
+	Unggahsurattugas    string `json:"unggah_surat_tugas"`
+	Unggahfoto          string `json:"unggah_foto"`
+	Status              string `json:"status"`
 }
 
 type Pengabdian struct {
-	Idpengabdian  int        `json:"id_pengabdian"`
-	Idmhs         int        `json:"id_mhs"`
-	Namaprogram   string     `json:"nama_program"`
-	Tahunkegiatan *time.Time `json:"tahun_kegiatan"`
-	Unggahsurat   string     `json:"unggah_surat"`
-	Status        string     `json:"status"`
+	Idpengabdian  int    `json:"id_pengabdian"`
+	Idmhs         int    `json:"id_mhs"`
+	Namaprogram   string `json:"nama_program"`
+	Tahunkegiatan string `json:"tahun_kegiatan"`
+	Unggahsurat   string `json:"unggah_surat"`
+	Status        string `json:"status"`
 }
 
 type Organisasi struct {

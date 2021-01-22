@@ -1,8 +1,16 @@
 <?php
+
 $database ="prestasi";
 $servername = "localhost";
 $username = "root";
 $password = "";
+
+/*
+$database ="prestasi";
+$servername = "localhost";
+$username = "user";
+$password = "YbcuGH4Ks@z6$";
+*/
 
 $conn = mysqli_connect($servername, $username, $password, $database);
 // mengecek koneksi

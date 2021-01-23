@@ -47,10 +47,16 @@ func main() {
 	router.PUT("/editprodi/:kode_prodi", controller.EditProdi)
 	router.PUT("/editprestasi/:id_prestasi", controller.EditPrestasi)
 
+	//edit > setuju/tidak
+	router.PUT("/editsetujuprestasi/:id_prestasi", controller.EditSetujuPrestasi)
+	router.PUT("/edittsetujuprestasi/:id_prestasi", controller.EditTSetujuPrestasi)
 	//delete
 	router.DELETE("/deletemahasiswa/:idmhs", controller.DeleteMahasiswa)
 	router.DELETE("/deleteprodi/:kode_prodi", controller.DeleteProdi)
 	router.DELETE("/deleteprestasi/:id_prestasi", controller.DeletePrestasi)
+
+	router.POST("/upload", controller.Upload)
+	router.POST("/uploadpdf", controller.Pdfupload)
 
 	router.Run(":8085")
 }

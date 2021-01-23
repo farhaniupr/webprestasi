@@ -30,8 +30,8 @@ $ext2 = strtolower(end(explode('.', $nama_file2)));
 		if(in_array($ext1, $valid_ext) && in_array($ext2, $valid_ext) && in_array($ext3, $valid_ext2)){
 			move_uploaded_file($_FILES['unggahfoto']['tmp_name'], "image/".$_FILES['unggahfoto']['name']);
             
-            echo "<script> alert('Anda Telah Berhasil input data');
-            window.location='http://localhost/webprestasi/web/dist/kelolaprestasikompetisi.html' </script>";
+			echo "<script> alert('Anda Telah Berhasil input data'); 
+			window.location='http://localhost/webprestasi/web/dist/kelolaprestasikompetisi.html'</script>";
             
 			}else{
 					echo "<script> alert ('Data Gagal diinput.'); history.back(); </script>";

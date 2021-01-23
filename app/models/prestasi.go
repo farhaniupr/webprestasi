@@ -67,6 +67,11 @@ type Prestasi struct {
 	Status              string `json:"status"`
 }
 
+type Foto struct {
+	Username string `json:"username"`
+	Value    string `json:"value"`
+}
+
 type Pengabdian struct {
 	Idpengabdian  int    `json:"id_pengabdian"`
 	Idmhs         int    `json:"id_mhs"`

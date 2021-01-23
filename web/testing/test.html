@@ -1,0 +1,72 @@
+<html>
+<body>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/bs-3.3.7/jq-3.3.1/dt-1.10.18/r-2.2.2/rg-1.1.0/rr-1.2.4/datatables.min.css" />
+
+
+    <div class="margin-top-15">
+                                                
+        <table id="example" class="display" cellspacing="0" width="100%">
+                    <thead>
+                        <tr>
+
+                            <th>fC.type</th>
+                            <th>f.type</th>
+                            <th>f.prop</th>
+                            <th>f.geom.type</th>
+                           
+                        </tr>
+                    </thead>
+
+                </table>
+    </div>
+    <script src="assets/vendors/simple-datatables/jquery.min.js"></script>-->
+    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
+<script>
+    $(document).ready(function () {
+        var getit;
+        getdata();
+
+        function getdata(){
+        const getPeople = async () => {
+                    const data = await fetch('http://localhost:8085/lihatprestasi', {
+                        method: 'GET',
+                        headers: {
+                            'Content-Type': 'application/json',                                  
+                        }
+                    });
+                    const jsondata = await data.json();
+                    console.log(jsondata.data);
+                getit=jsondata.data;
+                    tabl();
+                return jsondata;
+                };
+                getPeople();
+            
+        }
+
+        function tabl(){
+        var table = $("#example").DataTable({
+
+                    data: getit,
+                    columns: [
+
+                        {
+                            data: "nama",
+                        },
+
+                        {
+                            data: "nama_kegiatan",
+                        },
+                        {
+                            data: "nama_penyelenggaran"
+                        },
+                        {
+                            data: "status"
+                        }
+                    ]
+                });
+        }
+});
+</script>
+</body>
+</html>

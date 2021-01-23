@@ -87,6 +87,25 @@
                 </ul>
                 
             </li>
+            <li class="sidebar-item has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i data-feather="file-plus" width="20"></i> 
+                    <span>Kelola Organisasi</span>
+                </a>
+
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addorganisasi.html">Tambah Data</a>
+                    </li>
+                    
+                    <li>
+                        <a href="kelolaorganisasi.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
             
         </ul>
     </div>
@@ -143,6 +162,7 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Data Prestasi Kompetisi</h3>
+
                 <!--
                 <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
                 -->
@@ -161,6 +181,7 @@
         <div class="card">
             <div class="card-header">
                 Data table
+                <br></br><a href="export1.php" class="btn icon icon-left btn-success">Export File</a>
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1" >
@@ -233,7 +254,7 @@
                             data.data[i].status,
                             '<center><a href="#" onclick="return TSetuju('+data.data[i].Idprestasi+')" class="btn icon icon-left btn-danger"><i data-feather="alert-circle"></i>Tidak</a>'+'<br></br>'+
                             '<a href="#" onclick="return Setuju('+data.data[i].Idprestasi+')" class="btn icon icon-left btn-success"><i data-feather="check-circle"></i>Setuju</a>', 
-                            '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`http://localhost:5500/web/dist/editprestasi.html?id='+data.data[i].Idprestasi+'`" >Edit</button>'+"<br></br> "
+                            '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editprestasi.html?id='+data.data[i].Idprestasi+'`" >Edit</button>'+"<br></br> "
                             +'<button onclick="DeleteM('+data.data[i].Idprestasi+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
                     }
                     

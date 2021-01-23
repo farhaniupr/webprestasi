@@ -73,7 +73,7 @@ type Foto struct {
 }
 
 type Pengabdian struct {
-	Idpengabdian  int    `json:"id_pengabdian"`
+	Idpengabdian  int    `gorm:"primary_key";auto_increment;not_null json:"id_pengabdian"`
 	Idmhs         int    `json:"id_mhs"`
 	Namaprogram   string `json:"nama_program"`
 	Tahunkegiatan string `json:"tahun_kegiatan"`
@@ -82,7 +82,7 @@ type Pengabdian struct {
 }
 
 type Organisasi struct {
-	Idorganisasi   int    `json:"id_organisasi"`
+	Idorganisasi   int    `gorm:"primary_key";auto_increment;not_null json:"id_organisasi"`
 	Idmhs          int    `json:"id_mhs"`
 	Namaorganisasi string `json:"nama_organisasi"`
 	Jabatanmhs     string `json:"jabatan_mhs"`

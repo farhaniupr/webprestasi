@@ -87,6 +87,25 @@
                 </ul>
                 
             </li>
+            <li class="sidebar-item has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i data-feather="file-plus" width="20"></i> 
+                    <span>Kelola Organisasi</span>
+                </a>
+
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addorganisasi.html">Tambah Data</a>
+                    </li>
+                    
+                    <li>
+                        <a href="kelolaorganisasi.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
             
         </ul>
     </div>
@@ -218,7 +237,9 @@
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {
 						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].                      
-                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi, '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`http://localhost:5500/web/dist/editmahasiswa.html?id='+data.data[i].Idmhs+'`" >Edit</button>'+" "+'<button onclick="DeleteM('+data.data[i].Idmhs+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
+                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi, 
+                        '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editmahasiswa.html?id='+data.data[i].Idmhs
+                        +'`" >Edit</button>'+" "+'<button onclick="DeleteM('+data.data[i].Idmhs+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
 					}
                 inittable(arrayReturn);
                 //console.log(data.data[i])

@@ -36,27 +36,36 @@ func main() {
 	router.GET("/lihatmahasiswa/:idmhs", controller.GetOneMahasiswa)
 	router.GET("/lihatprodi/:kode_prodi", controller.GetOneProdi)
 	router.GET("/lihatprestasi/:id_prestasi", controller.GetOnePrestasi)
+	router.GET("/lihatorganisasi/:id_organisasi", controller.GetOneOrganisasi)
 
 	//insert
 	router.POST("/addmahasiswa", controller.AddMahasiswa)
 	router.POST("/addprodi", controller.AddProdi)
 	router.POST("/addprestasi", controller.AddPrestasi)
+	router.POST("/addorganisasi", controller.AddOrganisasi)
 
 	//edit
 	router.PUT("/editmahasiswa/:idmhs", controller.EditMahasiswa)
 	router.PUT("/editprodi/:kode_prodi", controller.EditProdi)
 	router.PUT("/editprestasi/:id_prestasi", controller.EditPrestasi)
+	router.PUT("/editorganisasi/:id_organisasi", controller.EditOrganisasi)
 
 	//edit > setuju/tidak
 	router.PUT("/editsetujuprestasi/:id_prestasi", controller.EditSetujuPrestasi)
 	router.PUT("/edittsetujuprestasi/:id_prestasi", controller.EditTSetujuPrestasi)
+
+	router.PUT("/editsetujuorganisasi/:id_organisasi", controller.EditSetujuOrganisasi)
+	router.PUT("/edittsetujuorganisasi/:id_organisasi", controller.EditTSetujuOrganisasi)
+
 	//delete
 	router.DELETE("/deletemahasiswa/:idmhs", controller.DeleteMahasiswa)
 	router.DELETE("/deleteprodi/:kode_prodi", controller.DeleteProdi)
 	router.DELETE("/deleteprestasi/:id_prestasi", controller.DeletePrestasi)
+	router.DELETE("/deleteorganisasi/:id_organisasi", controller.DeleteOrganisasi)
 
-	router.POST("/upload", controller.Upload)
-	router.POST("/uploadpdf", controller.Pdfupload)
+	//REST API upload -- sdh digabung
+	//router.POST("/upload", controller.Upload)
+	//router.POST("/uploadpdf", controller.Pdfupload)
 
 	router.Run(":8085")
 }

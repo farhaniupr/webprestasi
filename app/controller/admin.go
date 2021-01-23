@@ -36,6 +36,17 @@ type Result struct {
 	Status              string     `json:"status"`
 }
 
+type ResultOrganisasi struct {
+	Idorganisasi   int    `json:"id_organisasi"`
+	Idmhs          int    `json:"id_mhs"`
+	Nama           string `json:"nama"`
+	Namaorganisasi string `json:"nama_organisasi"`
+	Jabatanmhs     string `json:"jabatan_mhs"`
+	Periode        string `json:"periode"`
+	Unggahsk       string `json:"unggahsk"`
+	Status         string `json:"status"`
+}
+
 type Prestasi struct {
 	Idprestasi          int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi"`
 	Idmhs               int        `json:"id_mhs"`
@@ -69,8 +80,10 @@ func GetProdi(c *gin.Context) {
 }
 
 func GetOrganisasi(c *gin.Context) {
-	var organisasi []models.Organisasi
-	models.DB.Find(&organisasi)
+	var organisasi []ResultOrganisasi
+	//models.DB.Find(&organisasi)
+	models.DB.Table("organisasis").Select("organisasis.idorganisasi, organisasis.idmhs, organisasis.namaorganisasi, organisasis.jabatanmhs, organisasis.periode, organisasis.unggahsk, organisasis.status, mahasiswas.nama").
+		Joins("left join mahasiswas on mahasiswas.idmhs = organisasis.idmhs").Scan(&organisasi)
 	c.JSON(http.StatusOK, gin.H{"data": organisasi})
 }
 
@@ -123,6 +136,19 @@ func GetOnePrestasi(c *gin.Context) {
 
 	models.DB.Table("prestasis").Select("prestasis.idmhs, prestasis.namakegiatan, mahasiswas.nama, prestasis.jumlah, prestasis.idprestasi, prestasis.namapenyelenggaraan, prestasis.url, prestasis.kategorikegiatan, prestasis.tingkatkegiatan, prestasis.hasilkegiatan, prestasis.tempatkegiatan, prestasis.tanggalawal, prestasis.tanggalakhir, prestasis.unggahsertifikat, prestasis.unggahsurattugas, prestasis.unggahfoto, prestasis.status").
 		Joins("left join mahasiswas on mahasiswas.idmhs = prestasis.idmhs").Where("idprestasi = ?", parprestasi).Scan(&result)
+
+	c.JSON(http.StatusOK, gin.H{"data": result})
+}
+
+func GetOneOrganisasi(c *gin.Context) {
+	//var prestasi models.Prestasi
+	var result ResultOrganisasi
+	parorganisasi := c.Param("id_organisasi")
+
+	//models.DB.Where("id_prestasi = ?", parprestasi).First(&prestasi)
+
+	models.DB.Table("organisasis").Select("organisasis.idorganisasi, organisasis.idmhs, organisasis.namaorganisasi, organisasis.jabatanmhs, organisasis.periode, organisasis.unggahsk, organisasis.status, mahasiswas.nama").
+		Joins("left join mahasiswas on mahasiswas.idmhs = organisasis.idmhs").Where("idorganisasi = ?", parorganisasi).Scan(&result)
 
 	c.JSON(http.StatusOK, gin.H{"data": result})
 }
@@ -257,6 +283,47 @@ func AddPrestasi(c *gin.Context) {
 
 }
 
+func AddOrganisasi(c *gin.Context) {
+	var organisasi models.Organisasi
+	//var prestasiT Prestasi
+
+	if err := c.Bind(&organisasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	//START pdf
+	readerSK, err := base64.StdEncoding.DecodeString(organisasi.Unggahsk)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	PdfSTFilename := "web/dist/image/" + organisasi.Namaorganisasi + "_SK.pdf"
+
+	h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	if _, err := h.Write(readerSK); err != nil {
+		panic(err)
+	}
+	if err := h.Sync(); err != nil {
+		panic(err)
+	}
+	fmt.Println("Pdf file", PdfSTFilename, "created")
+	organisasi.Unggahsk = organisasi.Namaorganisasi + "_SK.pdf"
+	//end pdf
+
+	result := models.DB.Create(&organisasi)
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+}
+
 //Edit
 func EditMahasiswa(c *gin.Context) {
 	var mahasiswa models.Mahasiswa
@@ -329,6 +396,55 @@ func EditPrestasi(c *gin.Context) {
 	}
 }
 
+func EditOrganisasi(c *gin.Context) {
+	var organisasi models.Organisasi
+
+	if err := c.Bind(&organisasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parorganisasi string
+	parorganisasi = c.Param("id_organisasi")
+
+	parorganisasiConvert, err := strconv.Atoi(parorganisasi)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+	organisasi.Idorganisasi = parorganisasiConvert
+
+	//START pdf
+	readerSK, err := base64.StdEncoding.DecodeString(organisasi.Unggahsk)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	PdfSTFilename := "web/dist/image/" + organisasi.Namaorganisasi + "_SK.pdf"
+
+	h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	if _, err := h.Write(readerSK); err != nil {
+		panic(err)
+	}
+	if err := h.Sync(); err != nil {
+		panic(err)
+	}
+	fmt.Println("Pdf file", PdfSTFilename, "created")
+	organisasi.Unggahsk = organisasi.Namaorganisasi + "_SK.pdf"
+	//end pdf
+
+	result := models.DB.Where("idorganisasi = ?", organisasi.Idorganisasi).Updates(&organisasi)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
 func EditSetujuPrestasi(c *gin.Context) {
 	var prestasi models.Prestasi
 	//var prestasit models.Prestasi
@@ -381,6 +497,58 @@ func EditTSetujuPrestasi(c *gin.Context) {
 	}
 }
 
+func EditSetujuOrganisasi(c *gin.Context) {
+	var organisasi models.Organisasi
+	//var prestasit models.Prestasi
+
+	if err := c.Bind(&organisasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parorganisasi string
+	parorganisasi = c.Param("id_organisasi")
+
+	parorganisasiConvert, err := strconv.Atoi(parorganisasi)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+	organisasi.Idorganisasi = parorganisasiConvert
+
+	result := models.DB.Model(&models.Organisasi{}).Where("idorganisasi = ?", organisasi.Idorganisasi).Update("status", "setuju")
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func EditTSetujuOrganisasi(c *gin.Context) {
+	var organisasi models.Organisasi
+	//var prestasit models.Prestasi
+
+	if err := c.Bind(&organisasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parorganisasi string
+	parorganisasi = c.Param("id_organisasi")
+
+	parorganisasiConvert, err := strconv.Atoi(parorganisasi)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+	organisasi.Idorganisasi = parorganisasiConvert
+
+	result := models.DB.Model(&models.Organisasi{}).Where("idorganisasi = ?", organisasi.Idorganisasi).Update("status", "tidak setuju")
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
 //Delete
 func DeleteMahasiswa(c *gin.Context) {
 	var mahasiswa models.Mahasiswa
@@ -426,6 +594,23 @@ func DeletePrestasi(c *gin.Context) {
 	parprestasi := c.Param("id_prestasi")
 
 	result := models.DB.Where("idprestasi=?", parprestasi).Delete(&prestasi)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func DeleteOrganisasi(c *gin.Context) {
+	var organisasi models.Organisasi
+
+	if err := c.Bind(&organisasi); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	parorganisasi := c.Param("id_organisasi")
+
+	result := models.DB.Where("idorganisasi=?", parorganisasi).Delete(&organisasi)
 
 	chech := result.RowsAffected
 	if chech == 1 {

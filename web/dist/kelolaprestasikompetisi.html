@@ -212,6 +212,8 @@
         var arrayReturn = [];
         let b1 = '<button data-toggle="tooltip" class="btn btn-dark round" >Edit</button>'
         let b2 =  '<button data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>'
+
+        
         
 
             $.ajax({
@@ -221,9 +223,15 @@
                 success: function (data) {
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
-                        arrayReturn.push([data.data[i].nama, data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].kategori_kegiatan, '<center>'+data.data[i].unggah_sertifikat+'<br></br><a class="btn btn-sm btn-warning" href="http://localhost:5500/web/dist/image/'+data.data[i].unggah_sertifikat+'">Lihat</a>', '<center>'+data.data[i].unggah_surat_tugas+'<br></br><a class="btn btn-sm btn-warning" href="http://localhost:5500/web/dist/image/'+data.data[i].unggah_surat_tugas+'">Lihat</a>', '<center>'+data.data[i].unggah_foto+'<br></br><a class="btn btn-sm btn-warning" href="http://localhost:5500/web/dist/image/'+data.data[i].unggah_foto+'">Lihat</a>', 
-                            data.data[i].status, '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`http://localhost:5500/web/dist/editprestasi.html?id='+data.data[i].Idprestasi+'`" >Edit</button>'+"<br></br> "+'<button onclick="DeleteM('+data.data[i].Idprestasi+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
-					}
+                        arrayReturn.push([data.data[i].nama, data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].kategori_kegiatan, 
+                            '<center>'+data.data[i].unggah_sertifikat+'<br></br><a class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_sertifikat+'">Lihat</a>', 
+                            '<center>'+data.data[i].unggah_surat_tugas+'<br></br><a class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_surat_tugas+'">Lihat</a>', 
+                            '<center>'+data.data[i].unggah_foto+'<br></br><a class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_foto+'">Lihat</a>', 
+                            data.data[i].status, 
+                            '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`http://localhost:5500/web/dist/editprestasi.html?id='+data.data[i].Idprestasi+'`" >Edit</button>'+"<br></br> "
+                            +'<button onclick="DeleteM('+data.data[i].Idprestasi+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
+                    }
+                    
                 inittable(arrayReturn);
                 }
             });

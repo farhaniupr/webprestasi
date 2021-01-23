@@ -3,11 +3,11 @@ error_reporting(0);
 include './koneksi.php';
  
 
- $id_prestasi 				= $_POST['idprestasi'];
+ $id_prestasi 			= $_POST['idprestasi'];
 
  $lokasi_file2 			= $_FILES['unggahsurattugas']['tmp_name'];
  $nama_file2 			= $_FILES['unggahsurattugas']['name'];
- $ukuran_foto2   		= $_FILES['unggahsertifikat']['size'];
+ $ukuran_foto2   		= $_FILES['unggahsurattugas']['size'];
 
 
 		$max = 5000000; //5Mb
@@ -28,7 +28,7 @@ include './koneksi.php';
 			move_uploaded_file($_FILES['unggahsurattugas']['tmp_name'], "image/".$_FILES['unggahsurattugas']['name']);
 
 		$update=mysqli_query($conn,"UPDATE prestasis SET
-		unggahsurattugas='$nama_file2',
+		unggahsurattugas='$nama_file2'
 		WHERE idprestasi='$id_prestasi'");
 			}else{
 					echo "<script> alert ('Maaf... file yang anda pilih bukan file yang seharusnya.'); history.back(); </script>";
@@ -36,10 +36,10 @@ include './koneksi.php';
              }
 }
 if($update) {
-    echo "<script> alert('Anda Telah Berhasil input data');
-    window.location.reload() </script>";
+	echo "<script> alert('Anda Telah Berhasil input data');
+	window.location='http://localhost/webprestasi/web/dist/editprestasi.html?id=43' </script>";
 } else {
-    echo "<script> alert ('Data  Gagal di input');
-    window.location.reload() </script>";
-}
+	echo "<script> alert ('Data  Gagal di input');
+	window.location='http://localhost/webprestasi/web/dist/editprestasi.html?id=43' </script>";
+}	
 ?>

@@ -30,13 +30,11 @@
                 
             </li>          
         
-        
             <li class="sidebar-item  has-sub">
                 <a href="#" class='sidebar-link'>
                     <i data-feather="file-plus" width="20"></i> 
                     <span>Kelola Prodi</span>
-                </a>
-                
+                </a>                
                 <ul class="submenu ">
                     
                     <li>
@@ -45,10 +43,8 @@
                     
                     <li>
                         <a href="kelolaprodi.html">Lihat Data</a>
-                    </li>
-                    
-                </ul>
-                
+                    </li>                    
+                </ul>                
             </li>
 
             <li class="sidebar-item  has-sub">
@@ -89,7 +85,6 @@
                 </ul>
                 
             </li>
-            
         </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -145,13 +140,13 @@
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
                 <h3>Data Prestasi</h3>
-                <p class="text-subtitle text-muted">Tambah Data Mahasiswa</p>
+                <p class="text-subtitle text-muted">Tambah Data Prestasi</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Mahasiswa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Prestasi</li>
                     </ol>
                 </nav>
             </div>
@@ -168,59 +163,150 @@
                     </div>
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form">
+                            <form class="form" method="post" action="unggahprestasi.php" enctype="multipart/form-data">
                                 <div class="row">
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="nama">Nama</label>
-                                            <input type="text" id="nama" class="form-control" placeholder="Nama Mahasiswa"
-                                                name="nama">
+                                            <label for="nama_mahasiswa">Nama Mahasiswa</label>
+                                            <select name="nama_mhs" id="nama_mhs" class="form-select" >
+                                                
+                                                
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="nim">NIM</label>
-                                            <input type="text" id="nim" class="form-control" placeholder="NIM"
-                                                name="nim">
+                                            <label for="namakegiatan">Nama Kegiatan</label>
+                                            <input type="text" id="namakegiatan" class="form-control" placeholder="Nama Program Studi"
+                                                name="namakegiatan">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="fakultas">Fakultas</label>
-                                            <input type="text" id="fakultas" class="form-control" placeholder="Fakultas" name="fakultas">
+                                            <label for="namapenyelenggaraan">Penyelenggara</label>
+                                            <input type="text" id="namapenyelenggaraan" class="form-control" placeholder="Penyelenggara" name="namapenyelenggaraan">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="programstudi">Program Studi</label>
-                                            <input type="text" id="programstudi" class="form-control" name="programstudi"
-                                                placeholder="Program Studi">
+                                            <label for="tingkatkegiatan">Tingkat Kegiatan</label>
+                                            <select class="form-select" id="tingkatkegiatan">
+                                                <option value="Universitas">Universitas</option>
+                                                <option value="Provinsi">Provinsi</option>
+                                                <option value="Nasional">Nasional</option>
+                                                <option value="Internasional">Internasional</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="nohp">No Handphone</label>
-                                            <input type="number" id="nohp" class="form-control" name="nohp"
-                                                placeholder="No Handphone">
+                                            <label for="url">URL</label>
+                                            <input type="text" id="url" class="form-control" placeholder="URL" name="url">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="email">Email</label>
-                                            <input type="email" id="email" class="form-control" name="email"
-                                                placeholder="Email">
+                                            <label for="kategori_kegiatan">Kategori Kegiatan</label>
+                                            <select class="form-select" id="kategorikegiatan">
+                                                <option value="Individu">Individu</option>
+                                                <option value="Kelompok">Kelompok</option>
+                                            </select>
                                         </div>
                                     </div>
-                                    <div class="form-group col-12">
-                                        <div class='form-check'>
-                                            <div class="checkbox">
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="jumlah">Jumlah Peserta</label>
+                                            <input type="number" id="jumlah" class="form-control" placeholder="Jumlah Peserta Kegiatan" name="jumlah">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="tempatkegiatan">Tempat Kegiatan</label>
+                                            <input type="text" id="tempatkegiatan" class="form-control" placeholder="Tempat Kegiatan" name="tempatkegiatan">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="hasilkegiatan">Hasil Kegiatan</label>
+                                            <input type="text" id="hasilkegiatan" class="form-control" placeholder="Hasil Kegiatan" name="hasilkegiatan">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="tanggalawal">Tanggal Awal Kegiatan</label>
+                                            <input type="date" id="tanggalawal" class="form-control" placeholder="Tanggal Awal Kegiatan" name="tanggalawal">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="tanggalakhir">Tanggal Akhir Kegiatan</label>
+                                            <input type="date" id="tanggalakhir" class="form-control" placeholder="Tanggal Akhir Kegiatan" name="tanggalakhir">
+                                        </div>
+                                    </div>                                    
+                                    
+                                </div>
+                            
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="unggahsurattugas">Unggah Surat Tugas</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                            <div class="form-file">
+                                                <input type="file" class="form-file-input" name="unggahsurattugas" id="unggahsurattugas" aria-describedby="inputGroupFileAddon01" onchange="changeSuratTugas()">
+                                                <label class="form-file-label" for="inputGroupFile01">
+                                                    <span for="unggah_surat_tugas" class="form-file-text">File unggah surat tugas</span>
+                                                    <span class="form-file-button">Browse</span>
+                                                </label>
+                                                <!--<input type="hidden" id="idprestasi" name="idprestasi"/>-->
+                                            </div>
+                                        </div>                                        
+                                    </div>
+                                </div>
+                            
+
+                        
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="unggahfoto">Unggah Foto</label>
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                            <div class="form-file">
+                                                <input type="file" class="form-file-input" name="unggahfoto" id="unggahfoto" aria-describedby="inputGroupFileAddon01" onchange="changeFoto()">
+                                                <label class="form-file-label" for="inputGroupFile01">
+                                                    <span for="unggah_foto" class="form-file-text">File unggah foto</span>
+                                                    <span class="form-file-button">Browse</span>
+                                                </label>
+                                               <!-- <input type="hidden" id="idprestasi1" name="idprestasi1"/>-->
+                                            </div>
+                                        </div>                                         
+                                     
+                                    </div>
+                                    
+                                </div>
+
+
+                                <div class="col-md-6 col-12">
+                                    <div class="form-group">
+                                        <label for="unggahsertifikat">Unggah Sertifikat</label>                                           
+                                        <div class="input-group mb-3">
+                                            <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                            <div class="form-file">
+                                                <input type="file" class="form-file-input" name="unggahsertifikat" id="unggahsertifikat" aria-describedby="inputGroupFileAddon01" onchange="changeSertifikat()">
+                                                <label class="form-file-label" for="inputGroupFile01">
+                                                    <span for="unggah_sertifikat" class="form-file-text">File unggah sertifikat</span>
+                                                    <span class="form-file-button">Browse</span>
+                                                </label>
+                                                <!--<input type="hidden" id="idprestasi2" name="idprestasi2"/>-->
                                             </div>
                                         </div>
+                                       
                                     </div>
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Tambah</button>
-                                        <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
-                                    </div>
+                                    
+                                </div>
+                                <div class="col-12 d-flex justify-content-end">
+                                    <button type="submit" class="btn btn-primary mr-1 mb-1">Tambah</button>
+                                    <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
                                 </div>
                             </form>
                         </div>
@@ -230,10 +316,8 @@
         </div>
     </section>
     <!-- // Basic multiple Column Form section end -->
-</div>
-
-            
-        </div>
+</div>        
+    </div>
     </div>
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
@@ -241,8 +325,95 @@
     
     <script src="assets/js/main.js"></script>
 
-    <script src="assets/js/axios.min.js"></script>
-    <script src="assets/js/mahasiswa.js"></script>
-    
+    <!--<script src="assets/js/axios.min.js"></script>-->
+    <script src="https://unpkg.com/axios@0.21.1/dist/axios.min.js"></script>
+    <script src="assets/vendors/simple-datatables/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.18.1/moment.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.0.js"></script>
+
+    <script>
+        $.ajax({
+                        url : "http://localhost:8085/lihatmahasiswa",
+                        async: false,
+                        dataType: 'json',
+                        success: function (data) {
+                            $("#nama_mhs").empty();
+                            for (var i = 0, len = data.data.length; i < len; i++) {                                      
+                                $("#nama_mhs").append("<option value='"+data.data[i].Idmhs+"'>"+data.data[i].nama+"</option")
+                            }    
+                        }
+                        
+                    });
+
+        function changeFoto(){
+            $("span[for*='unggah_foto'").html(document.querySelector('#unggahfoto').value);
+        }
+        function changeSuratTugas(){
+            $("label[for*='unggah_surat_tugas'").html(document.querySelector('#unggahsurattugas').value);
+        }
+        function changeSertifikat(){
+            $("label[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
+        }
+
+        // add prestasi
+        const AddPrestasi = (prestasi) => {
+         axios.post('http://localhost:8085/addprestasi', prestasi)
+            .then(response => {
+                const addprodi = response.data;
+                console.log(`POST: prestasi is added`, prestasi);
+                
+            })
+            .catch(error => console.error(error));
+        };
+
+        function getFile(filePath) {
+            return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
+        }
+
+        // event listener for form submission
+        const form = document.querySelector('form');
+
+        const formEvent = form.addEventListener('submit', event => {
+            event.preventDefault();
+
+            const nama_kegiatan = document.querySelector('#namakegiatan').value;
+            const nama_penyelenggaraan = document.querySelector('#namapenyelenggaraan').value;
+            const id_mhs = parseInt(document.querySelector('#nama_mhs').value, 10); 
+            const kategori_kegiatan = document.querySelector('#kategorikegiatan').value;
+            const tingkat_kegiatan = document.querySelector('#tingkatkegiatan').value;
+            const url = document.querySelector('#url').value;
+            var jumlah = parseInt(document.querySelector('#jumlah').value, 10);
+            const hasil_kegiatan = document.querySelector('#hasilkegiatan').value;
+            const tempat_kegiatan = document.querySelector('#tempatkegiatan').value;
+            const tanggal_awal = document.querySelector('#tanggalawal').value; 
+            const tanggal_akhir = document.querySelector('#tanggalakhir').value;
+            const unggah_foto = getFile(document.querySelector('#unggahfoto').value);
+            const unggah_sertifikat = getFile(document.querySelector('#unggahsertifikat').value);
+            const unggah_surat_tugas = getFile(document.querySelector('#unggahsurattugas').value);
+            
+            console.log(unggah_sertifikat);
+
+            const prestasi = {  
+                                id_mhs : id_mhs, 
+                                nama_kegiatan : nama_kegiatan, 
+                                nama_penyelenggaraan : nama_penyelenggaraan,
+                                url : url, 
+                                jumlah : jumlah, 
+                                hasil_kegiatan : hasil_kegiatan, 
+                                kategori_kegiatan : kategori_kegiatan, 
+                                tingkat_kegiatan : tingkat_kegiatan, 
+                                tempat_kegiatan : tempat_kegiatan,
+                                tanggal_awal :tanggal_awal,
+                                tanggal_akhir : tanggal_akhir,
+                                unggah_sertifikat : unggah_sertifikat,
+                                unggah_foto : unggah_foto,
+                                unggah_surat_tugas : unggah_surat_tugas,
+                                status : ""
+                            };
+            AddPrestasi(prestasi);
+            //console.log(prestasi);
+        });
+    </script>
 </body>
 </html>

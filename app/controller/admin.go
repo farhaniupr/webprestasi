@@ -30,6 +30,25 @@ type Result struct {
 	Status              string     `json:"status"`
 }
 
+type Prestasi struct {
+	Idprestasi          int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi"`
+	Idmhs               int        `json:"id_mhs"`
+	Namakegiatan        string     `json:"nama_kegiatan"`
+	Namapenyelenggaraan string     `json:"nama_penyelenggaraan"`
+	URL                 string     `json:"url"`
+	Jumlah              int        `json:"jumlah"`
+	Kategorikegiatan    string     `json:"kategori_kegiatan"`
+	Tingkatkegiatan     string     `json:"tingkat_kegiatan"`
+	Hasilkegiatan       string     `json:"hasil_kegiatan"`
+	Tempatkegiatan      string     `json:"tempat_kegiatan"`
+	Tanggalawal         *time.Time `json:"tanggal_awal"`
+	Tanggalakhir        *time.Time `json:"tanggal_akhir"`
+	Unggahsertifikat    string     `json:"unggah_sertifikat"`
+	Unggahsurattugas    string     `json:"unggah_surat_tugas"`
+	Unggahfoto          string     `json:"unggah_foto"`
+	Status              string     `json:"status"`
+}
+
 //Get
 func GetMahasiswa(c *gin.Context) {
 	var mahasiswa []models.Mahasiswa
@@ -131,10 +150,12 @@ func AddProdi(c *gin.Context) {
 
 func AddPrestasi(c *gin.Context) {
 	var prestasi models.Prestasi
+	//var prestasiT Prestasi
 
 	if err := c.Bind(&prestasi); err != nil {
 		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
 	}
+
 	result := models.DB.Create(&prestasi)
 	chech := result.RowsAffected
 	if chech == 1 {

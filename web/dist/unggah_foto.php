@@ -13,7 +13,8 @@ $valid_ext = array('pdf');
 $valid_ext2 = array('jpeg','png','jpg');
 $ext3 = strtolower(end(explode('.', $nama_file3)));
         
-        
+//$id = intval($id_prestasi*10);
+
  if(!empty($lokasi_file3))
  {
 		if($ukuran_foto3 > $max2 )
@@ -23,6 +24,7 @@ $ext3 = strtolower(end(explode('.', $nama_file3)));
 		if(in_array($ext3, $valid_ext2)){
 			move_uploaded_file($_FILES['unggahfoto']['tmp_name'], "image/".$_FILES['unggahfoto']['name']);
 
+			
 		$update=mysqli_query($conn,"UPDATE prestasis SET
 		unggahfoto='$nama_file3'
 		WHERE idprestasi='$id_prestasi'");
@@ -35,9 +37,9 @@ $ext3 = strtolower(end(explode('.', $nama_file3)));
 
 	if($update) {
 		echo "<script> alert('Anda Telah Berhasil input data');
-		window.location.reload() </script>";
+		window.location='http://localhost/webprestasi/web/dist/editprestasi.html?id=43' </script>";
 	} else {
 		echo "<script> alert ('Data  Gagal di input');
-		window.location.reload() </script>";
+		window.location='http://localhost/webprestasi/web/dist/editprestasi.html?id=43' </script>";
 	}	
 ?>

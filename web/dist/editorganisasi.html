@@ -104,6 +104,25 @@
                 </ul>
                 
             </li>
+            <li class="sidebar-item has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i data-feather="file-plus" width="20"></i> 
+                    <span>Kelola Prestasi Non-Kompetisi</span>
+                </a>
+
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addprestasinon.html">Tambah Data</a>
+                    </li>
+                    
+                    <li>
+                        <a href="kelolaprestasinon.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
         </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -377,9 +396,10 @@
                                 periode : periode, 
                                 unggahsk : unggahsk
                             };
+
+            //console.log(organisasi);
             EditOrganisasi(organisasi);
-            //console.log(prestasi);
-            //location.reload();
+            location.reload();
         });
     </script>
 </body>

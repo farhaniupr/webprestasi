@@ -104,6 +104,25 @@
                 </ul>
                 
             </li>
+            <li class="sidebar-item has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i data-feather="file-plus" width="20"></i> 
+                    <span>Kelola Prestasi Non-Kompetisi</span>
+                </a>
+
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addprestasinon.html">Tambah Data</a>
+                    </li>
+                    
+                    <li>
+                        <a href="kelolaprestasinon.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>
+                
+            </li>
         </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -261,77 +280,63 @@
                                             <label for="tanggalakhir">Tanggal Akhir Kegiatan</label>
                                             <input type="date" id="tanggalakhir" class="form-control" placeholder="Tanggal Akhir Kegiatan" name="tanggalakhir">
                                         </div>
-                                    </div>                                    
-                                    <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Simpan</button>
-                                        <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <form method="post" action="unggah_surattugas.php" enctype="multipart/form-data">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="unggahsurattugas">Unggah Surat Tugas</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
-                                            <div class="form-file">
-                                                <input type="file" class="form-file-input" name="unggahsurattugas" id="unggahsurattugas" aria-describedby="inputGroupFileAddon01" onchange="changeSuratTugas()">
-                                                <label class="form-file-label" for="inputGroupFile01">
-                                                    <span for="unggah_surat_tugas" class="form-file-text">File unggah surat tugas</span>
-                                                    <span class="form-file-button">Browse</span>
-                                                </label>
-                                                <input type="hidden" id="idprestasi" name="idprestasi"/>
+                                    </div>             
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                                <label for="unggahsertifikat">Unggah Sertifikat</label>                                           
+                                                <div class="input-group mb-3">
+                                                    <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                                    <div class="form-file">
+                                                        <input type="file" class="form-file-input" name="unggahsertifikat" id="unggahsertifikat" aria-describedby="inputGroupFileAddon01" onchange="changeSertifikat()">
+                                                        <label class="form-file-label" for="inputGroupFile01">
+                                                            <span for="unggah_sertifikat" class="form-file-text">File unggah sertifikat</span>
+                                                            <span class="form-file-button">Browse</span>
+                                                        </label>
+                                                        
+                                                    </div>
+                                                </div>
+                                        </div>   
+                                    </div>                       
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="unggahsurattugas">Unggah Surat Tugas</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" name="unggahsurattugas" id="unggahsurattugas" aria-describedby="inputGroupFileAddon01" onchange="changeSuratTugas()">
+                                                    <label class="form-file-label" for="inputGroupFile01">
+                                                        <span for="unggah_surat_tugas" class="form-file-text">File unggah surat tugas</span>
+                                                        <span class="form-file-button">Browse</span>
+                                                    </label>
+                                                  
+                                                </div>
                                             </div>
-                                        </div>
-                                        <div class="form-actions">
-                                            <button class="btn btn-primary" type="submit" name="preview">upload</button>
-                                        </div>
-                                    </div>
-                                </div>
-                            </form>
-
-                            <form method="post" action="unggah_foto.php" enctype="multipart/form-data">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="unggahfoto">Unggah Foto</label>
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
-                                            <div class="form-file">
-                                                <input type="file" class="form-file-input" name="unggahfoto" id="unggahfoto" aria-describedby="inputGroupFileAddon01" onchange="changeFoto()">
-                                                <label class="form-file-label" for="inputGroupFile01">
-                                                    <span for="unggah_foto" class="form-file-text">File unggah foto</span>
-                                                    <span class="form-file-button">Browse</span>
-                                                </label>
-                                                <input type="hidden" id="idprestasi1" name="idprestasi1"/>
-                                            </div>
-                                        </div>                                           
-                                        <div class="form-actions">
-                                            <button class="btn btn-primary" type="submit" name="preview">upload</button>
                                         </div>
                                     </div>
                                     
-                                </div>
-                            </form>
-
-                            <form method="post" action="unggah_sertifikat.php" enctype="multipart/form-data">
-                                <div class="col-md-6 col-12">
-                                    <div class="form-group">
-                                        <label for="unggahsertifikat">Unggah Sertifikat</label>                                           
-                                        <div class="input-group mb-3">
-                                            <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
-                                            <div class="form-file">
-                                                <input type="file" class="form-file-input" name="unggahsertifikat" id="unggahsertifikat" aria-describedby="inputGroupFileAddon01" onchange="changeSertifikat()">
-                                                <label class="form-file-label" for="inputGroupFile01">
-                                                    <span for="unggah_sertifikat" class="form-file-text">File unggah sertifikat</span>
-                                                    <span class="form-file-button">Browse</span>
-                                                </label>
-                                                <input type="hidden" id="idprestasi2" name="idprestasi2"/>
-                                            </div>
-                                        </div>
-                                        <div class="form-actions">
-                                            <button class="btn btn-primary" type="submit" name="preview">upload</button>
-                                        </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="unggahfoto">Unggah Foto</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" name="unggahfoto" id="unggahfoto" aria-describedby="inputGroupFileAddon01" onchange="changeFoto()">
+                                                    <label class="form-file-label" for="inputGroupFile01">
+                                                        <span for="unggah_foto" class="form-file-text">File unggah foto</span>
+                                                        <span class="form-file-button">Browse</span>
+                                                    </label>
+                                                    
+                                                </div>
+                                            </div> 
+                                        </div>         
+                                    </div>
+                                    <input type="hidden" id="base64foto" name="base64foto" />
+                                    <input type="hidden" id="base64se" name="base64se" />
+                                    <input type="hidden" id="base64st" name="base64st"/>
+                                    <input type="hidden" id="idprestasi" name="idprestasi"/>
+                                    <div class="col-12 d-flex justify-content-end">
+                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Simpan</button>
+                                        <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
                                     </div>
                                 </div>
                             </form>
@@ -388,6 +393,80 @@
             $("label[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
         }
 
+        function getFile(filePath) {
+            return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
+        }
+
+
+        if (window.File && window.FileReader && window.FileList && window.Blob) {
+        document.getElementById('unggahfoto').addEventListener('change', handleFileSelectFoto, false);
+        document.getElementById('unggahsertifikat').addEventListener('change', handleFileSelectSE, false);
+        document.getElementById('unggahsurattugas').addEventListener('change', handleFileSelectST, false);
+        } else {
+        alert('The File APIs are not fully supported in this browser.');
+        }
+        
+
+        function handleFileSelectFoto(evt) {
+        var f = evt.target.files[0]; // FileList object
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+            var binaryData = e.target.result;
+            //Converting Binary Data to base 64
+            var base64String = window.btoa(binaryData);
+            //showing file converted to base64
+            $("span[for*='unggah_foto'").html(document.querySelector('#unggahfoto').value);
+            document.getElementById('base64foto').value = base64String;
+            alert('File converted to base64 successfuly!\nCheck in Textarea');
+            
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
+        }
+
+        function handleFileSelectSE(evt) {
+        var f = evt.target.files[0]; // FileList object
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+            var binaryData = e.target.result;
+            //Converting Binary Data to base 64
+            var base64String = window.btoa(binaryData);
+            //showing file converted to base64
+            $("span[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
+            document.getElementById('base64se').value = base64String;
+            alert('File converted to base64 successfuly!\nCheck in Textarea');
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
+        }
+
+
+        function handleFileSelectST(evt) {
+        var f = evt.target.files[0]; // FileList object
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+            var binaryData = e.target.result;
+            //Converting Binary Data to base 64
+            var base64String = window.btoa(binaryData);
+            //showing file converted to base64
+            $("span[for*='unggah_surat_tugas'").html(document.querySelector('#unggahsurattugas').value);
+            document.getElementById('base64st').value = base64String;
+            alert('File converted to base64 successfuly!\nCheck in Textarea');
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
+        }
+
+
         function GetOnePrestasi(prestasi) {
             $.ajax({
                 url : "http://localhost:8085/lihatprestasi/"+prestasi,
@@ -403,8 +482,6 @@
                 //document.getElementById('nama_mhs').value = data.data.nama
                 $("#nama_mhs").val(data.data.id_mhs).change()
                 document.getElementById('idprestasi').value = parseInt(data.data.Idprestasi, 10);
-                document.getElementById('idprestasi1').value = parseInt(data.data.Idprestasi, 10);
-                document.getElementById('idprestasi2').value = parseInt(data.data.Idprestasi, 10);
                 document.getElementById('kategorikegiatan').value = data.data.kategori_kegiatan
                 document.getElementById('tingkatkegiatan').value = data.data.tingkat_kegiatan
                 document.getElementById('namakegiatan').value = data.data.nama_kegiatan
@@ -454,6 +531,10 @@
             const tanggal_awal = document.querySelector('#tanggalawal').value; 
             const tanggal_akhir = document.querySelector('#tanggalakhir').value;
             //const unggah_foto = document.querySelector('#unggahfoto').value;
+            const unggah_foto = document.querySelector('#base64foto').value;
+            const unggah_sertifikat = document.querySelector('#base64se').value;
+            const unggah_surat_tugas = document.querySelector('#base64st').value;
+
             const prestasi = {  Idprestasi : parseInt(c,10),  
                                 id_mhs : id_mhs, 
                                 nama_kegiatan : nama_kegiatan, 
@@ -465,7 +546,10 @@
                                 tingkat_kegiatan : tingkat_kegiatan, 
                                 tempat_kegiatan : tempat_kegiatan,
                                 tanggal_awal :tanggal_awal,
-                                tanggal_akhir : tanggal_akhir
+                                tanggal_akhir : tanggal_akhir,
+                                unggah_sertifikat : unggah_sertifikat,
+                                unggah_foto : unggah_foto,
+                                unggah_surat_tugas : unggah_surat_tugas
                             };
             EditPrestasi(prestasi);
             //console.log(prestasi);

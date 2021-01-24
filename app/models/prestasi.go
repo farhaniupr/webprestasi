@@ -1,7 +1,5 @@
 package models
 
-import "time"
-
 const (
 	layoutDate = "2006-01-02"
 	layoutYear = "2006"
@@ -36,16 +34,17 @@ type Admin struct {
 }
 
 type Prestasinonkompetisi struct {
-	Idprestasinon    int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi_non"`
-	Idmhs            int        `json:"id_mhs"`
-	Namakegiatan     string     `json:"nama_kegiatan"`
-	Tempatkegiatan   string     `json:"tempat_kegiatan"`
-	Tanggalawal      *time.Time `json:"tanggal_awal"`
-	Tanggalakhir     *time.Time `json:"tanggal_akhir"`
-	Unggahsertifikat string     `json:"unggah_sertifikat"`
-	Unggahsurattugas string     `json:"unggah_surat_tugas"`
-	Unggahfoto       string     `json:"unggah_foto"`
-	Status           bool       `json:"status"`
+	Idprestasinon       int    `gorm:"primary_key";auto_increment;not_null json:"id_prestasi_non"`
+	Idmhs               int    `json:"id_mhs"`
+	Namakegiatan        string `json:"nama_kegiatan"`
+	Namapenyelenggaraan string `json:"nama_penyelenggaraan"`
+	Tempatkegiatan      string `json:"tempat_kegiatan"`
+	Tanggalawal         string `json:"tanggal_awal"`
+	Tanggalakhir        string `json:"tanggal_akhir"`
+	Unggahsertifikat    string `json:"unggah_sertifikat"`
+	Unggahsurattugas    string `json:"unggah_surat_tugas"`
+	Unggahfoto          string `json:"unggah_foto"`
+	Status              string `json:"status"`
 }
 
 type Prestasi struct {

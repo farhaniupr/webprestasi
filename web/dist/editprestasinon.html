@@ -104,6 +104,7 @@
                 </ul>
                 
             </li>
+
             <li class="sidebar-item has-sub">
                 <a href="#" class='sidebar-link'>
                     <i data-feather="file-plus" width="20"></i> 
@@ -177,14 +178,14 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Organisasi</h3>
-                <p class="text-subtitle text-muted">Tambah Data Organisasi</p>
+                <h3>Data Prestasi Non-Kompetisi</h3>
+                <p class="text-subtitle text-muted">Edit Data Prestasi Non-Kompetisi</p>
             </div>
             <div class="col-12 col-md-6 order-md-2 order-first">
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Organisasi</li>
+                        <li class="breadcrumb-item active" aria-current="page">Prestasi Non-Kompetisi</li>
                     </ol>
                 </nav>
             </div>
@@ -197,7 +198,7 @@
             <div class="col-12">
                 <div class="card">
                     <div class="card-header">
-                        <h4 class="card-title">Form Tambah Data</h4>
+                        <h4 class="card-title">Form Edit Data</h4>
                     </div>
                     <div class="card-content">
                         <div class="card-body">
@@ -214,49 +215,90 @@
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="namaorganisasi">Organisasi</label>
-                                            <input type="text" id="namaorganisasi" class="form-control" placeholder="Nama Organisasi"
-                                                name="namaorganisasi">
+                                            <label for="namakegiatan">Nama Kegiatan</label>
+                                            <input type="text" id="namakegiatan" class="form-control" placeholder="Nama Program Studi"
+                                                name="namakegiatan">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="jabatanmhs">Jabatan Mahasiswa</label>
-                                            <input type="text" id="jabatanmhs" class="form-control" placeholder="Jabatan Mahasiswa" name="jabatanmhs">
+                                            <label for="namapenyelenggaraan">Penyelenggara</label>
+                                            <input type="text" id="namapenyelenggaraan" class="form-control" placeholder="Penyelenggara" name="namapenyelenggaraan">
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="periode">Periode Organisasi</label>
-                                            <select class="form-select" id="periode">
-                                                <option value="2016">2016</option>
-                                                <option value="2017">2018</option>
-                                                <option value="2018">2018</option>
-                                                <option value="2019">2019</option>
-                                                <option value="2020">2020</option>
-                                                <option value="2021">2021</option>
-                                                <option value="2022">2022</option>
-                                            </select>
+                                            <label for="tempatkegiatan">Tempat Kegiatan</label>
+                                            <input type="text" id="tempatkegiatan" class="form-control" placeholder="Tempat Kegiatan" name="tempatkegiatan">
                                         </div>
-                                    </div>                                  
+                                    </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
-                                            <label for="unggahsk">Unggah SK Organisasi</label>
+                                            <label for="tanggalawal">Tanggal Awal Kegiatan</label>
+                                            <input type="date" id="tanggalawal" class="form-control" placeholder="Tanggal Awal Kegiatan" name="tanggalawal">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="tanggalakhir">Tanggal Akhir Kegiatan</label>
+                                            <input type="date" id="tanggalakhir" class="form-control" placeholder="Tanggal Akhir Kegiatan" name="tanggalakhir">
+                                        </div>
+                                    </div>   
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="unggahsurattugas">Unggah Surat Tugas</label>
                                             <div class="input-group mb-3">
                                                 <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
                                                 <div class="form-file">
-                                                    <input type="file" class="form-file-input" name="unggahsk" id="unggahsk" aria-describedby="inputGroupFileAddon01" accept=".pdf">
+                                                    <input type="file" class="form-file-input" accept=".pdf" name="unggahsurattugas" id="unggahsurattugas" aria-describedby="inputGroupFileAddon01">
                                                     <label class="form-file-label" for="inputGroupFile01">
-                                                        <span for="unggah_sk" class="form-file-text">File unggah SK Organisasi</span>
+                                                        <span for="unggah_surat_tugas" class="form-file-text">File unggah surat tugas</span>
+                                                        <span class="form-file-button">Browse</span>
+                                                    </label>
+    
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="unggahfoto">Unggah Foto</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" accept=".png" name="unggahfoto" id="unggahfoto" aria-describedby="inputGroupFileAddon01">
+                                                    <label class="form-file-label" for="inputGroupFile01">
+                                                        <span for="unggah_foto" class="form-file-text">File unggah foto</span>
+                                                        <span class="form-file-button">Browse</span>
+                                                    </label>
+                                                    
+                                                </div>
+                                            </div>   
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="unggahsertifikat">Unggah Sertifikat</label>
+                                            <div class="input-group mb-3">
+                                                <span class="input-group-text" id="inputGroupFileAddon01"><i data-feather="upload"></i></span>
+                                                <div class="form-file">
+                                                    <input type="file" class="form-file-input" accept=".pdf" name="unggahsertifikat" id="unggahsertifikat" aria-describedby="inputGroupFileAddon01">
+                                                    <label class="form-file-label" for="inputGroupFile01">
+                                                        <span for="unggah_sertifikat" class="form-file-text">File unggah sertifikat</span>
                                                         <span class="form-file-button">Browse</span>
                                                     </label>    
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <input type="hidden" id="base64sk" name="base64sk" />
+                                    <input type="hidden" id="base64foto" name="base64foto" />
+                                    <input type="hidden" id="base64se" name="base64se" />
+                                    <input type="hidden" id="base64st" name="base64st"/>
+                                    <input type="hidden" id="idprestasinon" name="idprestasinon"/>
                                     <div class="col-12 d-flex justify-content-end">
-                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Tambah</button>
+                                        <button type="submit" class="btn btn-primary mr-1 mb-1">Edit</button>
                                         <button type="reset" class="btn btn-light-secondary mr-1 mb-1">Reset</button>
                                     </div>                                 
                                 </div>                          
@@ -287,6 +329,11 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>-->
 
     <script>
+         var urls = window.location.href;
+        var url = new URL(urls);
+        var c = url.searchParams.get("id");
+        GetOnePrestasinon(c);
+
         $.ajax({
                 url : "http://localhost:8085/lihatmahasiswa",
                 async: false,
@@ -300,20 +347,17 @@
                         
                     });
 
-        function changeSK(){
-            $("span[for*='unggah_sk'").html(document.querySelector('#unggahsk').value);
+        function changeFoto(){
+            $("span[for*='unggah_foto'").html(document.querySelector('#unggahfoto').value);
+        }
+        function changeSuratTugas(){
+            $("label[for*='unggah_surat_tugas'").html(document.querySelector('#unggahsurattugas').value);
+        }
+        function changeSertifikat(){
+            $("label[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
         }
 
-        // add prestasi
-        const AddOrganisasi = (organisasi) => {
-         axios.post('http://localhost:8085/addorganisasi', organisasi)
-            .then(response => {
-                const addorganisasi = response.data;
-                console.log(`POST: organisasi is added`, addorganisasi);
-                window.location="kelolaorganisasi.html";
-            })
-            .catch(error => console.error(error));
-        };
+        // editprestasinon
 
         function getFile(filePath) {
             return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
@@ -321,13 +365,15 @@
 
 
         if (window.File && window.FileReader && window.FileList && window.Blob) {
-        document.getElementById('unggahsk').addEventListener('change', handleFileSelectSK, false);
+        document.getElementById('unggahfoto').addEventListener('change', handleFileSelectFoto, false);
+        document.getElementById('unggahsertifikat').addEventListener('change', handleFileSelectSE, false);
+        document.getElementById('unggahsurattugas').addEventListener('change', handleFileSelectST, false);
         } else {
         alert('The File APIs are not fully supported in this browser.');
         }
         
 
-        function handleFileSelectSK(evt) {
+        function handleFileSelectFoto(evt) {
         var f = evt.target.files[0]; // FileList object
         var reader = new FileReader();
         // Closure to capture the file information.
@@ -337,8 +383,8 @@
             //Converting Binary Data to base 64
             var base64String = window.btoa(binaryData);
             //showing file converted to base64
-            $("span[for*='unggah_sk'").html(document.querySelector('#unggahsk').value);
-            document.getElementById('base64sk').value = base64String;
+            $("span[for*='unggah_foto'").html(document.querySelector('#unggahfoto').value);
+            document.getElementById('base64foto').value = base64String;
             alert('File converted to base64 successfuly!\nCheck in Textarea');
             
             };
@@ -347,28 +393,122 @@
         reader.readAsBinaryString(f);
         }
 
+        function handleFileSelectSE(evt) {
+        var f = evt.target.files[0]; // FileList object
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+            var binaryData = e.target.result;
+            //Converting Binary Data to base 64
+            var base64String = window.btoa(binaryData);
+            //showing file converted to base64
+            $("span[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
+            document.getElementById('base64se').value = base64String;
+            alert('File converted to base64 successfuly!\nCheck in Textarea');
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
+        }
+
+
+        function handleFileSelectST(evt) {
+        var f = evt.target.files[0]; // FileList object
+        var reader = new FileReader();
+        // Closure to capture the file information.
+        reader.onload = (function(theFile) {
+            return function(e) {
+            var binaryData = e.target.result;
+            //Converting Binary Data to base 64
+            var base64String = window.btoa(binaryData);
+            //showing file converted to base64
+            $("span[for*='unggah_surat_tugas'").html(document.querySelector('#unggahsurattugas').value);
+            document.getElementById('base64st').value = base64String;
+            alert('File converted to base64 successfuly!\nCheck in Textarea');
+            };
+        })(f);
+        // Read in the image file as a data URL.
+        reader.readAsBinaryString(f);
+        }
+
+        function GetOnePrestasinon(prestasinon) {
+            $.ajax({
+                url : "http://localhost:8085/lihatprestasinon/"+prestasinon,
+                async: false,
+                dataType: 'json',
+                success: function (data) {
+
+                console.log(data.data);
+                
+                var dateawal = moment(data.data.tanggal_awal).format("YYYY-MM-DD") 
+                var dateakhir = moment(data.data.tanggal_akhir).format("YYYY-MM-DD")
+
+                //document.getElementById('nama_mhs').value = data.data.nama
+                $("#nama_mhs").val(data.data.id_mhs).change()
+                document.getElementById('idprestasinon').value = parseInt(data.data.Idprestasinon, 10);
+                document.getElementById('namakegiatan').value = data.data.nama_kegiatan
+                document.getElementById('tempatkegiatan').value = data.data.tempat_kegiatan
+                document.getElementById('namapenyelenggaraan').value = data.data.nama_penyelenggaraan
+                document.getElementById('tanggalawal').value = dateawal 
+                document.getElementById('tanggalakhir').value = dateakhir
+
+                $("span[for*='unggah_foto'").html(data.data.unggah_foto);
+                $("span[for*='unggah_sertifikat'").html(data.data.unggah_sertifikat);
+                $("span[for*='unggah_surat_tugas'").html(data.data.unggah_surat_tugas);
+                
+                
+            }}) 
+        };
+
+
+        const EditPrestasinon = (prestasinon) => {
+                $.ajax({
+                    type: 'PUT',
+                    url: 'http://localhost:8085/editprestasinon/'+prestasinon.Idprestasinon,
+                    contentType: 'application/json',
+                    data: JSON.stringify(prestasinon),
+                    success: function(data) {
+                        data.data
+                }
+                });     
+        }
+
+
         // event listener for form submission
         const form = document.querySelector('form');
 
         const formEvent = form.addEventListener('submit', event => {
             event.preventDefault();
 
-            const nama_organisasi = document.querySelector('#namaorganisasi').value;
-            const jabatan_mhs = document.querySelector('#jabatanmhs').value;
-            const periode = document.querySelector('#periode').value;
-            const id_mhs = parseInt(document.querySelector('#nama_mhs').value, 10);
-            //const unggah_foto = getFile(document.querySelector('#unggahfoto').value);
-            const unggahsk = document.querySelector('#base64sk').value;
+            const nama_kegiatan = document.querySelector('#namakegiatan').value;
+            const nama_penyelenggaraan = document.querySelector('#namapenyelenggaraan').value;
+            const id_mhs = parseInt(document.querySelector('#nama_mhs').value, 10); 
+            const tempat_kegiatan = document.querySelector('#tempatkegiatan').value;
+            const tanggal_awal = document.querySelector('#tanggalawal').value; 
+            const tanggal_akhir = document.querySelector('#tanggalakhir').value;
 
-            const organisasi = {  
+            //const unggah_foto = getFile(document.querySelector('#unggahfoto').value);
+            const unggah_foto = document.querySelector('#base64foto').value;
+            const unggah_sertifikat = document.querySelector('#base64se').value;
+            const unggah_surat_tugas = document.querySelector('#base64st').value;
+            
+            
+            const prestasinon = {  
+                                Idprestasinon : parseInt(c,10),
                                 id_mhs : id_mhs, 
-                                jabatan_mhs : jabatan_mhs, 
-                                nama_organisasi : nama_organisasi,
-                                periode : periode, 
-                                unggahsk : unggahsk
+                                nama_kegiatan : nama_kegiatan, 
+                                nama_penyelenggaraan : nama_penyelenggaraan,
+                                tempat_kegiatan : tempat_kegiatan,
+                                tanggal_awal :tanggal_awal,
+                                tanggal_akhir : tanggal_akhir,
+                                unggah_sertifikat : unggah_sertifikat,
+                                unggah_foto : unggah_foto,
+                                unggah_surat_tugas : unggah_surat_tugas
                             };
-            AddOrganisasi(organisasi);
-           
+                            console.log(prestasinon);
+            EditPrestasinon(prestasinon);
+            location.reload();
         });
     </script>
 </body>

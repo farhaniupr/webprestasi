@@ -28,7 +28,7 @@ func main() {
 	router.GET("/lihatmahasiswa", controller.GetMahasiswa)
 	router.GET("/lihatorganisasi", controller.GetOrganisasi)
 	router.GET("/lihatpengabdian", controller.GetPengabdian)
-	router.GET("/lihatprestasinon", controller.GetPrestasiNon)
+	router.GET("/lihatprestasinon", controller.GetPrestasinon)
 	router.GET("/lihatprestasi", controller.GetPrestasi)
 	router.GET("/lihatprodi", controller.GetProdi)
 
@@ -36,18 +36,21 @@ func main() {
 	router.GET("/lihatmahasiswa/:idmhs", controller.GetOneMahasiswa)
 	router.GET("/lihatprodi/:kode_prodi", controller.GetOneProdi)
 	router.GET("/lihatprestasi/:id_prestasi", controller.GetOnePrestasi)
+	router.GET("/lihatprestasinon/:id_prestasinon", controller.GetOnePrestasinon)
 	router.GET("/lihatorganisasi/:id_organisasi", controller.GetOneOrganisasi)
 
 	//insert
 	router.POST("/addmahasiswa", controller.AddMahasiswa)
 	router.POST("/addprodi", controller.AddProdi)
 	router.POST("/addprestasi", controller.AddPrestasi)
+	router.POST("/addprestasinon", controller.AddPrestasinon)
 	router.POST("/addorganisasi", controller.AddOrganisasi)
 
 	//edit
 	router.PUT("/editmahasiswa/:idmhs", controller.EditMahasiswa)
 	router.PUT("/editprodi/:kode_prodi", controller.EditProdi)
 	router.PUT("/editprestasi/:id_prestasi", controller.EditPrestasi)
+	router.PUT("/editprestasinon/:id_prestasinon", controller.EditPrestasinon)
 	router.PUT("/editorganisasi/:id_organisasi", controller.EditOrganisasi)
 
 	//edit > setuju/tidak
@@ -57,10 +60,14 @@ func main() {
 	router.PUT("/editsetujuorganisasi/:id_organisasi", controller.EditSetujuOrganisasi)
 	router.PUT("/edittsetujuorganisasi/:id_organisasi", controller.EditTSetujuOrganisasi)
 
+	router.PUT("/editsetujuprestasinon/:id_prestasinon", controller.EditSetujuPrestasinon)
+	router.PUT("/edittsetujuprestasinon/:id_prestasinon", controller.EditTSetujuPrestasinon)
+
 	//delete
 	router.DELETE("/deletemahasiswa/:idmhs", controller.DeleteMahasiswa)
 	router.DELETE("/deleteprodi/:kode_prodi", controller.DeleteProdi)
 	router.DELETE("/deleteprestasi/:id_prestasi", controller.DeletePrestasi)
+	router.DELETE("/deleteprestasinon/:id_prestasinon", controller.DeletePrestasinon)
 	router.DELETE("/deleteorganisasi/:id_organisasi", controller.DeleteOrganisasi)
 
 	//REST API upload -- sdh digabung

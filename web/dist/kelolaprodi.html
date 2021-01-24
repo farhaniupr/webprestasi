@@ -120,10 +120,26 @@
                     
                     <li>
                         <a href="kelolaprestasinon.html">Lihat Data</a>
+                    </li>                    
+                </ul>                
+            </li>
+            <li class="sidebar-item has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i data-feather="file-plus" width="20"></i> 
+                    <span>Kelola Pengabdian</span>
+                </a>
+
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addpengabdian.html">Tambah Data</a>
                     </li>
                     
-                </ul>
-                
+                    <li>
+                        <a href="kelolapengabdian.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>                
             </li>
         </ul>
     </div>
@@ -277,10 +293,7 @@
 
     <script src="assets/js/axios.min.js"></script>
     <script>
-        var arrayReturn = [];
-        let b1 = '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" >Edit</button>'
-        let b2 =  '<button data-toggle="tooltip" title="Trash" class="btn btn-dark round"">Hapus</button>'
-        
+        var arrayReturn = [];       
 
             $.ajax({
                 url : "http://localhost:8085/lihatprodi",
@@ -290,7 +303,13 @@
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {
 						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].                      
-                        arrayReturn.push([data.data[i].kode_prodi, data.data[i].nama_prodi, data.data[i].nama_fakultas,'<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`http://localhost:5500/web/dist/editprodi.html?id='+data.data[i].kode_prodi+'`" >Edit</button>'+" "+'<button onclick="DeleteProdi('+data.data[i].kode_prodi+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
+                        arrayReturn.push([
+                            data.data[i].kode_prodi, 
+                            data.data[i].nama_prodi, 
+                            data.data[i].nama_fakultas,
+                            '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editprodi.html?id='+
+                            data.data[i].kode_prodi+'`" >Edit</button>'+" "+'<button onclick="DeleteProdi('+data.data[i].kode_prodi
+                            +')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
 					}
                 inittable(arrayReturn);
                 //console.log(data.data[i])

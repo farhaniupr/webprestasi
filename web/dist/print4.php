@@ -12,7 +12,7 @@
 
 <body>
 <?php
-include '../config/koneksi.php';
+include './koneksi.php';
 
 ?>
 <!doctype html>
@@ -38,8 +38,8 @@ include '../config/koneksi.php';
                                         <tbody>
           <?php
                  $no=1;
-                $data_pengabdian = mysqli_query($conn,"SELECT a.nama, a.nim, b.* from datapengabdian b
-                LEFT JOIN datamahasiswa a ON b.idmhs = a.idmhs WHERE b.status='setuju' order by id_pengabdian  DESC");
+                $data_pengabdian = mysqli_query($conn,"SELECT a.nama, a.nim, b.* from pengabdians b
+                LEFT JOIN mahasiswas a ON b.idmhs = a.idmhs WHERE b.status='setuju' order by idpengabdian  DESC");
                 while($data=mysqli_fetch_array($data_pengabdian))
                 {
                 ?>
@@ -48,8 +48,8 @@ include '../config/koneksi.php';
         <td><center><?php echo $no++; ?></center></td>
                                    <td><?php echo $data['nama']; ?></td>
                                     <td><?php echo $data['nim']; ?></td>
-                                    <td><?php echo $data['nama_program']; ?></td>
-                                    <td><?php echo $data['tahun_kegiatan']; ?></td>
+                                    <td><?php echo $data['namaprogram']; ?></td>
+                                    <td><?php echo $data['tahunkegiatan']; ?></td>
                                     
                                    
                                    

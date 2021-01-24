@@ -141,7 +141,6 @@
                     
                 </ul>                
             </li>
-            
         </ul>
     </div>
     <button class="sidebar-toggler btn x"><i data-feather="x"></i></button>
@@ -196,7 +195,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Prestasi Non-Kompetisi</h3>
+                <h3>Data Organisasi</h3>
 
                 <!--
                 <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
@@ -206,7 +205,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Prestasi Non-Kompetisi</li>
+                        <li class="breadcrumb-item active" aria-current="page">Pengabdian</li>
                     </ol>
                 </nav>
             </div>
@@ -216,19 +215,16 @@
         <div class="card">
             <div class="card-header">
                 Data table
-                <br></br><a href="export3.php" class="btn icon icon-left btn-success">Export File</a>
+                <br></br><a href="export4.php" class="btn icon icon-left btn-success">Export File</a>
             </div>
             <div class="card-body">
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
                             <th>Nama Mahasiswa</th>
-                            <th>Nama Kegiatan</th>
-                            <th>Penyelenggara</th>
-                            <th>Tempat Kegiatan</th>
-                            <th>Sertifikat</th>
+                            <th>Nama Program</th>
+                            <th>Tahun Kegiatan</th>
                             <th>Surat Tugas</th>
-                            <th>Foto</th>
                             <th>Status</th>
                             <th>Aksi Status</th>
                             <th>Aksi Field</th>
@@ -270,36 +266,31 @@
     <script src="assets/js/axios.min.js"></script>
     <script>
         var arrayReturn = [];
-        
-      
-        
 
-        $.ajax({
-                url : "http://localhost:8085/lihatprestasinon",
+            $.ajax({
+                url : "http://localhost:8085/lihatpengabdian",
                 async: false,
                 dataType: 'json',
                 success: function (data) {
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
-                        arrayReturn.push([data.data[i].nama, data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].tempat_kegiatan, 
-                            '<center>'+data.data[i].unggah_sertifikat+'<br></br><a target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_sertifikat+'">Lihat</a>', 
-                            '<center>'+data.data[i].unggah_surat_tugas+'<br></br><a target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_surat_tugas+'">Lihat</a>', 
-                            '<center>'+data.data[i].unggah_foto+'<br></br><a target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_foto+'">Lihat</a>', 
+                        arrayReturn.push([data.data[i].nama, data.data[i].nama_program, data.data[i].tahun_kegiatan, 
+                            '<center>'+data.data[i].unggah_surat+'<br></br><a target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_surat+'">Lihat</a>',  
                             data.data[i].status,
-                            '<center><a href="#" onclick="return TSetuju('+data.data[i].Idprestasinon+')" class="btn icon icon-left btn-danger"><i data-feather="alert-circle"></i>Tidak</a>'+'<br></br>'+
-                            '<a href="#" onclick="return Setuju('+data.data[i].Idprestasinon+')" class="btn icon icon-left btn-success"><i data-feather="check-circle"></i>Setuju</a>', 
-                            '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editprestasinon.html?id='+data.data[i].Idprestasinon+'`" >Edit</button>'+"<br></br> "
-                            +'<button onclick="DeleteM('+data.data[i].Idprestasinon+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
+                            '<center><a href="#" onclick="return TSetuju('+data.data[i].Idpengabdian+')" class="btn icon icon-left btn-danger"><i data-feather="alert-circle"></i>Tidak</a>'+'<br></br>'+
+                            '<a href="#" onclick="return Setuju('+data.data[i].Idpengabdian+')" class="btn icon icon-left btn-success"><i data-feather="check-circle"></i>Setuju</a>', 
+                            '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editpengabdian.html?id='+data.data[i].Idpengabdian+'`" >Edit</button>'+"<br></br> "
+                            +'<button onclick="DeleteM('+data.data[i].Idpengabdian+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
                     }
                     
                 inittable(arrayReturn);
                 }
             });
 
-            function Setuju(prestasinon){
-                axios.put(`http://localhost:8085/editsetujuprestasinon/${prestasinon}`, {"status" : "setuju"})
+            function Setuju(pengabdian){
+                axios.put(`http://localhost:8085/editsetujupengabdian/${pengabdian}`, {"status" : "setuju"})
                 .then(response => {
-                console.log('Prestasinon-setuju  is edited', prestasinon);                
+                console.log('pengabdian-setuju  is edited', pengabdian);                
                 location.reload();
                 //$('#table1').DataTable("aaData" : data);
                 //load()
@@ -309,10 +300,10 @@
             }
 
 
-            function TSetuju(prestasinon){
-                axios.put(`http://localhost:8085/edittsetujuprestasinon/${prestasinon}`, {"status" : "tidak setuju"})
+            function TSetuju(pengabdian){
+                axios.put(`http://localhost:8085/edittsetujupengabdian/${pengabdian}`, {"status" : "tidak setuju"})
                 .then(response => {
-                console.log('Prestasinon-setuju  is edited', prestasinon);                
+                console.log('pengabdian-setuju  is edited', pengabdian);                
                 location.reload();
             })
             .catch(error => console.error(error));
@@ -327,10 +318,10 @@
             } );
     	    }
 
-            function DeleteM(prestasinon) {
-            axios.delete(`http://localhost:8085/deleteprestasinon/${prestasinon}`)
+            function DeleteM(pengabdian) {
+            axios.delete(`http://localhost:8085/deletepengabdian/${pengabdian}`)
                 .then(response => {
-                console.log('Prestasinon is removed', prestasinon);                
+                console.log('pengabdian is removed', pengabdian);                
                 
                 location.reload();
             })

@@ -20,6 +20,10 @@ type Mahasiswa struct {
 	Hobi           string `json:"hobi"`
 }
 
+type Auth struct {
+	Username string `json:"username"`
+	Password string `json:"password"`
+}
 type Fakultasprodi struct {
 	Kodeprodi    string `json:"kode_prodi"`
 	Namafakultas string `json:"nama_fakultas"`

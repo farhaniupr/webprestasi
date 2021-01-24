@@ -47,6 +47,25 @@ type ResultOrganisasi struct {
 	Status         string `json:"status"`
 }
 
+type ResultPengabdian struct {
+	Idpengabdian  int        `gorm:"primary_key";auto_increment;not_null json:"id_pengabdian"`
+	Idmhs         int        `json:"id_mhs"`
+	Nama          string     `json:"nama"`
+	Namaprogram   string     `json:"nama_program"`
+	Tahunkegiatan *time.Time `json:"tahun_kegiatan"`
+	Unggahsurat   string     `json:"unggah_surat"`
+	Status        string     `json:"status"`
+}
+
+type Pengabdian struct {
+	Idpengabdian  int    `gorm:"primary_key";auto_increment;not_null json:"id_pengabdian"`
+	Idmhs         int    `json:"id_mhs"`
+	Nama          string `json:"nama"`
+	Namaprogram   string `json:"nama_program"`
+	Tahunkegiatan string `json:"tahun_kegiatan"`
+	Unggahsurat   string `json:"unggah_surat"`
+	Status        string `json:"status"`
+}
 type Prestasinonkompetisi struct {
 	Idprestasinon       int        `gorm:"primary_key";auto_increment;not_null json:"id_prestasi_non"`
 	Idmhs               int        `json:"id_mhs"`
@@ -103,8 +122,12 @@ func GetOrganisasi(c *gin.Context) {
 }
 
 func GetPengabdian(c *gin.Context) {
-	var pengabdian []models.Pengabdian
-	models.DB.Find(&pengabdian)
+	var pengabdian []Pengabdian
+	//models.DB.Find(&pengabdian)
+
+	models.DB.Table("pengabdians").Select("pengabdians.idpengabdian, pengabdians.idmhs, pengabdians.namaprogram, pengabdians.tahunkegiatan, pengabdians.unggahsurat, pengabdians.status, mahasiswas.nama, mahasiswas.idmhs").
+		Joins("left join mahasiswas on mahasiswas.idmhs = pengabdians.idmhs").Scan(&pengabdian)
+
 	c.JSON(http.StatusOK, gin.H{"data": pengabdian})
 }
 
@@ -127,6 +150,17 @@ func GetPrestasinon(c *gin.Context) {
 }
 
 //Get 1 Row
+func GetOnePengabdian(c *gin.Context) {
+	var pengabdian Pengabdian
+	parpengabdian := c.Param("idpengabdian")
+
+	//models.DB.Where("idpengabdian = ?", parpengabdian).First(&pengabdian)
+	models.DB.Table("pengabdians").Select("pengabdians.idpengabdian, pengabdians.idmhs, pengabdians.namaprogram, pengabdians.tahunkegiatan, pengabdians.unggahsurat, pengabdians.status, mahasiswas.idmhs, mahasiswas.nama").
+		Joins("left join mahasiswas on mahasiswas.idmhs = pengabdians.idmhs").Where("idpengabdian = ?", parpengabdian).Scan(&pengabdian)
+
+	c.JSON(http.StatusOK, gin.H{"data": pengabdian})
+}
+
 func GetOneMahasiswa(c *gin.Context) {
 	var mahasiswa models.Mahasiswa
 	paridmhs := c.Param("idmhs")
@@ -452,6 +486,47 @@ func AddOrganisasi(c *gin.Context) {
 	}
 }
 
+func AddPengabdian(c *gin.Context) {
+	var pengabdian models.Pengabdian
+	//var prestasiT Prestasi
+
+	if err := c.Bind(&pengabdian); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	//START pdf
+	readerSK, err := base64.StdEncoding.DecodeString(pengabdian.Unggahsurat)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	PdfSTFilename := "web/dist/image/" + pengabdian.Namaprogram + "_Surat.pdf"
+
+	h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
+	if err != nil {
+		log.Fatal(err)
+		return
+	}
+
+	if _, err := h.Write(readerSK); err != nil {
+		panic(err)
+	}
+	if err := h.Sync(); err != nil {
+		panic(err)
+	}
+	fmt.Println("Pdf file", PdfSTFilename, "created")
+	pengabdian.Unggahsurat = pengabdian.Namaprogram + "_Surat.pdf"
+	//end pdf
+
+	result := models.DB.Create(&pengabdian)
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	} else {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+}
+
 //Edit
 func EditMahasiswa(c *gin.Context) {
 	var mahasiswa models.Mahasiswa
@@ -555,53 +630,58 @@ func EditPrestasi(c *gin.Context) {
 		prestasi.Unggahfoto = prestasi.Namakegiatan + "_foto.png"
 		//END png
 	}
-	//START pdf
-	readerSertifikat, err := base64.StdEncoding.DecodeString(prestasi.Unggahsertifikat)
-	if err != nil {
-		log.Fatal(err)
+
+	if len(prestasi.Unggahsertifikat) > 0 {
+		//START pdf
+		readerSertifikat, err := base64.StdEncoding.DecodeString(prestasi.Unggahsertifikat)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		PdfSertifikatFilename := "web/dist/image/" + prestasi.Namakegiatan + "_SE.pdf"
+
+		g, err := os.OpenFile(PdfSertifikatFilename, os.O_WRONLY|os.O_CREATE, 0777)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+
+		if _, err := g.Write(readerSertifikat); err != nil {
+			panic(err)
+		}
+		if err := g.Sync(); err != nil {
+			panic(err)
+		}
+		fmt.Println("Pdf file", PdfSertifikatFilename, "created")
+		prestasi.Unggahsertifikat = prestasi.Namakegiatan + "_SE.pdf"
+		//end pdf
 	}
 
-	PdfSertifikatFilename := "web/dist/image/" + prestasi.Namakegiatan + "_SE.pdf"
+	if len(prestasi.Unggahsurattugas) > 0 {
+		//START pdf
+		readerSurattugas, err := base64.StdEncoding.DecodeString(prestasi.Unggahsurattugas)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	g, err := os.OpenFile(PdfSertifikatFilename, os.O_WRONLY|os.O_CREATE, 0777)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
+		PdfSTFilename := "web/dist/image/" + prestasi.Namakegiatan + "_ST.pdf"
 
-	if _, err := g.Write(readerSertifikat); err != nil {
-		panic(err)
-	}
-	if err := g.Sync(); err != nil {
-		panic(err)
-	}
-	fmt.Println("Pdf file", PdfSertifikatFilename, "created")
-	prestasi.Unggahsertifikat = prestasi.Namakegiatan + "_SE.pdf"
-	//end pdf
+		h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
 
-	//START pdf
-	readerSurattugas, err := base64.StdEncoding.DecodeString(prestasi.Unggahsurattugas)
-	if err != nil {
-		log.Fatal(err)
+		if _, err := h.Write(readerSurattugas); err != nil {
+			panic(err)
+		}
+		if err := h.Sync(); err != nil {
+			panic(err)
+		}
+		fmt.Println("Pdf file", PdfSTFilename, "created")
+		prestasi.Unggahsurattugas = prestasi.Namakegiatan + "_ST.pdf"
+		//end pdf
 	}
-
-	PdfSTFilename := "web/dist/image/" + prestasi.Namakegiatan + "_ST.pdf"
-
-	h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	if _, err := h.Write(readerSurattugas); err != nil {
-		panic(err)
-	}
-	if err := h.Sync(); err != nil {
-		panic(err)
-	}
-	fmt.Println("Pdf file", PdfSTFilename, "created")
-	prestasi.Unggahsurattugas = prestasi.Namakegiatan + "_ST.pdf"
-	//end pdf
 
 	result := models.DB.Where("Idprestasi = ?", prestasi.Idprestasi).Updates(&prestasi)
 
@@ -667,52 +747,57 @@ func EditPrestasinon(c *gin.Context) {
 		//END png
 	}
 	//START pdf
-	readerSertifikat, err := base64.StdEncoding.DecodeString(prestasinon.Unggahsertifikat)
-	if err != nil {
-		log.Fatal(err)
+
+	if len(prestasinon.Unggahsertifikat) > 0 {
+		readerSertifikat, err := base64.StdEncoding.DecodeString(prestasinon.Unggahsertifikat)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		PdfSertifikatFilename := "web/dist/image/" + prestasinon.Namakegiatan + "_SE.pdf"
+
+		g, err := os.OpenFile(PdfSertifikatFilename, os.O_WRONLY|os.O_CREATE, 0777)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+
+		if _, err := g.Write(readerSertifikat); err != nil {
+			panic(err)
+		}
+		if err := g.Sync(); err != nil {
+			panic(err)
+		}
+		fmt.Println("Pdf file", PdfSertifikatFilename, "created")
+		prestasinon.Unggahsertifikat = prestasinon.Namakegiatan + "_SE.pdf"
+		//end pdf
 	}
 
-	PdfSertifikatFilename := "web/dist/image/" + prestasinon.Namakegiatan + "_SE.pdf"
+	if len(prestasinon.Unggahsurattugas) > 0 {
+		//START pdf
+		readerSurattugas, err := base64.StdEncoding.DecodeString(prestasinon.Unggahsurattugas)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	g, err := os.OpenFile(PdfSertifikatFilename, os.O_WRONLY|os.O_CREATE, 0777)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
+		PdfSTFilename := "web/dist/image/" + prestasinon.Namakegiatan + "_ST.pdf"
 
-	if _, err := g.Write(readerSertifikat); err != nil {
-		panic(err)
-	}
-	if err := g.Sync(); err != nil {
-		panic(err)
-	}
-	fmt.Println("Pdf file", PdfSertifikatFilename, "created")
-	prestasinon.Unggahsertifikat = prestasinon.Namakegiatan + "_SE.pdf"
-	//end pdf
+		h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
 
-	//START pdf
-	readerSurattugas, err := base64.StdEncoding.DecodeString(prestasinon.Unggahsurattugas)
-	if err != nil {
-		log.Fatal(err)
+		if _, err := h.Write(readerSurattugas); err != nil {
+			panic(err)
+		}
+		if err := h.Sync(); err != nil {
+			panic(err)
+		}
+		fmt.Println("Pdf file", PdfSTFilename, "created")
+		prestasinon.Unggahsurattugas = prestasinon.Namakegiatan + "_ST.pdf"
+		//end pdf
 	}
-
-	PdfSTFilename := "web/dist/image/" + prestasinon.Namakegiatan + "_ST.pdf"
-
-	h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
-
-	if _, err := h.Write(readerSurattugas); err != nil {
-		panic(err)
-	}
-	if err := h.Sync(); err != nil {
-		panic(err)
-	}
-	fmt.Println("Pdf file", PdfSTFilename, "created")
-	prestasinon.Unggahsurattugas = prestasinon.Namakegiatan + "_ST.pdf"
-	//end pdf
 
 	result := models.DB.Where("idprestasinon = ?", parprestasinon).Updates(&prestasinon)
 
@@ -739,31 +824,84 @@ func EditOrganisasi(c *gin.Context) {
 	}
 	organisasi.Idorganisasi = parorganisasiConvert
 
-	//START pdf
-	readerSK, err := base64.StdEncoding.DecodeString(organisasi.Unggahsk)
-	if err != nil {
-		log.Fatal(err)
-	}
+	if len(organisasi.Unggahsk) > 0 {
+		//START pdf
+		readerSK, err := base64.StdEncoding.DecodeString(organisasi.Unggahsk)
+		if err != nil {
+			log.Fatal(err)
+		}
 
-	PdfSTFilename := "web/dist/image/" + organisasi.Namaorganisasi + "_SK.pdf"
+		PdfSTFilename := "web/dist/image/" + organisasi.Namaorganisasi + "_SK.pdf"
 
-	h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
-	if err != nil {
-		log.Fatal(err)
-		return
-	}
+		h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
 
-	if _, err := h.Write(readerSK); err != nil {
-		panic(err)
+		if _, err := h.Write(readerSK); err != nil {
+			panic(err)
+		}
+		if err := h.Sync(); err != nil {
+			panic(err)
+		}
+		fmt.Println("Pdf file", PdfSTFilename, "created")
+		organisasi.Unggahsk = organisasi.Namaorganisasi + "_SK.pdf"
+		//end pdf
 	}
-	if err := h.Sync(); err != nil {
-		panic(err)
-	}
-	fmt.Println("Pdf file", PdfSTFilename, "created")
-	organisasi.Unggahsk = organisasi.Namaorganisasi + "_SK.pdf"
-	//end pdf
 
 	result := models.DB.Where("idorganisasi = ?", organisasi.Idorganisasi).Updates(&organisasi)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func EditPengabdian(c *gin.Context) {
+	var pengabdian models.Pengabdian
+
+	if err := c.Bind(&pengabdian); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parpengabdian string
+	parpengabdian = c.Param("idpengabdian")
+
+	parpengabdianConvert, err := strconv.Atoi(parpengabdian)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+	pengabdian.Idpengabdian = parpengabdianConvert
+
+	if len(pengabdian.Unggahsurat) > 0 {
+		//START pdf
+		readerSK, err := base64.StdEncoding.DecodeString(pengabdian.Unggahsurat)
+		if err != nil {
+			log.Fatal(err)
+		}
+
+		PdfSTFilename := "web/dist/image/" + pengabdian.Namaprogram + "_Surat.pdf"
+
+		h, err := os.OpenFile(PdfSTFilename, os.O_WRONLY|os.O_CREATE, 0777)
+		if err != nil {
+			log.Fatal(err)
+			return
+		}
+
+		if _, err := h.Write(readerSK); err != nil {
+			panic(err)
+		}
+		if err := h.Sync(); err != nil {
+			panic(err)
+		}
+		fmt.Println("Pdf file", PdfSTFilename, "created")
+		pengabdian.Unggahsurat = pengabdian.Namaprogram + "_Surat.pdf"
+		//end pdf
+	}
+
+	result := models.DB.Where("idpengabdian = ?", pengabdian.Idpengabdian).Updates(&pengabdian)
 
 	chech := result.RowsAffected
 	if chech == 1 {
@@ -927,6 +1065,58 @@ func EditTSetujuPrestasinon(c *gin.Context) {
 	}
 }
 
+func EditSetujuPengabdian(c *gin.Context) {
+	var pengabdian models.Pengabdian
+	//var prestasit models.Prestasi
+
+	if err := c.Bind(&pengabdian); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parpengabdian string
+	parpengabdian = c.Param("idpengabdian")
+
+	parpengabdianConvert, err := strconv.Atoi(parpengabdian)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+	pengabdian.Idpengabdian = parpengabdianConvert
+
+	result := models.DB.Model(&models.Pengabdian{}).Where("idpengabdian = ?", pengabdian.Idpengabdian).Update("status", "setuju")
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+func EditTSetujuPengabdian(c *gin.Context) {
+	var pengabdian models.Pengabdian
+	//var prestasit models.Prestasi
+
+	if err := c.Bind(&pengabdian); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	var parpengabdian string
+	parpengabdian = c.Param("idpengabdian")
+
+	parpengabdianConvert, err := strconv.Atoi(parpengabdian)
+
+	if err != nil {
+		fmt.Println("eror")
+	}
+	pengabdian.Idpengabdian = parpengabdianConvert
+
+	result := models.DB.Model(&models.Pengabdian{}).Where("idpengabdian = ?", pengabdian.Idpengabdian).Update("status", "tidak setuju")
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
 //Delete
 func DeleteMahasiswa(c *gin.Context) {
 	var mahasiswa models.Mahasiswa
@@ -1013,6 +1203,24 @@ func DeleteOrganisasi(c *gin.Context) {
 	}
 }
 
+func DeletePengabdian(c *gin.Context) {
+	var pengabdian models.Pengabdian
+
+	if err := c.Bind(&pengabdian); err != nil {
+		c.JSON(http.StatusOK, gin.H{"error": err.Error()})
+	}
+
+	parpengabdian := c.Param("idpengabdian")
+
+	result := models.DB.Where("idpengabdian=?", parpengabdian).Delete(&pengabdian)
+
+	chech := result.RowsAffected
+	if chech == 1 {
+		c.JSON(http.StatusOK, gin.H{"Status": "Berhasil"})
+	}
+}
+
+//upload
 func Upload(c *gin.Context) {
 	var foto models.Foto
 

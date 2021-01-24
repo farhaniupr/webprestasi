@@ -21,7 +21,22 @@ const formEvent = form.addEventListener('submit', event => {
     const programstudi = document.querySelector('#programstudi').value;
     const nohp = document.querySelector('#nohp').value;
     const email = document.querySelector('#email').value;
-    const mhs = { nama : nama, nim : nim, fakultas : fakultas, programstudi : programstudi, nohp : nohp, email : email };
+    const password = document.querySelector('#password').value;
+    const alamatktp = document.querySelector('#alamatktp').value;
+    const alamatdomisili = document.querySelector('#alamatdomisili').value;
+    const hobi = document.querySelector('#hobi').value;
+    const mhs = { 
+        nama : nama, 
+        nim : nim, 
+        fakultas : fakultas, 
+        programstudi : programstudi, 
+        nohp : nohp, 
+        email : email,
+        password : password,
+        alamatktp : alamatktp,
+        alamatdomisili : alamatdomisili,
+        hobi : hobi 
+    };
     AddMahasiswa(mhs);
 });
 

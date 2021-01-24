@@ -121,7 +121,24 @@
                     </li>
                     
                 </ul>
-                
+            </li>
+            <li class="sidebar-item has-sub">
+                <a href="#" class='sidebar-link'>
+                    <i data-feather="file-plus" width="20"></i> 
+                    <span>Kelola Pengabdian</span>
+                </a>
+
+                <ul class="submenu ">
+                    
+                    <li>
+                        <a href="addpengabdian.html">Tambah Data</a>
+                    </li>
+                    
+                    <li>
+                        <a href="kelolapengabdian.html">Lihat Data</a>
+                    </li>
+                    
+                </ul>                
             </li>
         </ul>
     </div>
@@ -220,14 +237,23 @@
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="fakultas">Fakultas</label>
-                                            <input type="text" id="fakultas" class="form-control" placeholder="Fakultas" name="fakultas">
+                                            <select name="fakultas" id="fakultas" class="form-select">
+                                                <option value="Fakultas Kedokteran">Fakultas Kedokteran</option>
+                                                <option value="Fakultas Keguruan dan Ilmu Pendidikan">Fakultas Keguruan dan Ilmu Pendidikan</option>
+                                                <option value="Fakultas Ekonomi dan Bisnis">Fakultas Ekonomi dan Bisnis</option>
+                                                <option value="Fakultas Pertanian">Fakultas Pertanian</option>
+                                                <option value="Fakultas Hukum">Fakultas Hukum</option>
+                                                <option value="Fakultas Ilmu Sosial dan Ilmu Politik">Fakultas Ilmu Sosial dan Ilmu Politik</option>
+                                                <option value="Fakultas Matematika dan Ilmu Pengetahuan Alam">Fakultas Matematika dan Ilmu Pengetahuan Alam</option>
+                                                <option value="Fakultas Teknik">Fakultas Teknik</option>
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
                                         <div class="form-group">
                                             <label for="programstudi">Program Studi</label>
-                                            <input type="text" id="programstudi" class="form-control" name="programstudi"
-                                                placeholder="Program Studi">
+                                            <select name="programstudi" id="programstudi" class="form-select">
+                                            </select>
                                         </div>
                                     </div>
                                     <div class="col-md-6 col-12">
@@ -242,6 +268,34 @@
                                             <label for="email">Email</label>
                                             <input type="email" id="email" class="form-control" name="email"
                                                 placeholder="Email">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="alamatktp">Alamat KTP</label>
+                                            <input type="text" id="alamatktp" class="form-control" name="alamatktp"
+                                                placeholder="Alamat KTP">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="alamatdomisili">Alamat Domisili</label>
+                                            <input type="text" id="alamatdomisili" class="form-control" name="alamatdomisili"
+                                                placeholder="Alamat Domisili">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="hobi">Hobi</label>
+                                            <input type="text" id="hobi" class="form-control" name="hobi"
+                                                placeholder="Hobi">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 col-12">
+                                        <div class="form-group">
+                                            <label for="password">Password</label>
+                                            <input type="password" id="password" class="form-control" name="password"
+                                                placeholder="Password">
                                         </div>
                                     </div>
                                     <div class="form-group col-12">
@@ -273,8 +327,24 @@
     <script src="assets/js/main.js"></script>
 
     <script src="assets/js/axios.min.js"></script>
+    <script src="assets/vendors/simple-datatables/jquery.min.js"></script>
+    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
+    <script src="assets/js/moment.min.js"></script>
+    <script src="assets/js/jquery-3.5.0.js"></script>
     <script>
-        //
+
+        $.ajax({
+            url : "http://localhost:8085/lihatprodi",
+            async: false,
+            dataType: 'json',
+            success: function (data) {
+                    $("#nama_mhs").empty();
+                        for (var i = 0, len = data.data.length; i < len; i++) {                                      
+                                $("#programstudi").append("<option value='"+data.data[i].nama_prodi+"'>"+data.data[i].nama_prodi+"</option")  
+                            }    
+                        }
+                        
+        });
 
         var urls = window.location.href;
         var url = new URL(urls);
@@ -286,12 +356,18 @@
                 .then(response => {
                 console.log(' lihat mahasiswa', response.data.data);                
                 
+                $("#fakultas").val(response.data.data.fakultas).change()
+                $("#programstudi").val(response.data.data.programstudi).change()
                 document.getElementById('nama').value = response.data.data.nama
                 document.getElementById('nim').value = response.data.data.nim
                 document.getElementById('nohp').value = response.data.data.nohp
-                document.getElementById('programstudi').value = response.data.data.programstudi
-                document.getElementById('fakultas').value = response.data.data.fakultas
+                //document.getElementById('programstudi').value = response.data.data.programstudi
+                //document.getElementById('fakultas').value = response.data.data.fakultas
                 document.getElementById('email').value = response.data.data.email
+                document.getElementById('hobi').value = response.data.data.email
+                document.getElementById('alamatdomisili').value = response.data.data.alamatktp
+                document.getElementById('alamatktp').value = response.data.data.alamatdomisili
+                document.getElementById('password').value = response.data.data.password
                 
             })
             .catch(error => console.error(error));
@@ -304,7 +380,7 @@
                     //const  editmhs = response.data.data;
                     console.log(`PUT : mhs is edited`, mhs);
                     console.log(response.data);
-                            
+                    location.reload();  
                 })
                 .catch(error => console.error(error));
         };
@@ -321,9 +397,25 @@
             const programstudi = document.querySelector('#programstudi').value;
             const nohp = document.querySelector('#nohp').value;
             const email = document.querySelector('#email').value;
-            const mhs = { Idmhs : parseInt(c,10), nama : nama, nim : nim, fakultas : fakultas, programstudi : programstudi, nohp : nohp, email : email };
+            const password = document.querySelector('#password').value;
+            const alamatktp = document.querySelector('#alamatktp').value;
+            const alamatdomisili = document.querySelector('#alamatdomisili').value;
+            const hobi = document.querySelector('#hobi').value;
+            const mhs = { 
+                Idmhs : parseInt(c,10), 
+                nama : nama, 
+                nim : nim, 
+                fakultas : fakultas, 
+                programstudi : programstudi, 
+                nohp : nohp, 
+                email : email, 
+                password : password,
+                alamatktp : alamatktp,
+                alamatdomisili : alamatdomisili,
+                hobi : hobi 
+            };
             EditMahasiswa(mhs);
-            location.reload();  
+ 
             
         });
     </script>

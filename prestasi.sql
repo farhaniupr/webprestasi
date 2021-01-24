@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 21 Jan 2021 pada 23.47
+-- Waktu pembuatan: 24 Jan 2021 pada 03.31
 -- Versi server: 10.4.16-MariaDB
 -- Versi PHP: 7.4.12
 
@@ -58,7 +58,7 @@ CREATE TABLE `fakultasprodis` (
 --
 
 INSERT INTO `fakultasprodis` (`kodeprodi`, `namafakultas`, `namaprodi`) VALUES
-('11201', 'Fakultas Kedokteran', 'Kedokteran '),
+('11201', 'Fakultas Kedokteran', 'Kedokteran'),
 ('11901', 'Fakultas Kedokteran', 'Profesi Dokter Profesi '),
 ('22201', 'Fakultas Teknik', 'Teknik Sipil '),
 ('23201', 'Fakultas Teknik', 'Arsitektur '),
@@ -1260,7 +1260,7 @@ INSERT INTO `mahasiswas` (`idmhs`, `nama`, `nim`, `password`, `fakultas`, `progr
 (3506, 'ELSA PURNAMA SARI', 'DAB118118', 'DAB118118', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
 (3507, 'NOVRINDO GABRIEL PANARA TARUNG', 'DAB118119', 'DAB118119', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
 (3508, 'MELISSA TANIA YULIANTARA', 'DAB118055', 'DAB118055', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
-(3509, 'ABELINO NOVANDOW', 'DAB118057', 'DAB118057', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
+(3509, 'ABELINO NOVANDOW', 'DAB118057', 'DAB118057', 'Fakultas Teknik', 'Teknik Sipil', '082251983584', 'farhaniupr@gmail.com', '', '', ''),
 (3510, 'CORAH MALEM BR SINULINGGA', 'DAB118064', 'DAB118064', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
 (3511, 'HEPRISTY MAYELSYA', 'DAB118142', 'DAB118142', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
 (3512, 'JULIO DWI HASURUNGAN SINURAT', 'DAB118091', 'DAB118091', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
@@ -1294,9 +1294,9 @@ INSERT INTO `mahasiswas` (`idmhs`, `nama`, `nim`, `password`, `fakultas`, `progr
 (3540, 'MEIRILA ASI', 'DBC118094', 'DBC118094', 'Fakultas Teknik', 'Teknik Informatika', '', '', '', '', ''),
 (3541, 'FANNI LEDIA HALOHO', 'DBD118012', 'DBD118012', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', ''),
 (3542, 'TESA MEGASARA SITANGGANG', 'DBD118013', 'DBD118013', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', ''),
-(3543, 'RAHUL BINDU ANTAMA SITINDAON', 'DBD118024', 'DBD118024', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', ''),
-(3544, 'YERSI SAPUTRA OKVI SIATORA', 'DBD118034', 'DBD118034', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', '');
+(3543, 'RAHUL BINDU ANTAMA SITINDAON', 'DBD118024', 'DBD118024', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', '');
 INSERT INTO `mahasiswas` (`idmhs`, `nama`, `nim`, `password`, `fakultas`, `programstudi`, `nohp`, `email`, `alamatktp`, `alamatdomisili`, `hobi`) VALUES
+(3544, 'YERSI SAPUTRA OKVI SIATORA', 'DBD118034', 'DBD118034', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', ''),
 (3545, 'JONHNIARTO', 'DBD118035', 'DBD118035', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', ''),
 (3546, 'ONGKY KOESWARA', 'DBD118026', 'DBD118026', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', ''),
 (3547, 'LILIK GUNAWAN', 'DBD118047', 'DBD118047', 'Fakultas Teknik', 'Teknik Pertambangan', '', '', '', '', ''),
@@ -1327,7 +1327,7 @@ CREATE TABLE `organisasis` (
   `jabatanmhs` varchar(50) NOT NULL,
   `periode` varchar(50) NOT NULL,
   `unggahsk` varchar(100) NOT NULL,
-  `status` enum('setuju','tidak setuju') NOT NULL
+  `status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1335,7 +1335,13 @@ CREATE TABLE `organisasis` (
 --
 
 INSERT INTO `organisasis` (`idorganisasi`, `idmhs`, `namaorganisasi`, `jabatanmhs`, `periode`, `unggahsk`, `status`) VALUES
-(27, 2377, 'bem', 'anggota', '2015', 'Progres I_DBC117052_Erlina Yelie.pdf', 'setuju');
+(27, 2377, 'bem', 'anggota', '2015', 'Progres I_DBC117052_Erlina Yelie.pdf', 'setuju'),
+(28, 2386, 'silvia', 'Anggota', '2016', 'silvia_SK.pdf', 'setuju'),
+(29, 2378, 'Eva', 'Anggota', '2016', 'Eva_SK.pdf', ''),
+(30, 2380, 'Valeri', 'Anggota', '2019', 'Valeri_SK.pdf', ''),
+(31, 2379, 'Sihar', 'Anggota', '2022', 'Sihar_SK.pdf', 'setuju'),
+(33, 2395, 'Olvi', 'Anggota', '2019', 'Olvi_SK.pdf', ''),
+(34, 2395, 'Olvi', 'Anggota', '2019', 'Olvi_SK.pdf', '');
 
 -- --------------------------------------------------------
 
@@ -1369,22 +1375,24 @@ CREATE TABLE `prestasinonkompetisis` (
   `idprestasinon` int(5) NOT NULL,
   `idmhs` int(5) NOT NULL,
   `namakegiatan` varchar(50) NOT NULL,
-  `namapenyelenggara` varchar(50) NOT NULL,
+  `namapenyelenggaraan` varchar(50) NOT NULL,
   `tempatkegiatan` text NOT NULL,
   `tanggalawal` date NOT NULL,
   `tanggalakhir` date NOT NULL,
   `unggahsertifikat` varchar(100) NOT NULL,
   `unggahsurattugas` varchar(100) NOT NULL,
   `unggahfoto` varchar(100) NOT NULL,
-  `status` enum('setuju','tidak setuju') NOT NULL
+  `status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `prestasinonkompetisis`
 --
 
-INSERT INTO `prestasinonkompetisis` (`idprestasinon`, `idmhs`, `namakegiatan`, `namapenyelenggara`, `tempatkegiatan`, `tanggalawal`, `tanggalakhir`, `unggahsertifikat`, `unggahsurattugas`, `unggahfoto`, `status`) VALUES
-(24, 2377, 'penyeluhan', 'hmj', 'aula rahan', '2020-02-11', '2020-02-25', '1.pdf', '2.pdf', 'upr.png', 'setuju');
+INSERT INTO `prestasinonkompetisis` (`idprestasinon`, `idmhs`, `namakegiatan`, `namapenyelenggaraan`, `tempatkegiatan`, `tanggalawal`, `tanggalakhir`, `unggahsertifikat`, `unggahsurattugas`, `unggahfoto`, `status`) VALUES
+(24, 2377, 'penyeluhan', 'hmj', 'aula rahan', '2020-02-11', '2020-02-25', '1.pdf', '2.pdf', 'upr.png', 'setuju'),
+(25, 2377, 'prestasi non 1', 'test', 'aula rahan test', '2021-01-24', '2021-01-24', 'prestasi non 1_SE.pdf', 'prestasi non 1_ST.pdf', 'prestasi non 1_foto.png', 'setuju'),
+(26, 2377, 'prestasi non 2', 'testi', 'aula rahan test', '2021-01-24', '2021-01-24', 'prestasi non 2_SE.pdf', 'prestasi non 2_ST.pdf', 'prestasi non 2_foto.png', 'setuju');
 
 -- --------------------------------------------------------
 
@@ -1399,7 +1407,7 @@ CREATE TABLE `prestasis` (
   `namapenyelenggaraan` varchar(100) NOT NULL,
   `url` varchar(50) NOT NULL,
   `kategorikegiatan` varchar(50) NOT NULL,
-  `tingkat_kegiatan` varchar(100) NOT NULL,
+  `tingkatkegiatan` varchar(100) NOT NULL,
   `jumlah` int(5) NOT NULL,
   `tempatkegiatan` text NOT NULL,
   `hasilkegiatan` varchar(100) NOT NULL,
@@ -1408,15 +1416,17 @@ CREATE TABLE `prestasis` (
   `unggahsertifikat` varchar(100) NOT NULL,
   `unggahsurattugas` varchar(100) NOT NULL,
   `unggahfoto` varchar(100) NOT NULL,
-  `status` enum('setuju','tidak setuju') NOT NULL
+  `status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data untuk tabel `prestasis`
 --
 
-INSERT INTO `prestasis` (`idprestasi`, `idmhs`, `namakegiatan`, `namapenyelenggaraan`, `url`, `kategorikegiatan`, `tingkat_kegiatan`, `jumlah`, `tempatkegiatan`, `hasilkegiatan`, `tanggalawal`, `tanggalakhir`, `unggahsertifikat`, `unggahsurattugas`, `unggahfoto`, `status`) VALUES
-(43, 2479, 'penyeluhan', 'hmj', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Kelompok', 'Provinsi', 10, 'aula rahan', 'Juara II', '2020-12-16', '2020-12-22', '1.pdf', '2.pdf', 'upr.png', 'setuju');
+INSERT INTO `prestasis` (`idprestasi`, `idmhs`, `namakegiatan`, `namapenyelenggaraan`, `url`, `kategorikegiatan`, `tingkatkegiatan`, `jumlah`, `tempatkegiatan`, `hasilkegiatan`, `tanggalawal`, `tanggalakhir`, `unggahsertifikat`, `unggahsurattugas`, `unggahfoto`, `status`) VALUES
+(43, 2379, 'penyeluhan', 'hmj', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Kelompok', 'Provinsi', 10, 'aula rahan', 'Juara II', '2021-12-17', '2020-12-22', '1.pdf', '2.pdf', 'upr.png', 'setuju'),
+(53, 2384, 'framita', '', '', 'Individu', 'Universitas', 0, '', '', '2021-01-22', '2021-01-23', 'framita_SE.pdf', 'framita_ST.pdf', 'framita_foto.png', 'setuju'),
+(54, 2391, 'test', 'test', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Individu', 'Internasional', 4, 'aula rahan', 'Juara II', '2021-01-22', '2021-01-24', 'test_SE.pdf', 'test_ST.pdf', 'test_foto.png', 'setuju');
 
 --
 -- Indexes for dumped tables
@@ -1484,7 +1494,7 @@ ALTER TABLE `mahasiswas`
 -- AUTO_INCREMENT untuk tabel `organisasis`
 --
 ALTER TABLE `organisasis`
-  MODIFY `idorganisasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `idorganisasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengabdians`
@@ -1496,13 +1506,13 @@ ALTER TABLE `pengabdians`
 -- AUTO_INCREMENT untuk tabel `prestasinonkompetisis`
 --
 ALTER TABLE `prestasinonkompetisis`
-  MODIFY `idprestasinon` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `idprestasinon` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT untuk tabel `prestasis`
 --
 ALTER TABLE `prestasis`
-  MODIFY `idprestasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=44;
+  MODIFY `idprestasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

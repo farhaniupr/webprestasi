@@ -301,7 +301,6 @@
             .catch(error => console.error(error));
         };
 
-        // edit mhs
         const EditProdi = (prodi) => {
             axios.put(`http://localhost:8085/editprodi/${prodi.kode_prodi}`, prodi)
                 .then(response => {
@@ -312,7 +311,6 @@
                 .catch(error => console.error(error));
         };
 
-        // event listener for form submission
         const form = document.querySelector('form');
 
         const formEvent = form.addEventListener('submit', event => {

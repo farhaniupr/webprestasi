@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 24 Jan 2021 pada 03.31
+-- Waktu pembuatan: 25 Jan 2021 pada 02.40
 -- Versi server: 10.4.16-MariaDB
 -- Versi PHP: 7.4.12
 
@@ -31,7 +31,7 @@ CREATE TABLE `admins` (
   `idadmin` int(5) NOT NULL,
   `nama` varchar(50) NOT NULL,
   `username` varchar(50) NOT NULL,
-  `password` varchar(50) NOT NULL
+  `password` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -39,7 +39,8 @@ CREATE TABLE `admins` (
 --
 
 INSERT INTO `admins` (`idadmin`, `nama`, `username`, `password`) VALUES
-(1, 'UPR', 'admin', 'admin123');
+(1, 'UPR', 'admin', 'admin123'),
+(5, '', 'admin1', '$2a$10$hcQ0B2cmFdMd5h8bKMt0KOMHpYTgsRg3PFi2bdUu8vusz5X2RACA2');
 
 -- --------------------------------------------------------
 
@@ -1312,7 +1313,10 @@ INSERT INTO `mahasiswas` (`idmhs`, `nama`, `nim`, `password`, `fakultas`, `progr
 (3557, 'RAYANTI VERONICA SIREGAR', 'DBC118056', 'DBC118056', 'Fakultas Teknik', 'Teknik Informatika', '', '', '', '', ''),
 (3558, 'TSAR ADETTA TRIYAS YASSIN', '193030501084', '193030501084', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
 (3559, 'FERRY DACOSTA BABOE', '193020501069', '193020501069', 'Fakultas Teknik', 'Teknik Sipil', '', '', '', '', ''),
-(3568, 'Farhani', '1000', '', 'Teknik', 'Teknik Informatika', '082251983584', 'farhaniupr@gmail.com', '', '', '');
+(3568, 'Farhani', '1000', '', 'Teknik', 'Teknik Informatika', '082251983584', 'farhaniupr@gmail.com', '', '', ''),
+(3573, 'FarhaniTEst', '300', '300', 'FarhaniTEst', 'FarhaniTEst', '082251983584', 'FarhaniTEst@gmail.com', 'FarhaniTEst', 'JALAN A. YANI KOMP. PSR. KAMELOH', 'asd'),
+(3576, 'test', 'test', 'test', 'test', 'test', '082251983584', 'test@gmail.com', 'test', 'test', 'test'),
+(3577, 'Pepo', 'Pepo', '020395@Afarhan', 'Fakultas Pertanian', 'Teknologi Industri Pertanian ', '082251983584', 'farhansabran.123@gmail.com', 'Pepo', 'Pepo', 'farhansabran.123@gmail.com');
 
 -- --------------------------------------------------------
 
@@ -1355,7 +1359,7 @@ CREATE TABLE `pengabdians` (
   `namaprogram` varchar(100) NOT NULL,
   `tahunkegiatan` year(4) NOT NULL,
   `unggahsurat` varchar(100) NOT NULL,
-  `status` enum('setuju','tidak setuju') NOT NULL
+  `status` varchar(25) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
@@ -1363,7 +1367,8 @@ CREATE TABLE `pengabdians` (
 --
 
 INSERT INTO `pengabdians` (`idpengabdian`, `idmhs`, `namaprogram`, `tahunkegiatan`, `unggahsurat`, `status`) VALUES
-(50, 2377, 'kknt', 2020, 'Progres II_DBC117052_Erlina Yelie.pdf', 'setuju');
+(50, 2377, 'kknt', 2020, 'Progres II_DBC117052_Erlina Yelie.pdf', 'setuju'),
+(52, 2381, 'Lasma Program', 2018, 'Lasma Program_Surat.pdf', 'setuju');
 
 -- --------------------------------------------------------
 
@@ -1482,13 +1487,13 @@ ALTER TABLE `prestasis`
 -- AUTO_INCREMENT untuk tabel `admins`
 --
 ALTER TABLE `admins`
-  MODIFY `idadmin` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `idadmin` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT untuk tabel `mahasiswas`
 --
 ALTER TABLE `mahasiswas`
-  MODIFY `idmhs` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3573;
+  MODIFY `idmhs` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3578;
 
 --
 -- AUTO_INCREMENT untuk tabel `organisasis`
@@ -1500,7 +1505,7 @@ ALTER TABLE `organisasis`
 -- AUTO_INCREMENT untuk tabel `pengabdians`
 --
 ALTER TABLE `pengabdians`
-  MODIFY `idpengabdian` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=51;
+  MODIFY `idpengabdian` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=53;
 
 --
 -- AUTO_INCREMENT untuk tabel `prestasinonkompetisis`

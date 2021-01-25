@@ -1,3 +1,6 @@
+## Webservice
+Memakai golang dengan web framework gin gonic, dengan sistem keamana login masuk ke website dan webservice memakai JWT(Json Web Token)
+
 ## Instruksi
 1. Download Golang for windows dan install
     ```https://golang.org/dl/go1.15.7.windows-amd64.msi```

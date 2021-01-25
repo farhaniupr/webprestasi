@@ -171,7 +171,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -185,7 +185,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -385,10 +385,24 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>-->
 
     <script>
+        var token = window.localStorage.getItem('token');
+        if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+        function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+        }
+
         $.ajax({
                 url : "http://localhost:8085/lihatmahasiswa",
                 async: false,
                 dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
                 success: function (data) {
                             $("#nama_mhs").empty();
                             for (var i = 0, len = data.data.length; i < len; i++) {                                      
@@ -396,7 +410,7 @@
                             }    
                         }
                         
-                    });
+        });
 
         function changeFoto(){
             $("span[for*='unggah_foto'").html(document.querySelector('#unggahfoto').value);
@@ -408,7 +422,6 @@
             $("label[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
         }
 
-        // add prestasi
         const AddPrestasi = (prestasi) => {
          axios.post('http://localhost:8085/addprestasi', prestasi)
             .then(response => {
@@ -422,7 +435,6 @@
         function getFile(filePath) {
             return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
         }
-
 
         if (window.File && window.FileReader && window.FileList && window.Blob) {
         document.getElementById('unggahfoto').addEventListener('change', handleFileSelectFoto, false);
@@ -471,7 +483,6 @@
         // Read in the image file as a data URL.
         reader.readAsBinaryString(f);
         }
-
 
         function handleFileSelectST(evt) {
         var f = evt.target.files[0]; // FileList object

@@ -170,7 +170,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -184,7 +184,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -266,14 +266,27 @@
 
     <script src="assets/js/axios.min.js"></script>
     <script>
+        if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+        function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+        }
+
+        var token = window.localStorage.getItem('token');
+
         var arrayReturn = [];
-        let b1 = '<button data-toggle="tooltip" class="btn btn-dark round" >Edit</button>'
-        let b2 =  '<button data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>'
 
             $.ajax({
                 url : "http://localhost:8085/lihatorganisasi",
                 async: false,
                 dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
                 success: function (data) {
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
@@ -302,7 +315,6 @@
             .catch(error => console.error(error));
             }
 
-
             function TSetuju(organisasi){
                 axios.put(`http://localhost:8085/edittsetujuorganisasi/${organisasi}`, {"status" : "tidak setuju"})
                 .then(response => {
@@ -330,8 +342,6 @@
             })
             .catch(error => console.error(error));
             };
-       
-            
     </script>
 </body>
 </html>

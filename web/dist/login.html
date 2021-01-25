@@ -69,6 +69,10 @@
     <script src="assets/js/main.js"></script>
     <script src="assets/js/axios.min.js"></script>
     <script>
+        if ((window.localStorage.getItem('token') != null) && (window.localStorage.getItem('user') != null)){
+            window.location="index.html";
+        }
+
         const login = (user) => {
             axios.post('http://localhost:8085/login', user)
                 .then(response => {
@@ -76,9 +80,13 @@
                     console.log(`POST: mhs is added`, response.data);
                     console.log(`token`, response.data.data.token)
                     window.localStorage.setItem('token', response.data.data.token)
+                    window.localStorage.setItem('user', response.data.data.username)
                     
                     //window.localStorage.removeItem('token');
                     //window.localStorage.getItem('token');
+
+                    console.log(window.localStorage.getItem('token'))
+                    console.log(window.localStorage.getItem('user'))
                     window.location="index.html";
                 })
                 .catch(error => console.error(error));

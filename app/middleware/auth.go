@@ -23,7 +23,7 @@ func Auth(c *gin.Context) {
 		fmt.Println("token verified")
 		claims := token.Claims.(jwt.MapClaims)
 		fmt.Println(claims)
-		var idAccount int
+		var idAccount string
 		err := mapstructure.Decode(claims["username"], &idAccount)
 		if err != nil {
 			result := gin.H{

@@ -174,7 +174,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -188,7 +188,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -279,6 +279,16 @@
     <script src="assets/js/axios.min.js"></script>
     <script>
     // create a new prodi
+    if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+    function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+    }
+
     const AddProdi = (prodi) => {
         axios.post('http://localhost:8085/addprodi', prodi)
             .then(response => {
@@ -301,9 +311,6 @@
         const prodi = { kode_prodi : kode_prodi, nama_prodi : nama_prodi, nama_fakultas : nama_fakultas};
         AddProdi(prodi);
     });
-
-
-
     </script>
     
 </body>

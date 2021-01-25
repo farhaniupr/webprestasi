@@ -171,7 +171,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -185,7 +185,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -259,15 +259,28 @@
 
     <script src="assets/js/axios.min.js"></script>
     <script>
-        var arrayReturn = [];
-        let b1 = '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" >Edit</button>'
-        let b2 =  '<button data-toggle="tooltip" title="Trash" class="btn btn-dark round"">Hapus</button>'
-        
+        if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+        function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+        }
 
+        var arrayReturn = [];
+        
+        var token = window.localStorage.getItem('token');
+
+        console.log(token);
             $.ajax({
                 url : "http://localhost:8085/lihatmahasiswa",
                 async: true,
                 dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
                 success: function (data) {
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {
@@ -296,21 +309,7 @@
                 location.reload();
             })
             .catch(error => console.error(error));
-            };
-            
+            };            
     </script>
 </body>
 </html>
-
-
-<!--referensi 
-    //<button onclick="window.location.href='b.php'">Click me</button>
-    // location.href=`http://localhost:5500/editmahasiswa   
-    // GetOne('+data.data[i].Idmhs+')"
-
-    //
-    var url_string = "http://www.example.com/t.html?a=1&b=3&c=m2-m3-m4-m5"; //window.location.href
-    var url = new URL(url_string);
-    var c = url.searchParams.get("c");
-    console.log(c);
--->

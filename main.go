@@ -27,19 +27,19 @@ func main() {
 
 	//get
 	router.GET("/lihatmahasiswa", middleware.Auth, controller.GetMahasiswa)
-	router.GET("/lihatorganisasi", controller.GetOrganisasi)
-	router.GET("/lihatpengabdian", controller.GetPengabdian)
-	router.GET("/lihatprestasinon", controller.GetPrestasinon)
-	router.GET("/lihatprestasi", controller.GetPrestasi)
-	router.GET("/lihatprodi", controller.GetProdi)
+	router.GET("/lihatorganisasi", middleware.Auth, controller.GetOrganisasi)
+	router.GET("/lihatpengabdian", middleware.Auth, controller.GetPengabdian)
+	router.GET("/lihatprestasinon", middleware.Auth, controller.GetPrestasinon)
+	router.GET("/lihatprestasi", middleware.Auth, controller.GetPrestasi)
+	router.GET("/lihatprodi", middleware.Auth, controller.GetProdi)
 
 	//get 1 row
-	router.GET("/lihatmahasiswa/:idmhs", controller.GetOneMahasiswa)
-	router.GET("/lihatprodi/:kode_prodi", controller.GetOneProdi)
-	router.GET("/lihatprestasi/:id_prestasi", controller.GetOnePrestasi)
-	router.GET("/lihatprestasinon/:id_prestasinon", controller.GetOnePrestasinon)
-	router.GET("/lihatorganisasi/:id_organisasi", controller.GetOneOrganisasi)
-	router.GET("/lihatpengabdian/:idpengabdian", controller.GetOnePengabdian)
+	router.GET("/lihatmahasiswa/:idmhs", middleware.Auth, controller.GetOneMahasiswa)
+	router.GET("/lihatprodi/:kode_prodi", middleware.Auth, controller.GetOneProdi)
+	router.GET("/lihatprestasi/:id_prestasi", middleware.Auth, controller.GetOnePrestasi)
+	router.GET("/lihatprestasinon/:id_prestasinon", middleware.Auth, controller.GetOnePrestasinon)
+	router.GET("/lihatorganisasi/:id_organisasi", middleware.Auth, controller.GetOneOrganisasi)
+	router.GET("/lihatpengabdian/:idpengabdian", middleware.Auth, controller.GetOnePengabdian)
 
 	//insert
 	router.POST("/addmahasiswa", controller.AddMahasiswa)

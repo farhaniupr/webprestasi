@@ -169,7 +169,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -183,7 +183,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -345,7 +345,19 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>-->
 
     <script>
-         var urls = window.location.href;
+        var token = window.localStorage.getItem('token');
+
+        if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+        function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+        }
+        
+        var urls = window.location.href;
         var url = new URL(urls);
         var c = url.searchParams.get("id");
         GetOnePrestasinon(c);
@@ -354,6 +366,9 @@
                 url : "http://localhost:8085/lihatmahasiswa",
                 async: false,
                 dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
                 success: function (data) {
                             $("#nama_mhs").empty();
                             for (var i = 0, len = data.data.length; i < len; i++) {                                      
@@ -373,12 +388,9 @@
             $("label[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
         }
 
-        // editprestasinon
-
         function getFile(filePath) {
             return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
         }
-
 
         if (window.File && window.FileReader && window.FileList && window.Blob) {
         document.getElementById('unggahfoto').addEventListener('change', handleFileSelectFoto, false);
@@ -388,64 +400,62 @@
         alert('The File APIs are not fully supported in this browser.');
         }
         
-
         function handleFileSelectFoto(evt) {
-        var f = evt.target.files[0]; // FileList object
-        var reader = new FileReader();
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-            var binaryData = e.target.result;
-            //Converting Binary Data to base 64
-            var base64String = window.btoa(binaryData);
-            //showing file converted to base64
-            $("span[for*='unggah_foto'").html(document.querySelector('#unggahfoto').value);
-            document.getElementById('base64foto').value = base64String;
-            alert('File converted to base64 successfuly!\nCheck in Textarea');
-            
-            };
-        })(f);
-        // Read in the image file as a data URL.
-        reader.readAsBinaryString(f);
+            var f = evt.target.files[0]; // FileList object
+            var reader = new FileReader();
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                var binaryData = e.target.result;
+                //Converting Binary Data to base 64
+                var base64String = window.btoa(binaryData);
+                //showing file converted to base64
+                $("span[for*='unggah_foto'").html(document.querySelector('#unggahfoto').value);
+                document.getElementById('base64foto').value = base64String;
+                alert('File converted to base64 successfuly!\nCheck in Textarea');
+                
+                };
+            })(f);
+            // Read in the image file as a data URL.
+            reader.readAsBinaryString(f);
         }
 
         function handleFileSelectSE(evt) {
-        var f = evt.target.files[0]; // FileList object
-        var reader = new FileReader();
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-            var binaryData = e.target.result;
-            //Converting Binary Data to base 64
-            var base64String = window.btoa(binaryData);
-            //showing file converted to base64
-            $("span[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
-            document.getElementById('base64se').value = base64String;
-            alert('File converted to base64 successfuly!\nCheck in Textarea');
-            };
-        })(f);
-        // Read in the image file as a data URL.
-        reader.readAsBinaryString(f);
+            var f = evt.target.files[0]; // FileList object
+            var reader = new FileReader();
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                var binaryData = e.target.result;
+                //Converting Binary Data to base 64
+                var base64String = window.btoa(binaryData);
+                //showing file converted to base64
+                $("span[for*='unggah_sertifikat'").html(document.querySelector('#unggahsertifikat').value);
+                document.getElementById('base64se').value = base64String;
+                alert('File converted to base64 successfuly!\nCheck in Textarea');
+                };
+            })(f);
+            // Read in the image file as a data URL.
+            reader.readAsBinaryString(f);
         }
 
-
         function handleFileSelectST(evt) {
-        var f = evt.target.files[0]; // FileList object
-        var reader = new FileReader();
-        // Closure to capture the file information.
-        reader.onload = (function(theFile) {
-            return function(e) {
-            var binaryData = e.target.result;
-            //Converting Binary Data to base 64
-            var base64String = window.btoa(binaryData);
-            //showing file converted to base64
-            $("span[for*='unggah_surat_tugas'").html(document.querySelector('#unggahsurattugas').value);
-            document.getElementById('base64st').value = base64String;
-            alert('File converted to base64 successfuly!\nCheck in Textarea');
-            };
-        })(f);
-        // Read in the image file as a data URL.
-        reader.readAsBinaryString(f);
+            var f = evt.target.files[0]; // FileList object
+            var reader = new FileReader();
+            // Closure to capture the file information.
+            reader.onload = (function(theFile) {
+                return function(e) {
+                var binaryData = e.target.result;
+                //Converting Binary Data to base 64
+                var base64String = window.btoa(binaryData);
+                //showing file converted to base64
+                $("span[for*='unggah_surat_tugas'").html(document.querySelector('#unggahsurattugas').value);
+                document.getElementById('base64st').value = base64String;
+                alert('File converted to base64 successfuly!\nCheck in Textarea');
+                };
+            })(f);
+            // Read in the image file as a data URL.
+            reader.readAsBinaryString(f);
         }
 
         function GetOnePrestasinon(prestasinon) {
@@ -453,30 +463,29 @@
                 url : "http://localhost:8085/lihatprestasinon/"+prestasinon,
                 async: false,
                 dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
                 success: function (data) {
+                    console.log(data.data);
+                    
+                    var dateawal = moment(data.data.tanggal_awal).format("YYYY-MM-DD") 
+                    var dateakhir = moment(data.data.tanggal_akhir).format("YYYY-MM-DD")
 
-                console.log(data.data);
-                
-                var dateawal = moment(data.data.tanggal_awal).format("YYYY-MM-DD") 
-                var dateakhir = moment(data.data.tanggal_akhir).format("YYYY-MM-DD")
+                    //document.getElementById('nama_mhs').value = data.data.nama
+                    $("#nama_mhs").val(data.data.id_mhs).change()
+                    document.getElementById('idprestasinon').value = parseInt(data.data.Idprestasinon, 10);
+                    document.getElementById('namakegiatan').value = data.data.nama_kegiatan
+                    document.getElementById('tempatkegiatan').value = data.data.tempat_kegiatan
+                    document.getElementById('namapenyelenggaraan').value = data.data.nama_penyelenggaraan
+                    document.getElementById('tanggalawal').value = dateawal 
+                    document.getElementById('tanggalakhir').value = dateakhir
 
-                //document.getElementById('nama_mhs').value = data.data.nama
-                $("#nama_mhs").val(data.data.id_mhs).change()
-                document.getElementById('idprestasinon').value = parseInt(data.data.Idprestasinon, 10);
-                document.getElementById('namakegiatan').value = data.data.nama_kegiatan
-                document.getElementById('tempatkegiatan').value = data.data.tempat_kegiatan
-                document.getElementById('namapenyelenggaraan').value = data.data.nama_penyelenggaraan
-                document.getElementById('tanggalawal').value = dateawal 
-                document.getElementById('tanggalakhir').value = dateakhir
-
-                $("span[for*='unggah_foto'").html(data.data.unggah_foto);
-                $("span[for*='unggah_sertifikat'").html(data.data.unggah_sertifikat);
-                $("span[for*='unggah_surat_tugas'").html(data.data.unggah_surat_tugas);
-                
-                
+                    $("span[for*='unggah_foto'").html(data.data.unggah_foto);
+                    $("span[for*='unggah_sertifikat'").html(data.data.unggah_sertifikat);
+                    $("span[for*='unggah_surat_tugas'").html(data.data.unggah_surat_tugas);                
             }}) 
         };
-
 
         const EditPrestasinon = (prestasinon) => {
                 $.ajax({
@@ -489,8 +498,6 @@
                 }
                 });     
         }
-
-
         // event listener for form submission
         const form = document.querySelector('form');
 

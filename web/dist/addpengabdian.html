@@ -171,7 +171,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -185,7 +185,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -304,10 +304,25 @@
     <script src="https://code.jquery.com/jquery-3.5.0.js"></script>-->
     
     <script>
+        var token = window.localStorage.getItem('token');
+
+        if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+        function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+        }
+
         $.ajax({
                 url : "http://localhost:8085/lihatmahasiswa",
                 async: false,
                 dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
                 success: function (data) {
                             $("#nama_mhs").empty();
                             for (var i = 0, len = data.data.length; i < len; i++) {                                      
@@ -321,7 +336,6 @@
             $("span[for*='unggah_sk'").html(document.querySelector('#unggahsk').value);
         }
 
-        // add prestasi
         const AddPengabdian = (pengabdian) => {
          axios.post('http://localhost:8085/addpengabdian', pengabdian)
             .then(response => {
@@ -336,11 +350,10 @@
             return filePath.substr(filePath.lastIndexOf('\\') + 1).split('.')[0];
         }
 
-
         if (window.File && window.FileReader && window.FileList && window.Blob) {
         document.getElementById('unggahsurat').addEventListener('change', handleFileSelectSK, false);
         } else {
-        alert('The File APIs are not fully supported in this browser.');
+            alert('The File APIs are not fully supported in this browser.');
         }
         
 
@@ -364,12 +377,9 @@
         reader.readAsBinaryString(f);
         }
 
-        // event listener for form submission
         const form = document.querySelector('form');
-
         const formEvent = form.addEventListener('submit', event => {
             event.preventDefault();
-
             const nama_program = document.querySelector('#namaprogram').value;
             //const jabatan_mhs = document.querySelector('#jabatanmhs').value;
             const tahun_kegiatan = document.querySelector('#tahunkegiatan').value;

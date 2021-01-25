@@ -169,7 +169,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -183,7 +183,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -332,13 +332,26 @@
     <script src="assets/js/moment.min.js"></script>
     <script src="assets/js/jquery-3.5.0.js"></script>
     <script>
+        if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+        function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+        }
 
+        var token = window.localStorage.getItem('token');
         $.ajax({
             url : "http://localhost:8085/lihatprodi",
             async: false,
             dataType: 'json',
+            headers:{
+                    "Authorization" : token
+                },
             success: function (data) {
-                    $("#nama_mhs").empty();
+                    //$("#nama_mhs").empty();
                         for (var i = 0, len = data.data.length; i < len; i++) {                                      
                                 $("#programstudi").append("<option value='"+data.data[i].nama_prodi+"'>"+data.data[i].nama_prodi+"</option")  
                             }    
@@ -352,7 +365,9 @@
         GetOne(c);
 
         function GetOne(idmhs) {
-                axios.get(`http://localhost:8085/lihatmahasiswa/${idmhs}`)
+                axios.get(`http://localhost:8085/lihatmahasiswa/${idmhs}`,  {headers:{
+                    "Authorization" : token
+                }})
                 .then(response => {
                 console.log(' lihat mahasiswa', response.data.data);                
                 
@@ -373,7 +388,6 @@
             .catch(error => console.error(error));
         };
 
-        // edit mhs
         const EditMahasiswa = (mhs) => {
             axios.put(`http://localhost:8085/editmahasiswa/${mhs.Idmhs}`, mhs)
                 .then(response => {

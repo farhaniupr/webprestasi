@@ -170,7 +170,7 @@
                                 </div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                         <li class="dropdown">
@@ -184,7 +184,7 @@
                                 <div class="d-none d-md-block d-lg-inline-block">Admin</div>
                             </a>
                             <div class="dropdown-menu dropdown-menu-right">
-                                <a class="dropdown-item" href="#"><i data-feather="log-out"></i> Logout</a>
+                                <a class="dropdown-item" onclick="logout()"><i data-feather="log-out"></i> Logout</a>
                             </div>
                         </li>
                     </ul>
@@ -265,12 +265,26 @@
 
     <script src="assets/js/axios.min.js"></script>
     <script>
-        var arrayReturn = [];
+        if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
+            window.location="login.html";
+        }
+            
+        function logout(){
+            window.localStorage.removeItem('token');
+            window.localStorage.removeItem('user');
+            window.location="login.html"
+        }
 
+        var arrayReturn = [];
+        var token = window.localStorage.getItem('token');
+        
             $.ajax({
                 url : "http://localhost:8085/lihatpengabdian",
                 async: false,
                 dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
                 success: function (data) {
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
@@ -299,7 +313,6 @@
             .catch(error => console.error(error));
             }
 
-
             function TSetuju(pengabdian){
                 axios.put(`http://localhost:8085/edittsetujupengabdian/${pengabdian}`, {"status" : "tidak setuju"})
                 .then(response => {
@@ -327,7 +340,6 @@
             })
             .catch(error => console.error(error));
             };
-       
             
     </script>
 </body>

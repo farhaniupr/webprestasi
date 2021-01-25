@@ -12,15 +12,15 @@ Html menggunakan dengan axios dan ajax untuk mengakses webservice
 3. Download extension CORS Unblock dan enable extension
     ```https://chrome.google.com/webstore/detail/cors-unblock/lfhmikememgdcahcdlaciloancbhjino?hl=en```
 
-4. Download repository ini secara manual >> klik tombol download(zip)  (tidak recomended)
+4. Download repository ini secara manual, klik tombol download(zip)
 
    ```atau```
 
-   clone repository pake git (download git) >>> ```https://git-scm.com/download/win```
+   clone repository pake git (download git) ```https://git-scm.com/download/win```
 
    cara clone 
     ```bash
-        git clone https://github.com farhaniupr/webprestasi.git
+        git clone https://github.com/farhaniupr/webprestasi.git
     ```
 
     bila ada update-an website yang dikerjakan tinggal ketik di folder webprestasi:

@@ -32,7 +32,9 @@
     ```
     Contoh hasil running bisa dilihat di folder screenshoot
 
-7. Copy folder web ke xampp dan buka di browser ```http://localhost/?<folder lain atau tidak>?/folder>/web/dist/index.html``` in browser.
+7. Copy folder web ke xampp dan running Website prestasi buka di browser 
+
+    ```http://localhost/?<folder lain atau tidak>?/folder>/web/dist/index.html```
 
 ### Note
 - file yang bisa diupload di tambah dan edit prestasi dan lain-lain >>> pdf dan image(hanya png) < 1MB 

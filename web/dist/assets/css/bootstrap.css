@@ -267,7 +267,8 @@ sup {
 }
 
 a {
-	color: #0d6efd;
+    /*color: #e3e5e9;*/
+    color: #adadad;
 	text-decoration: underline
 }
 
@@ -7322,8 +7323,8 @@ button.close {
 }
 
 .py-4 {
-	padding-top: 1.5rem!important;
-	padding-bottom: 1.5rem!important
+	padding-top: 3.5rem!important;
+	padding-bottom: 3.5rem!important
 }
 
 .py-5 {

@@ -43,3 +43,4 @@ Html menggunakan dengan axios dan ajax untuk mengakses webservice
 ### Note
 - file yang bisa diupload di tambah dan edit prestasi dan lain-lain >>> pdf dan image(hanya png) < 1MB 
 - untuk import prodi tetap sama seperti sebelumnya memakai file excel
+- referensi side bar : https://colorlib.com/wp/bootstrap-sidebar/

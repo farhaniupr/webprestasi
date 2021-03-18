@@ -30,6 +30,7 @@ func Login(auth models.Auth) (bool, error, string) {
 			sign := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 				"username": auth.Username,
 				//"account_number": account.AccountNumber,
+					
 			})
 
 			token, err := sign.SignedString([]byte("secret"))

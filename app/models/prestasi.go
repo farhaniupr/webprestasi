@@ -93,3 +93,8 @@ type Organisasi struct {
 	Unggahsk       string `json:"unggahsk"`
 	Status         string `json:"status"`
 }
+
+type EvaluasiUniv struct {
+	Year      string `json:"year"`
+	Mahasiswa int    `json:"mahasiswa"`
+}

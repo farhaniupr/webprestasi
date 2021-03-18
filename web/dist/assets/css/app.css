@@ -851,13 +851,13 @@ footer {
 }
 
 .sidebar-wrapper .sidebar-header {
-	padding: 2rem 2rem 1rem;
+	padding: 1rem 1rem 1rem;
 	font-size: 2rem;
 	font-weight: 700
 }
 
 .sidebar-wrapper .sidebar-header img {
-	height: 2.5rem
+	height: 3.5rem
 }
 
 .sidebar-wrapper .sidebar-toggler.x {
@@ -1666,5 +1666,8 @@ footer {
           font-size: 18px; }
 
 .py-4 {
-    padding-top: 3.5rem !important; }
+    padding-top: 4.5rem !important;
+	
+}
+
 

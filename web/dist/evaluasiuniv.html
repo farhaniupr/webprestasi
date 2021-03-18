@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
-    
+    <link rel="stylesheet" href="assets/scss/style.css">
     <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
 </head>
 <body>
@@ -30,9 +30,10 @@
                         <span>Dashboard</span>
                     </a>
                     
-                </li>     
+                </li>          
             
-                <li class="sidebar-item  active has-sub">
+            
+                <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Data Prestasi</span>
@@ -58,7 +59,7 @@
                     
                 </li>
 
-                <li class="sidebar-item  has-sub">
+                <li class="sidebar-item active has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Evaluasi</span>
@@ -154,12 +155,13 @@
                     </ul>
                 </div>
             </nav>
+            <!-- end header-->
             
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Program Studi</h3>
+                <h3>Data Mahasiswa</h3>
                 <!--
                 <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
                 -->
@@ -168,92 +170,77 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Program Studi</li>
+                        <li class="breadcrumb-item active" aria-current="page">Evaluasi</li>
                     </ol>
                 </nav>
             </div>
         </div>
     </div>
-      <!-- Custom file input start -->
-      <section id="custom-file-input">
-        <div class="row">
-            <div class="col-12">
-                <div class="card">
-                    <div class="card-header">
-                        <h4 class="card-title">Import Data File Excel</h4>
-                    </div>
-                    <div class="card-content">
-                        <div class="card-body">
-                            <div class="row">
-                               
-                                <div class="col-md-6 mb-1">
-                                    <form method="post" action="import_data2.php" enctype="multipart/form-data">
-                                    
-                                        <div class="form-group">
-                                            <div class="custom-file">
-                                                <input type="file" class="custom-file-input" id="file" name="file">                                                
-                                            </div>
-                                            <div>
-                                                <br>
-                                            </div>
-                                            <div class="form-actions">
-                                                <button class="btn btn-primary" type="submit" name="preview">Submit</button>
-                                            </div>
-                                        </div>                                  
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-    <!-- Custom file input end -->
     <section class="section">
         <div class="card">
             <div class="card-header">
-                Data table
+                Data Evaluasi Tahunan Universitas
             </div>
             <div class="card-body">
-                <table class='table table-striped' id="table1" >
-                    <thead>
-                        <tr>
-                            <th>Kode Prodi</th>
-                            <th>Nama Prodi</th>
-                            <th>Fakultas</th>
-                            <th>Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                       
-                    </tbody>
-                </table>
+                <div id="chart" style="width:auto; height:300px;"></div> 
             </div>
         </div>
 
     </section>
+</div>          
 </div>
-
-          
-        </div>
-    </div>
+</div>
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/app.js"></script>
     <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="assets/js/vendors.js"></script>
     <script src="assets/js/main.js"></script>
-
-
-
-
-    <!--ajax-->
     <script src="assets/vendors/simple-datatables/jquery.min.js"></script>
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.js"></script>-->
-    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
+    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>        
+    <script type="text/javascript" src="assets/js/loader.js"></script>
+    <script src="assets/js/chartquery.min.js"></script>
+    <script>
+        // Visualization API with the 'corechart' package.
+        google.charts.load('visualization', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawLineChart);
+    
+        function drawLineChart() {
+            $.ajax({
+                url: "http://localhost:8085/evaluasiuniv",
+                dataType: "json",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+
+                    var arrData = [['year', 'mahasiswa']];    // Define an array and assign columns for the chart.
+    
+                    // Loop through each data and populate the array.
+                    $.each(data.data, function (index, value) {
+                        arrData.push([value.year, value.mahasiswa]);
+                    });
+                    
+                    // Set chart Options.
+                    var options = {
+                        title: 'Mahasiswa Berprestasi',
+                        curveType: 'function',
+                        legend: { position: 'bottom', textStyle: { color: '#555', fontSize: 14} }  // You can position the legend on 'top' or at the 'bottom'.
+                    };
+    
+                    // Create DataTable and add the array to it.
+                    var figures = google.visualization.arrayToDataTable(arrData)
+
+
+                    // Define the chart type (LineChart) and the container (a DIV in our case).
+                    var chart = new google.visualization.LineChart(document.getElementById('chart'));
+                    chart.draw(figures, options);      // Draw the chart with Options.
+                },
+                error: function (XMLHttpRequest, textStatus, errorThrown) {
+                    alert('Got an Error');
+                }
+            });
+        }
+    </script>
 
     <script src="assets/js/axios.min.js"></script>
     <script>
@@ -266,49 +253,9 @@
             window.localStorage.removeItem('user');
             window.location="login.html"
         }
+        var arrayReturn = [];
         var token = window.localStorage.getItem('token');
-        var arrayReturn = [];       
-
-            $.ajax({
-                url : "http://localhost:8085/lihatprodi",
-                async: true,
-                dataType: 'json',
-                headers:{
-                    "Authorization" : token
-                },
-                success: function (data) {
-                    //console.log(data.length);
-					for (var i = 0, len = data.data.length; i < len; i++) {
-						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].                      
-                        arrayReturn.push([
-                            data.data[i].kode_prodi, 
-                            data.data[i].nama_prodi, 
-                            data.data[i].nama_fakultas,
-                            '<button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editprodi.html?id='+
-                            data.data[i].kode_prodi+'`" >Edit</button>'+" "+'<button onclick="DeleteProdi('+data.data[i].kode_prodi
-                            +')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
-					}
-                inittable(arrayReturn);
-                //console.log(data.data[i])
-                }
-            });
-
-            function inittable(data) {	
-            $('#table1').DataTable( {
-                "aaData": data
-            } );
-    	    }
-
-            function DeleteProdi(kode_prodi) {
-                axios.delete(`http://localhost:8085/deleteprodi/${kode_prodi}`)
-                    .then(response => {
-                    console.log(' prodi is removed', kode_prodi);                
-                    
-                    location.reload();
-                })
-                .catch(error => console.error(error));
-            };
-            
+        console.log(token);            
     </script>
 </body>
 </html>

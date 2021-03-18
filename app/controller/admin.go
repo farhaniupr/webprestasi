@@ -1306,3 +1306,12 @@ func Pdfupload(c *gin.Context) {
 	}
 	fmt.Println("Png file", pngFilename, "created")
 }
+
+func EvaluasiUniv(c *gin.Context) {
+	var evaluasi []models.EvaluasiUniv
+
+	//models.DB.Find(&organisasi)
+	models.DB.Raw("SELECT year(tanggalawal) as year, count(*) as mahasiswa from prestasis group by year(tanggalawal)").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+
+}

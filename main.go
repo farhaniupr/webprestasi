@@ -25,8 +25,11 @@ func main() {
 	//router.Use(gin.Logger())
 	///router.Use(gin.Recovery())
 
+	//get evaluasi
+	router.GET("/evaluasiuniv", controller.EvaluasiUniv)
+
 	//get
-	router.GET("/lihatmahasiswa", middleware.Auth, controller.GetMahasiswa)
+	router.GET("/lihatmahasiswa", controller.GetMahasiswa)
 	router.GET("/lihatorganisasi", middleware.Auth, controller.GetOrganisasi)
 	router.GET("/lihatpengabdian", middleware.Auth, controller.GetPengabdian)
 	router.GET("/lihatprestasinon", middleware.Auth, controller.GetPrestasinon)

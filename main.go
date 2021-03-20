@@ -26,7 +26,20 @@ func main() {
 	///router.Use(gin.Recovery())
 
 	//get evaluasi
-	router.GET("/evaluasiuniv", controller.EvaluasiUniv)
+	router.GET("/evaluasiunivprestasi", controller.EvaluasiUnivPrestasi)
+	router.GET("/evaluasiunivpengabdian", controller.EvaluasiUnivPengabdian)
+	router.GET("/evaluasiunivprestasinon", controller.EvaluasiUnivPrestasiNon)
+	//router.GET("/evaluasiunivorganisasi", controller.EvaluasiUnivOrganisasi)
+
+	router.GET("/evaluasifakultasKedokteran", controller.EvaluasiFakultasDokterPrestasi)
+	router.GET("/evaluasifakultasFisip", controller.EvaluasiFakultasFisipPrestasi)
+	router.GET("/evaluasifakultasMtk", controller.EvaluasiFakultasMtkPrestasi)
+	router.GET("/evaluasifakultasGuru", controller.EvaluasiFakultasGuruPrestasi)
+	router.GET("/evaluasifakultasEkonomi", controller.EvaluasiFakultasEkoPrestasi)
+	router.GET("/evaluasifakultasPertanian", controller.EvaluasiFakultasPertaPrestasi)
+	router.GET("/evaluasifakultasHukum", controller.EvaluasiFakultasHukumPrestasi)
+	router.GET("/evaluasifakultasTeknik", controller.EvaluasiFakultasTeknikPrestasi)
+	//router.GET("/evaluasifakultas", controla)
 
 	//get
 	router.GET("/lihatmahasiswa", controller.GetMahasiswa)

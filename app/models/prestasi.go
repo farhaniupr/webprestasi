@@ -94,7 +94,57 @@ type Organisasi struct {
 	Status         string `json:"status"`
 }
 
-type EvaluasiUniv struct {
+type EvaluasiUnivPrestasi struct {
+	Year     string `json:"year"`
+	Prestasi int    `json:"prestasi"`
+}
+
+type EvaluasiUnivPrestasinon struct {
+	Year        string `json:"year"`
+	Prestasinon int    `json:"prestasinon"`
+}
+
+type EvaluasiUnivPengabdian struct {
+	Year       string `json:"year"`
+	Pengabdian int    `json:"pengabdian"`
+}
+
+type EvaluasiFakultasTeknik struct {
+	Year   string `json:"year"`
+	Teknik int    `json:"teknik"`
+}
+
+type EvaluasiFakultasHukum struct {
+	Year  string `json:"year"`
+	Hukum int    `json:"hukum"`
+}
+
+type EvaluasiFakultasEkonomi struct {
+	Year    string `json:"year"`
+	Ekonomi int    `json:"ekonomi"`
+}
+
+type EvaluasiFakultasFisip struct {
+	Year  string `json:"year"`
+	Fisip int    `json:"fisip"`
+}
+
+type EvaluasiFakultasPertanian struct {
 	Year      string `json:"year"`
-	Mahasiswa int    `json:"mahasiswa"`
+	Pertanian int    `json:"pertanian"`
+}
+
+type EvaluasiFakultasKedokteran struct {
+	Year       string `json:"year"`
+	Kedokteran int    `json:"kedokteran"`
+}
+
+type EvaluasiFakultasMtk struct {
+	Year       string `json:"year"`
+	Matematika int    `json:"matematika"`
+}
+
+type EvaluasiFakultasGuru struct {
+	Year     string `json:"year"`
+	Keguruan int    `json:"keguruan"`
 }

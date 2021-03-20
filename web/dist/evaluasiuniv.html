@@ -9,8 +9,8 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
-    <link rel="stylesheet" href="assets/scss/style.css">
-    <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
+        <!--<link rel="stylesheet" href="assets/scss/style.css">
+    <link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
 </head>
 <body>
     <div id="app">
@@ -182,7 +182,8 @@
                 Data Evaluasi Tahunan Universitas
             </div>
             <div class="card-body">
-                <div id="chart" style="width:auto; height:300px;"></div> 
+                <div id="chartprestasi" style="width:auto; height:300px;"></div> 
+                <!--<div id="chartprestasinon" style="width:auto; height:300px;"></div> -->
             </div>
         </div>
 
@@ -202,45 +203,179 @@
     <script src="assets/js/chartquery.min.js"></script>
     <script>
         // Visualization API with the 'corechart' package.
-        google.charts.load('visualization', { packages: ['corechart'] });
-        google.charts.setOnLoadCallback(drawLineChart);
+        var arrData = [['year', 'prestasi']];
+        var arrData2 = [['year', 'prestasinon']];
+        google.load('visualization', '1', {packages:['corechart'], callback: drawChart});  
+
+        function drawChart() {
+        $.ajax({
+                url: "http://localhost:8085/evaluasiunivprestasi",
+                dataType: "json",
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                success: function (data) {
+                    var data1 = new google.visualization.DataTable();
+                   
+                    data1.addColumn('string', 'year');
+                    data1.addColumn('number', 'prestasi');
+                        // Define an array and assign columns for the chart.
+                    $.each(data.data, function (index, value) {
+                        console.log(data1.addRow([value.year, value.prestasi]));
+
+                    });
+
+                    
+                $.ajax({
+                        url: "http://localhost:8085/evaluasiunivprestasinon",
+                        dataType: "json",
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            var data2 = new google.visualization.DataTable();
+                            data2.addColumn('string', 'year');
+                            data2.addColumn('number', 'prestasinon');
+
+                            $.each(data.data, function (index, value) {
+                                data2.addRow([value.year, value.prestasinon]);
+                            });
+                            var options = {
+                                title: 'Evaluasi Universitas',
+                                curveType: 'function',
+                                legend: { position: 'bottom', textStyle: { color: '#555', fontSize: 14} }  // You can position the legend on 'top' or at the 'bottom'.
+                            };
+                            var joinedData = google.visualization.data.join(data1, data2, 'full', [[0, 0]], [1], [1]);
+
+                            var chart = new google.visualization.LineChart(document.querySelector('#chartprestasi'));
+                            chart.draw(joinedData, {
+                            title: 'Evaluasi Universitas',
+                            curveType: 'function',
+                            legend: { position: 'bottom', textStyle: { color: '#555', fontSize: 14} }  // You can position the legend on 'top' or at the 'bottom'.
+                            });                                              
+                        }});
+                }});
+    }
+    </script>
     
-        function drawLineChart() {
-            $.ajax({
-                url: "http://localhost:8085/evaluasiuniv",
+    <script>
+        // Visualization API with the 'corechart' package.
+    /*    var arrData = [['year', 'prestasi']];
+        var arrData2 = [['year', 'prestasinon']];
+        
+        $.ajax({
+                url: "http://localhost:8085/evaluasiunivprestasi",
                 dataType: "json",
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
 
-                    var arrData = [['year', 'mahasiswa']];    // Define an array and assign columns for the chart.
-    
-                    // Loop through each data and populate the array.
+                        // Define an array and assign columns for the chart.
                     $.each(data.data, function (index, value) {
-                        arrData.push([value.year, value.mahasiswa]);
+                        arrData.push([value.year, value.prestasi]);
                     });
-                    
-                    // Set chart Options.
-                    var options = {
-                        title: 'Mahasiswa Berprestasi',
-                        curveType: 'function',
-                        legend: { position: 'bottom', textStyle: { color: '#555', fontSize: 14} }  // You can position the legend on 'top' or at the 'bottom'.
-                    };
-    
-                    // Create DataTable and add the array to it.
-                    var figures = google.visualization.arrayToDataTable(arrData)
 
+                $.ajax({
+                        url: "http://localhost:8085/evaluasiunivprestasinon",
+                        dataType: "json",
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            $.each(data.data, function (index, value) {
+                                arrData2.push([value.year, value.prestasinon]);
+                            });
+                        
+                }});
+        }});
 
-                    // Define the chart type (LineChart) and the container (a DIV in our case).
-                    var chart = new google.visualization.LineChart(document.getElementById('chart'));
-                    chart.draw(figures, options);      // Draw the chart with Options.
-                },
-                error: function (XMLHttpRequest, textStatus, errorThrown) {
-                    alert('Got an Error');
-                }
+        google.charts.load('visualization', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawLineChart);        
+
+        function drawLineChart() {
+            var options = {
+                title: 'Evaluasi Universitas',
+                curveType: 'function',
+                legend: { position: 'bottom', textStyle: { color: '#555', fontSize: 14} }  // You can position the legend on 'top' or at the 'bottom'.
+            };
+            var figures = google.visualization.arrayToDataTable(arrData)
+            var chart = new google.visualization.LineChart(document.getElementById('chartprestasi'));
+            chart.draw(figures, options);      // Draw the chart with Options.
+        
+            var figures2 = google.visualization.arrayToDataTable(arrData2)
+            var chart = new google.visualization.LineChart(document.getElementById('chartprestasinon'));
+            chart.draw(figures2, options);      // Draw the chart with Options.
+        
+        
+        }*/
+    </script>
+    <script>/**
+    function calldata(urltarget, store) {
+            $.ajax({
+                    url: urltarget,
+                    dataType: "json",
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                            // Define an array and assign columns for the chart.
+                        $.each(data.data, function (index, value) {
+                            console.log(store.addRow([value.year, value.prestasi]));
+                            store.addRow([value.year, value.prestasi]);
+                        });                        
+            }});   
+
+        }
+
+        
+        google.charts.load('visualization', { packages: ['corechart'] });
+        google.charts.setOnLoadCallback(drawLineChart);        
+
+        function drawLineChart() {  
+          
+            var data1 = new google.visualization.DataTable();
+            data1.addColumn('string', 'year');
+            data1.addColumn('number', 'prestasi');
+            //calldata("http://localhost:8085/evaluasiunivprestasi", data1);
+
+            var data2 = new google.visualization.DataTable();
+            data2.addColumn('string', 'year');
+            data2.addColumn('number', 'prestasinon');
+            //calldata("http://localhost:8085/evaluasiunivprestasinon", data2);
+            
+            $.ajax({
+                    url: "http://localhost:8085/evaluasiunivprestasi",
+                    dataType: "json",
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+
+                            // Define an array and assign columns for the chart.
+                        $.each(data.data, function (index, value) {
+                            //console.log(data1.addRow([value.year, value.prestasi]));
+                            data1.addRow([value.year, value.prestasi]);
+                        });                        
+            }});          
+
+            $.ajax({
+                    url: "http://localhost:8085/evaluasiunivprestasinon",
+                    dataType: "json",
+                    type: "GET",
+                    contentType: "application/json; charset=utf-8",
+                    success: function (data) {
+                        $.each(data.data, function (index, value) {
+                            data2.addRow([value.year, value.prestasinon]);
+                    });
+            }});
+
+            var joindata = google.visualization.data.join(data1, data2, 'full', [[0,0]], [1], [1]);
+            var chart = new google.visualization.LineChart(document.getElementById('chartprestasi'));
+            chart.draw(joindata,  {
+                height: 300,
+                width: 600,
+                interpolateNulls: true
             });
         }
+    **/
     </script>
+
 
     <script src="assets/js/axios.min.js"></script>
     <script>

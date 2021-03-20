@@ -1307,11 +1307,74 @@ func Pdfupload(c *gin.Context) {
 	fmt.Println("Png file", pngFilename, "created")
 }
 
-func EvaluasiUniv(c *gin.Context) {
-	var evaluasi []models.EvaluasiUniv
+func EvaluasiUnivPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiUnivPrestasi
 
-	//models.DB.Find(&organisasi)
-	models.DB.Raw("SELECT year(tanggalawal) as year, count(*) as mahasiswa from prestasis group by year(tanggalawal)").Scan(&evaluasi)
+	models.DB.Raw("SELECT year(tanggalawal) as year, count(*) as prestasi from prestasis group by year(tanggalawal)").Scan(&evaluasi)
 	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
-
 }
+
+func EvaluasiUnivPrestasiNon(c *gin.Context) {
+	var evaluasi []models.EvaluasiUnivPrestasinon
+
+	models.DB.Raw("SELECT year(tanggalawal) as year, count(*) as prestasinon from prestasinonkompetisis group by year(tanggalawal)").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiUnivPengabdian(c *gin.Context) {
+	var evaluasi []models.EvaluasiUnivPengabdian
+
+	models.DB.Raw("SELECT year(tanggalawal) as year, count(*) as pengabdian from pengabdians group by year(tanggalawal)").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasEkoPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasEkonomi
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as ekonomi FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Ekonomi dan Bisnis' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasTeknikPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasTeknik
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as teknik FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Teknik' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasPertaPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasPertanian
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as pertanian FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Pertanian' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasFisipPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasFisip
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as fisip FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Ilmu Sosial dan Ilmu Politik' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasHukumPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasHukum
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as hukum FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Hukum' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasGuruPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasGuru
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as keguruan FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Keguruan dan Ilmu Pendidikan' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasMtkPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasMtk
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as matematika FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Matematika dan Ilmu Pengetahuan Alam' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+func EvaluasiFakultasDokterPrestasi(c *gin.Context) {
+	var evaluasi []models.EvaluasiFakultasKedokteran
+	models.DB.Raw("SELECT year(p.tanggalawal) as year, count(*) as kedokteran FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs where m.fakultas='Fakultas Kedokteran' GROUP by p.tanggalawal").Scan(&evaluasi)
+	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
+}
+
+//SELECT m.programstudi, count(*) as jumlah FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs GROUP by programstudi
+//SELECT m.fakultas, count(*) as jumlah FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs GROUP by m.fakultas

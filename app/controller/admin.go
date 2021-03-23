@@ -140,6 +140,15 @@ func GetPrestasi(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": result})
 }
 
+func GetPrestasiCondition(c *gin.Context) {
+	//var prestasi []models.Prestasi
+	var result []Result
+
+	models.DB.Table("prestasis").Select("prestasis.idmhs, prestasis.namakegiatan, prestasis.jumlah, mahasiswas.nama, prestasis.idprestasi, prestasis.namapenyelenggaraan, prestasis.url, prestasis.kategorikegiatan, prestasis.tingkatkegiatan, prestasis.hasilkegiatan, prestasis.tempatkegiatan, prestasis.tanggalawal, prestasis.tanggalakhir, prestasis.unggahsertifikat, prestasis.unggahsurattugas, prestasis.unggahfoto, prestasis.status").
+		Joins("left join mahasiswas on mahasiswas.idmhs = prestasis.idmhs").Where("status = ?", "").Scan(&result)
+	c.JSON(http.StatusOK, gin.H{"data": result})
+}
+
 func GetPrestasinon(c *gin.Context) {
 	//var prestasi []models.Prestasi
 	var result []Prestasinonkompetisi

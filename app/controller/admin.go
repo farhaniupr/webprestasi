@@ -1385,5 +1385,11 @@ func EvaluasiFakultasDokterPrestasi(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": evaluasi})
 }
 
+func GetCountMahasiswa(c *gin.Context) {
+	var mahasiswa []models.Mahasiswa
+	models.DB.Raw("SELECT COUNT(*) as mahasiswa from mahasiswas").Scan(&mahasiswa)
+	c.JSON(http.StatusOK, gin.H{"data": mahasiswa})
+}
+
 //SELECT m.programstudi, count(*) as jumlah FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs GROUP by programstudi
 //SELECT m.fakultas, count(*) as jumlah FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs GROUP by m.fakultas

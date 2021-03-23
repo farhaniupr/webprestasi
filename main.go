@@ -97,6 +97,8 @@ func main() {
 	router.DELETE("/deleteorganisasi/:id_organisasi", controller.DeleteOrganisasi)
 	router.DELETE("/deletepengabdian/:idpengabdian", controller.DeletePengabdian)
 
+	router.GET("/countmahasiswa", controller.GetCountMahasiswa)
+
 	//REST API upload -- sdh digabung
 	//router.POST("/upload", controller.Upload)
 	//router.POST("/uploadpdf", controller.Pdfupload)

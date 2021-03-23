@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Waktu pembuatan: 25 Jan 2021 pada 02.40
+-- Waktu pembuatan: 23 Mar 2021 pada 10.24
 -- Versi server: 10.4.16-MariaDB
 -- Versi PHP: 7.4.12
 
@@ -1431,7 +1431,12 @@ CREATE TABLE `prestasis` (
 INSERT INTO `prestasis` (`idprestasi`, `idmhs`, `namakegiatan`, `namapenyelenggaraan`, `url`, `kategorikegiatan`, `tingkatkegiatan`, `jumlah`, `tempatkegiatan`, `hasilkegiatan`, `tanggalawal`, `tanggalakhir`, `unggahsertifikat`, `unggahsurattugas`, `unggahfoto`, `status`) VALUES
 (43, 2379, 'penyeluhan', 'hmj', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Kelompok', 'Provinsi', 10, 'aula rahan', 'Juara II', '2021-12-17', '2020-12-22', '1.pdf', '2.pdf', 'upr.png', 'setuju'),
 (53, 2384, 'framita', '', '', 'Individu', 'Universitas', 0, '', '', '2021-01-22', '2021-01-23', 'framita_SE.pdf', 'framita_ST.pdf', 'framita_foto.png', 'setuju'),
-(54, 2391, 'test', 'test', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Individu', 'Internasional', 4, 'aula rahan', 'Juara II', '2021-01-22', '2021-01-24', 'test_SE.pdf', 'test_ST.pdf', 'test_foto.png', 'setuju');
+(54, 2391, 'test', 'test', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Individu', 'Internasional', 4, 'aula rahan', 'Juara II', '2021-01-22', '2021-01-24', 'test_SE.pdf', 'test_ST.pdf', 'test_foto.png', 'setuju'),
+(55, 2394, 'penyeluhan', 'hmj', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Individu', 'Universitas', 1, 'aula rahan', '', '2020-10-11', '2020-11-11', 'penyeluhan_SE.pdf', 'penyeluhan_ST.pdf', 'penyeluhan_foto.png', ''),
+(56, 2400, 'prestasi non 1', 'hmj', 'test', 'Individu', 'Universitas', 1, 'aula rahan', 'Juara II', '2019-01-18', '2019-01-18', 'prestasi non 1_SE.pdf', 'prestasi non 1_ST.pdf', 'prestasi non 1_foto.png', ''),
+(57, 3550, 'penyeluhan', 'hmj', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Individu', 'Universitas', 3, '', 'Juara II', '2018-06-15', '2018-06-20', 'penyeluhan_SE.pdf', 'penyeluhan_ST.pdf', 'penyeluhan_foto.png', ''),
+(58, 2828, 'TEst', 'hmj', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Individu', 'Universitas', 1, '', 'Juara II', '2021-03-23', '2021-03-31', 'TEst_SE.pdf', 'TEst_ST.pdf', 'TEst_foto.png', ''),
+(59, 3509, 'penyeluhan', 'hmj', 'http://localhost/prestasi1/admin/kelola_prestasi.p', 'Individu', 'Universitas', 1, 'aula rahan', 'Juara II', '2021-03-22', '2021-03-22', 'penyeluhan_SE.pdf', 'penyeluhan_ST.pdf', 'penyeluhan_foto.png', '');
 
 --
 -- Indexes for dumped tables
@@ -1517,7 +1522,7 @@ ALTER TABLE `prestasinonkompetisis`
 -- AUTO_INCREMENT untuk tabel `prestasis`
 --
 ALTER TABLE `prestasis`
-  MODIFY `idprestasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `idprestasi` int(5) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=60;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

@@ -12,29 +12,28 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
     <link rel="stylesheet" href="assets/css/app.css">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
 </head>
 <body>
     <div id="app">
-        <div id="sidebar" class='active'>
+    <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
     <div class="sidebar-header img bg-wrap text-center py-4" style="background-image: url(image/backg.jpg);">
         <img src="assets/images/image857.png" alt="" srcset="">
     </div>
     <div class="sidebar-menu">
         <ul class="menu">
+                 
                 <li class='sidebar-title'>Main Menu</li>
         
-                <li class="sidebar-item active ">
+                <li class="sidebar-item active">
                     <a href="index.html" class='sidebar-link'>
                         <i data-feather="home" width="20"></i> 
                         <span>Dashboard</span>
                     </a>
                     
                 </li>          
-            
-            
+        
                 <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
@@ -68,15 +67,13 @@
                     </a>
                     
                     <ul class="submenu ">
-                        
                         <li>
                             <a href="evaluasiuniv.html">Universitas</a>
                         </li>
                         
                         <li>
                             <a href="evaluasifakultas.html">Fakultas</a>
-                        </li>
-                        
+                        </li>                        
                     </ul>
                     
                 </li>
@@ -157,13 +154,12 @@
                     </ul>
                 </div>
             </nav>
-            <!-- end header-->
             
 <!-- Isi Dashboard-->
 <div class="main-content container-fluid">
     <div class="page-title">
         <h3>Dashboard</h3>
-        <p class="text-subtitle text-muted">Halaman Dashboard</p>
+        <p class="text-subtitle text-muted">Data Universitas Palangka Raya</p>
     </div>
     <section class="section">
         <div class="row mb-2">
@@ -308,10 +304,10 @@
         <div class="row mb-4">
             <div class="col-md-12">
                    
-                <!--
+                
                 <div class="card">
                     <div class="card-header">
-                        <h3 class='card-heading p-1 pl-3'>Grafik Prestasi dan Non Prestasi</h3>
+                        <h3 class='card-heading p-1 pl-3'>Grafik Prestasi dan Prestasi Non-Kompetisi</h3>
                     </div>
                     <div class="card-body">
                         <div class="row">
@@ -328,13 +324,13 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-md-8 col-12">
+                            <div class="col-md-8 col-12 table-responsive">
                                 <div id="chartprestasi" style="width:auto; height:300px;"></div>
                             </div>
                         </div>
                     </div>
                 </div>
-                -->
+                
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Prestasi yang belum diapprove</h4>
@@ -342,7 +338,7 @@
                             
                         </div>
                     </div>
-                    <div class="card-body px-0 pb-0">
+                    <div class="card-body">
                         <div class="table-responsive">
                             <table class='table mb-0' id="table1">
                                 <thead>

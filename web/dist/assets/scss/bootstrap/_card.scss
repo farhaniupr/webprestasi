@@ -263,7 +263,6 @@
 .accordion {
   > .card {
     overflow: hidden;
-
     &:not(:first-of-type) {
       .card-header:first-child {
         @include border-radius(0);

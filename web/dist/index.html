@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
     <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
 </head>
 <body>
@@ -167,13 +168,14 @@
     <section class="section">
         <div class="row mb-2">
             <div class="col-12 col-md-3">
+                <!--
                 <div class="card card-statistic">
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>BALANCE</h3>
+                                <h3 class='card-title'>Mahasiswa</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>$50 </p>
+                                    <p id="mahasiswa">loading</p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
@@ -182,32 +184,79 @@
                         </div>
                     </div>
                 </div>
+                -->
+                <div class="card card-statistic">
+                    <p></p>
+                    <img class="card-body p-0"  src="assets/images/mahasiswa2.png">
+                        <div class="d-flex flex-column">
+                            
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Mahasiswa</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p id="mahasiswa">loading</p>
+                                </div>
+                            </div>
+                        </div>
+                    </img>
+                </div>
             </div>
             <div class="col-12 col-md-3">
+                <!--
                 <div class="card card-statistic">
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Revenue</h3>
+                                <h3 class='card-title'>Prestasi</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>$532,2 </p>
+                                    <p id="prestasi">loading</p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
                                 <canvas id="canvas2" style="height:100px !important"></canvas>
+                              
                             </div>
                         </div>
                     </div>
+                </div>-->
+                <div class="card card-statistic">
+                    <p></p>
+                    <img class="card-body p-0" src="assets/images/prestasi.png">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Prestasi</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p id="prestasi">loading</p>
+                                </div>
+                            </div>                           
+                        </div>
+                    </img>
                 </div>
             </div>
+            
             <div class="col-12 col-md-3">
+                <div class="card card-statistic">
+                    <p></p>
+                    <img class="card-body p-0" src="assets/images/prestasi.png">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Prestasi Non</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p id ="prestasinon">loading</p>
+                                </div>
+                            </div>
+                        </div>
+                    </img>
+                </div>
+            </div>
+            <!--
+                <div class="col-12 col-md-3">
                 <div class="card card-statistic">
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>ORDERS</h3>
+                                <h3 class='card-title'>Prestasi Non</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>1,544 </p>
+                                    <p id ="prestasinon">loading</p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
@@ -217,14 +266,16 @@
                     </div>
                 </div>
             </div>
+            -->
+            <!--
             <div class="col-12 col-md-3">
                 <div class="card card-statistic">
                     <div class="card-body p-0">
                         <div class="d-flex flex-column">
                             <div class='px-3 py-3 d-flex justify-content-between'>
-                                <h3 class='card-title'>Sales Today</h3>
+                                <h3 class='card-title'>Pengabdian</h3>
                                 <div class="card-right d-flex align-items-center">
-                                    <p>423 </p>
+                                    <p id="pengabdian">loading </p>
                                 </div>
                             </div>
                             <div class="chart-wrapper">
@@ -234,11 +285,30 @@
                     </div>
                 </div>
             </div>
+            -->
+            <div class="col-12 col-md-3">
+                <div class="card card-statistic">
+                    <p></p>
+                    <img class="card-body p-0" src="assets/images/pengabdian2.png">
+                        <div class="d-flex flex-column">
+                            <div class='px-3 py-3 d-flex justify-content-between'>
+                                <h3 class='card-title'>Pengabdian</h3>
+                                <div class="card-right d-flex align-items-center">
+                                    <p id="pengabdian">loading </p>
+                                </div>
+                            </div>
+                          
+                        </div>
+                    </img>
+                </div>
+            </div>
+
         </div>    
 
         <div class="row mb-4">
             <div class="col-md-12">
-                        
+                   
+                <!--
                 <div class="card">
                     <div class="card-header">
                         <h3 class='card-heading p-1 pl-3'>Grafik Prestasi dan Non Prestasi</h3>
@@ -264,6 +334,7 @@
                         </div>
                     </div>
                 </div>
+                -->
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h4 class="card-title">Prestasi yang belum diapprove</h4>
@@ -417,6 +488,51 @@
                         }});
                 }});
     }
+
+    $.ajax({
+            url: "http://localhost:8085/countmahasiswa",
+            dataType: "json",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                    //document.getElementById('mahasiswa').value = data.data[0].jumlah; 
+                    $("#mahasiswa").text(data.data[0].jumlah);
+                    console.log(data.data[0].jumlah);
+            }                                              
+    });
+    $.ajax({
+            url: "http://localhost:8085/countprestasi",
+            dataType: "json",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                    //document.getElementById('mahasiswa').value = data.data[0].jumlah; 
+                    $("#prestasi").text(data.data[0].jumlah);
+                    console.log(data.data[0].jumlah);
+            }                                              
+    });
+    $.ajax({
+            url: "http://localhost:8085/countprestasinon",
+            dataType: "json",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                    //document.getElementById('mahasiswa').value = data.data[0].jumlah; 
+                    $("#prestasinon").text(data.data[0].jumlah);
+                    console.log(data.data[0].jumlah);
+            }                                              
+    });
+    $.ajax({
+            url: "http://localhost:8085/countpengabdian",
+            dataType: "json",
+            type: "GET",
+            contentType: "application/json; charset=utf-8",
+            success: function (data) {
+                    //document.getElementById('mahasiswa').value = data.data[0].jumlah; 
+                    $("#pengabdian").text(data.data[0].jumlah);
+                    console.log(data.data[0].jumlah);
+            }                                              
+    });
     </script>
     <script src="assets/js/axios.min.js"></script>
 </body>

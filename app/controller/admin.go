@@ -100,6 +100,10 @@ type Prestasi struct {
 	Status              string     `json:"status"`
 }
 
+type ResultCount struct {
+	Jumlah int `json:"jumlah"`
+}
+
 //Get
 func GetMahasiswa(c *gin.Context) {
 	var mahasiswa []models.Mahasiswa
@@ -1386,10 +1390,25 @@ func EvaluasiFakultasDokterPrestasi(c *gin.Context) {
 }
 
 func GetCountMahasiswa(c *gin.Context) {
-	var mahasiswa []models.Mahasiswa
-	models.DB.Raw("SELECT COUNT(*) as mahasiswa from mahasiswas").Scan(&mahasiswa)
-	c.JSON(http.StatusOK, gin.H{"data": mahasiswa})
+	var ResultCount []ResultCount
+	models.DB.Raw("SELECT COUNT(*) as jumlah from mahasiswas").Scan(&ResultCount)
+	c.JSON(http.StatusOK, gin.H{"data": ResultCount})
 }
 
-//SELECT m.programstudi, count(*) as jumlah FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs GROUP by programstudi
-//SELECT m.fakultas, count(*) as jumlah FROM mahasiswas m INNER join prestasis p on m.idmhs = p.idmhs GROUP by m.fakultas
+func GetCountPrestasi(c *gin.Context) {
+	var ResultCount []ResultCount
+	models.DB.Raw("SELECT COUNT(*) as jumlah from prestasis").Scan(&ResultCount)
+	c.JSON(http.StatusOK, gin.H{"data": ResultCount})
+}
+
+func GetCountPrestasinon(c *gin.Context) {
+	var ResultCount []ResultCount
+	models.DB.Raw("SELECT COUNT(*) as jumlah from prestasinonkompetisis").Scan(&ResultCount)
+	c.JSON(http.StatusOK, gin.H{"data": ResultCount})
+}
+
+func GetCountPengabdian(c *gin.Context) {
+	var ResultCount []ResultCount
+	models.DB.Raw("SELECT COUNT(*) as jumlah from pengabdians").Scan(&ResultCount)
+	c.JSON(http.StatusOK, gin.H{"data": ResultCount})
+}

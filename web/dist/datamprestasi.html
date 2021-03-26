@@ -9,12 +9,12 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
-    <link rel="stylesheet" href="assets/scss/style.css">
+    
     <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
 </head>
 <body>
     <div id="app">
-    <div id="sidebar" class='active'>
+        <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
     <div class="sidebar-header img bg-wrap text-center py-4" style="background-image: url(image/backg.jpg);">
         <img src="assets/images/image857.png" alt="" srcset="">
@@ -31,8 +31,9 @@
                     </a>
                     
                 </li>          
-        
-                <li class="sidebar-item has-sub">
+            
+            
+                <li class="sidebar-item  active has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Data Prestasi</span>
@@ -58,25 +59,27 @@
                     
                 </li>
 
-                <li class="sidebar-item   has-sub">
+                <li class="sidebar-item  has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Evaluasi</span>
                     </a>
                     
                     <ul class="submenu ">
+                        
                         <li>
-                            <a href="evaluasiuniv.html">Universitas</a>
+                            <a href="">Universitas</a>
                         </li>
                         
                         <li>
-                            <a href="evaluasifakultas.html">Fakultas</a>
-                        </li>                        
+                            <a href="">Fakultas</a>
+                        </li>
+                        
                     </ul>
                     
                 </li>
 
-                <li class="sidebar-item  active has-sub">
+                <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Data Master</span>
@@ -84,7 +87,7 @@
 
                     <ul class="submenu ">                        
                         <li>
-                            <a href="datammahasiswa.html">Data Mahasiswa</a>
+                            <a href="kelolamahasiswa.html">Data Mahasiswa</a>
                         </li>                        
                         <li>
                             <a href="kelolaprestasikompetisi.html">Data Prestasi Kompetisi</a>
@@ -152,13 +155,13 @@
                     </ul>
                 </div>
             </nav>
-            <!-- end header-->
             
 <div class="main-content container-fluid">
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Mahasiswa</h3>
+                <h3>Data Prestasi Kompetisi</h3>
+
                 <!--
                 <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
                 -->
@@ -167,7 +170,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Data Master Mahasiswa</li>
+                        <li class="breadcrumb-item active" aria-current="page">Data Master Prestasi Kompetisi</li>
                     </ol>
                 </nav>
             </div>
@@ -180,15 +183,16 @@
             </div>
             <div class="card-body">
                 <p>Link API</p>
-                <input style="width:400px" type="text" value="http://localhost:8085/api.lihatmahasiswa"  disabled/>
-                <a class="btn btn-dark round" href="http://localhost:8085/api.lihatmahasiswa">Lihat Data JSON</a>
+                <input style="width:400px" type="text" value="http://localhost:8085/api.lihatprestasi"  disabled/>
+                <a href="export1.php" class="btn btn-dark round">Export File to Excel</a>
+                <a class="btn btn-dark round" href="http://localhost:8085/api.lihatprestasi">Lihat Data JSON</a>
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
-                            <th>Nama</th>
-                            <th>NIM</th>
-                            <th>Fakultas</th>
-                            <th>Program Studi</th>
+                            <th>Nama Mahasiswa</th>
+                            <th>Nama Kegiatan</th>
+                            <th>Penyelenggara</th>
+                            <th>Kategori Kelompok</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -209,7 +213,15 @@
     <script src="assets/vendors/simple-datatables/simple-datatables.js"></script>
     <script src="assets/js/vendors.js"></script>
     <script src="assets/js/main.js"></script>
+
+
+
+
+    <!--ajax-->
     <script src="assets/vendors/simple-datatables/jquery.min.js"></script>
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.3/js/dataTables.colReorder.min.js"></script>-->
     <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
 
     <script src="assets/js/axios.min.js"></script>
@@ -225,32 +237,52 @@
         }
 
         var arrayReturn = [];
-        
         var token = window.localStorage.getItem('token');
-        
-        $.ajax({
-                url : "http://localhost:8085/lihatmahasiswa",
-                async: true,
+       
+            $.ajax({
+                url : "http://localhost:8085/lihatprestasi",
+                async: false,
                 dataType: 'json',
                 headers:{
                     "Authorization" : token
                 },
                 success: function (data) {
                     //console.log(data.length);
-					for (var i = 0, len = data.data.length; i < len; i++) {
-						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].                      
-                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi]);
-					}
+					for (var i = 0, len = data.data.length; i < len; i++) {                                      
+                        arrayReturn.push([data.data[i].nama, data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].kategori_kegiatan,  
+                            data.data[i].status]);
+                    }
+                    
                 inittable(arrayReturn);
                 }
-        });
+            });
 
-        function inittable(data) {	
-        $('#table1').DataTable( {
+            function Setuju(prestasi){
+                axios.put(`http://localhost:8085/editsetujuprestasi/${prestasi}`, {"status" : "setuju"})
+                .then(response => {
+                console.log('Prestasi-setuju  is edited', prestasi);                
+                location.reload();
+                //$('#table1').DataTable("aaData" : data);
+                //load()
+                location.reload();
+            })
+            .catch(error => console.error(error));
+            }
+
+            function TSetuju(prestasi){
+                axios.put(`http://localhost:8085/edittsetujuprestasi/${prestasi}`, {"status" : "tidak setuju"})
+                .then(response => {
+                console.log('Prestasi-setuju  is edited', prestasi);                
+                location.reload();
+            })
+            .catch(error => console.error(error));
+            }
+
+            function inittable(data) {	
+            $('#table1').DataTable( {
                 "aaData": data
-        } );
-    	}
-
+            } );
+    	    }       
     </script>
 </body>
 </html>

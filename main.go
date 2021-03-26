@@ -42,7 +42,7 @@ func main() {
 	//router.GET("/evaluasifakultas", controla)
 
 	//get
-	router.GET("/lihatmahasiswa", controller.GetMahasiswa)
+	router.GET("/lihatmahasiswa", middleware.Auth, controller.GetMahasiswa)
 	router.GET("/lihatorganisasi", middleware.Auth, controller.GetOrganisasi)
 	router.GET("/lihatpengabdian", middleware.Auth, controller.GetPengabdian)
 	router.GET("/lihatprestasinon", middleware.Auth, controller.GetPrestasinon)
@@ -104,6 +104,25 @@ func main() {
 	//REST API upload -- sdh digabung
 	//router.POST("/upload", controller.Upload)
 	//router.POST("/uploadpdf", controller.Pdfupload)
+
+	//API utk client luar
+	router.GET("/api.evaluasiunivprestasi", controller.EvaluasiUnivPrestasi)
+	router.GET("/api.evaluasiunivpengabdian", controller.EvaluasiUnivPengabdian)
+	router.GET("/api.evaluasiunivprestasinon", controller.EvaluasiUnivPrestasiNon)
+	router.GET("/api.evaluasifakultasKedokteran", controller.EvaluasiFakultasDokterPrestasi)
+	router.GET("/api.evaluasifakultasFisip", controller.EvaluasiFakultasFisipPrestasi)
+	router.GET("/api.evaluasifakultasMtk", controller.EvaluasiFakultasMtkPrestasi)
+	router.GET("/api.evaluasifakultasGuru", controller.EvaluasiFakultasGuruPrestasi)
+	router.GET("/api.evaluasifakultasEkonomi", controller.EvaluasiFakultasEkoPrestasi)
+	router.GET("/api.evaluasifakultasPertanian", controller.EvaluasiFakultasPertaPrestasi)
+	router.GET("/api.evaluasifakultasHukum", controller.EvaluasiFakultasHukumPrestasi)
+	router.GET("/api.evaluasifakultasTeknik", controller.EvaluasiFakultasTeknikPrestasi)
+	router.GET("/api.lihatmahasiswa", controller.GetMahasiswa)
+	router.GET("/api.lihatorganisasi", controller.GetOrganisasi)
+	router.GET("/api.lihatpengabdian", controller.GetPengabdian)
+	router.GET("/api.lihatprestasinon", controller.GetPrestasinon)
+	router.GET("/api.lihatprestasi", controller.GetPrestasi)
+	router.GET("/api.lihatprodi", controller.GetProdi)
 
 	router.POST("/login", controller.Sign)
 	router.POST("/signup", controller.SignUp)

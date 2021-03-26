@@ -9,19 +9,21 @@
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
-        <!--<link rel="stylesheet" href="assets/scss/style.css">
-    <link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
+    <link rel="stylesheet" href="assets/scss/style.css">
+    <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
 </head>
 <body>
     <div id="app">
-        <div id="sidebar" class='active'>
+    <div id="sidebar" class='active'>
             <div class="sidebar-wrapper active">
     <div class="sidebar-header img bg-wrap text-center py-4" style="background-image: url(image/backg.jpg);">
         <img src="assets/images/image857.png" alt="" srcset="">
     </div>
     <div class="sidebar-menu">
         <ul class="menu">
+                 
                 <li class='sidebar-title'>Main Menu</li>
+        
                 <li class="sidebar-item">
                     <a href="index.html" class='sidebar-link'>
                         <i data-feather="home" width="20"></i> 
@@ -29,9 +31,8 @@
                     </a>
                     
                 </li>          
-            
-            
-                <li class="sidebar-item  has-sub">
+        
+                <li class="sidebar-item has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Data Prestasi</span>
@@ -57,27 +58,25 @@
                     
                 </li>
 
-                <li class="sidebar-item active has-sub">
+                <li class="sidebar-item   has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Evaluasi</span>
                     </a>
                     
                     <ul class="submenu ">
-                        
                         <li>
-                            <a href="">Universitas</a>
+                            <a href="evaluasiuniv.html">Universitas</a>
                         </li>
                         
                         <li>
-                            <a href="">Fakultas</a>
-                        </li>
-                        
+                            <a href="evaluasifakultas.html">Fakultas</a>
+                        </li>                        
                     </ul>
                     
                 </li>
 
-                <li class="sidebar-item has-sub">
+                <li class="sidebar-item  active has-sub">
                     <a href="#" class='sidebar-link'>
                         <i data-feather="file-plus" width="20"></i> 
                         <span>Data Master</span>
@@ -85,7 +84,7 @@
 
                     <ul class="submenu ">                        
                         <li>
-                            <a href="kelolamahasiswa.html">Data Mahasiswa</a>
+                            <a href="datammahasiswa.html">Data Mahasiswa</a>
                         </li>                        
                         <li>
                             <a href="kelolaprestasikompetisi.html">Data Prestasi Kompetisi</a>
@@ -139,7 +138,6 @@
                         <li class="dropdown">
                             <a href="#" data-toggle="dropdown" class="nav-link dropdown-toggle nav-link-lg nav-link-user">
                                 <div class="avatar mr-1">
-
                                     <!--<div class="avatar bg-warning mr-3">
                                     <span class="avatar-content">A</span>-->
                                     
@@ -160,7 +158,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Evaluasi</h3>
+                <h3>Data Mahasiswa</h3>
                 <!--
                 <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
                 -->
@@ -169,7 +167,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Evaluasi</li>
+                        <li class="breadcrumb-item active" aria-current="page">Mahasiswa</li>
                     </ol>
                 </nav>
             </div>
@@ -178,18 +176,32 @@
     <section class="section">
         <div class="card">
             <div class="card-header">
-                Data Evaluasi Tahunan Fakultas
+                API Web Service
             </div>
-            <div class="card-body table-responsive">
-                <div id="chartprestasi" style="width:auto; height:300px;"></div> 
-                <!--<div id="chartprestasinon" style="width:auto; height:300px;"></div> -->
+            <div class="card-body">
+                <p>Link API</p>
+                <a class="btn btn-dark round" href="http://localhost:8085/api.lihatmahasiswa">Lihat Data JSON</a>
+                <table class='table table-striped' id="table1" >
+                    <thead>
+                        <tr>
+                            <th>Nama</th>
+                            <th>NIM</th>
+                            <th>Fakultas</th>
+                            <th>Program Studi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
 
     </section>
-</div>          
 </div>
-</div>
+
+          
+        </div>
+    </div>
     <script src="assets/js/feather-icons/feather.min.js"></script>
     <script src="assets/vendors/perfect-scrollbar/perfect-scrollbar.min.js"></script>
     <script src="assets/js/app.js"></script>
@@ -197,91 +209,8 @@
     <script src="assets/js/vendors.js"></script>
     <script src="assets/js/main.js"></script>
     <script src="assets/vendors/simple-datatables/jquery.min.js"></script>
-    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>        
-    <script type="text/javascript" src="assets/js/loader.js"></script>
-    <script src="assets/js/chartquery.min.js"></script>
-    <script>
-        // Visualization API with the 'corechart' package.
-        google.load('visualization', '1', {packages:['corechart'], callback: drawChart});  
+    <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
 
-        function drawChart() {
-        $.ajax({
-                url: "http://localhost:8085/evaluasifakultasEkonomi",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    var data1 = new google.visualization.DataTable();
-                   
-                    data1.addColumn('string', 'year');
-                    data1.addColumn('number', 'ekonomi');
-                        // Define an array and assign columns for the chart.
-                    $.each(data.data, function (index, value) {
-                        console.log(data1.addRow([value.year, value.ekonomi]));
-
-                    });
-                    
-                $.ajax({
-                        url: "http://localhost:8085/evaluasifakultasTeknik",
-                        dataType: "json",
-                        type: "GET",
-                        contentType: "application/json; charset=utf-8",
-                        success: function (data) {
-                            var data2 = new google.visualization.DataTable();
-                            data2.addColumn('string', 'year');
-                            data2.addColumn('number', 'teknik');
-
-                            $.each(data.data, function (index, value) {
-                                data2.addRow([value.year, value.teknik]);
-                            });
-                            var joinedData = google.visualization.data.join(data1, data2, 'full', [[0, 0]], [1], [1]);
-
-                            $.ajax({
-                            url: "http://localhost:8085/evaluasifakultasGuru",
-                            dataType: "json",
-                            type: "GET",
-                            contentType: "application/json; charset=utf-8",
-                            success: function (data) {
-                            var data3 = new google.visualization.DataTable();
-                            data3.addColumn('string', 'year');
-                            data3.addColumn('number', 'keguruan');
-
-                            $.each(data.data, function (index, value) {
-                                data3.addRow([value.year, value.keguruan]);
-                            });
-
-                            var joinedData2 = google.visualization.data.join(joinedData, data3, 'full', [[0, 0]], [1,2], [1]);
-
-                            $.ajax({
-                            url: "http://localhost:8085/evaluasifakultasHukum",
-                            dataType: "json",
-                            type: "GET",
-                            contentType: "application/json; charset=utf-8",
-                            success: function (data) {
-                            var data4 = new google.visualization.DataTable();
-                            data4.addColumn('string', 'year');
-                            data4.addColumn('number', 'hukum');
-                                
-                            if (data != null && data.data !=null){
-                            $.each(data.data, function (index, value) {
-                                data4.addRow([value.year, value.hukum]);
-                            });
-                            }
-                        
-                            var joinedData3 = google.visualization.data.join(joinedData2, data4, 'full', [[0, 0]], [1,2,3], [1]);                                        
-                            var chart = new google.visualization.LineChart(document.querySelector('#chartprestasi'));
-                            chart.draw(joinedData3, {
-                                interpolateNulls: true,
-                                title: 'Evaluasi Universitas',
-                                curveType: 'function',
-                            }); 
-                        }});                      
-                    }});  
-                }});                                              
-            }});
-    }
-    </script>
-    
     <script src="assets/js/axios.min.js"></script>
     <script>
         if ((window.localStorage.getItem('token') == null) && (window.localStorage.getItem('user') == null)){
@@ -293,9 +222,34 @@
             window.localStorage.removeItem('user');
             window.location="login.html"
         }
+
         var arrayReturn = [];
+        
         var token = window.localStorage.getItem('token');
-        console.log(token);            
+        
+        $.ajax({
+                url : "http://localhost:8085/lihatmahasiswa",
+                async: true,
+                dataType: 'json',
+                headers:{
+                    "Authorization" : token
+                },
+                success: function (data) {
+                    //console.log(data.length);
+					for (var i = 0, len = data.data.length; i < len; i++) {
+						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].                      
+                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi]);
+					}
+                inittable(arrayReturn);
+                }
+        });
+
+        function inittable(data) {	
+        $('#table1').DataTable( {
+                "aaData": data
+        } );
+    	}
+
     </script>
 </body>
 </html>

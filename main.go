@@ -1,6 +1,8 @@
 package main
 
 import (
+	"net/http"
+
 	"github.com/gin-gonic/contrib/cors"
 	"github.com/gin-gonic/gin"
 
@@ -8,22 +10,45 @@ import (
 	"prestasi/app/middleware"
 )
 
+// CORS Middleware
+func CORS(c *gin.Context) {
+
+	// First, we add the headers with need to enable CORS
+	// Make sure to adjust these headers to your needs
+	c.Header("Access-Control-Allow-Origin", "*")
+	c.Header("Access-Control-Allow-Methods", "*")
+	c.Header("Access-Control-Allow-Headers", "*")
+	c.Header("Content-Type", "application/json")
+
+	// Second, we handle the OPTIONS problem
+	if c.Request.Method != "OPTIONS" {
+
+		c.Next()
+
+	} else {
+		c.AbortWithStatus(http.StatusOK)
+	}
+}
+
 func main() {
 	router := gin.Default()
 	cfg := cors.DefaultConfig()
 
 	cfg.AllowAllOrigins = true
 	cfg.AllowCredentials = true
-	cfg.AddAllowedHeaders("*")
+	//cfg.AddAllowedHeaders("Access-Control-Allow-Origin", "*")
+	//cfg.AddAllowedHeaders("Authorization")
 
 	cfg.AllowedMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
 	cfg.AllowedHeaders = []string{"Authorization", "Origin", "Accept", "X-Requested-With", " Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers"}
 
 	//cfg.AllowAllOrigins =
 
-	router.Use(cors.New(cfg))
+	//router.Use(cors.New(cfg))
 	//router.Use(gin.Logger())
 	///router.Use(gin.Recovery())
+
+	router.Use(CORS)
 
 	//get evaluasi
 	router.GET("/evaluasiunivprestasi", controller.EvaluasiUnivPrestasi)

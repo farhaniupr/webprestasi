@@ -395,7 +395,8 @@
                 async: false,
                 dataType: 'json',
                 headers:{
-                    "Authorization" : token
+                    "Authorization" : token,
+                    "Access-Control-Allow-Origin":"*"
                 },
                 success: function (data) {
                     //console.log(data.length);
@@ -449,6 +450,10 @@
                 url: "http://localhost:8085/evaluasiunivprestasi",
                 dataType: "json",
                 type: "GET",
+                headers:{
+                    "Authorization" : token,
+                    "Access-Control-Allow-Origin":"*"
+                },
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
                     var data1 = new google.visualization.DataTable();
@@ -464,6 +469,10 @@
                         url: "http://localhost:8085/evaluasiunivprestasinon",
                         dataType: "json",
                         type: "GET",
+                        headers:{
+                            "Authorization" : token,
+                            "Access-Control-Allow-Origin":"*"
+                        },
                         contentType: "application/json; charset=utf-8",
                         success: function (data) {
                             var data2 = new google.visualization.DataTable();
@@ -489,6 +498,11 @@
             url: "http://localhost:8085/countmahasiswa",
             dataType: "json",
             type: "GET",
+            headers:{
+                    "Authorization" : token,
+                    "Access-Control-Allow-Origin":"*"
+                },
+            crossDomain: true,
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                     //document.getElementById('mahasiswa').value = data.data[0].jumlah; 
@@ -500,6 +514,10 @@
             url: "http://localhost:8085/countprestasi",
             dataType: "json",
             type: "GET",
+            headers:{
+                    "Authorization" : token,
+                    "Access-Control-Allow-Origin":"*"
+                },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                     //document.getElementById('mahasiswa').value = data.data[0].jumlah; 
@@ -511,6 +529,10 @@
             url: "http://localhost:8085/countprestasinon",
             dataType: "json",
             type: "GET",
+            headers:{
+                    "Authorization" : token,
+                    "Access-Control-Allow-Origin":"*"
+                },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                     //document.getElementById('mahasiswa').value = data.data[0].jumlah; 
@@ -522,6 +544,10 @@
             url: "http://localhost:8085/countpengabdian",
             dataType: "json",
             type: "GET",
+            headers:{
+                    "Authorization" : token,
+                    "Access-Control-Allow-Origin":"*"
+                },
             contentType: "application/json; charset=utf-8",
             success: function (data) {
                     //document.getElementById('mahasiswa').value = data.data[0].jumlah; 

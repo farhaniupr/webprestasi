@@ -120,7 +120,7 @@ func main() {
 	router.GET("/countmahasiswa", controller.GetCountMahasiswa)
 	router.GET("/countprestasi", controller.GetCountPrestasi)
 	router.GET("/countprestasinon", controller.GetCountPrestasinon)
-	router.GET("/countpengabdian", controller.GetCountPrestasinon)
+	router.GET("/countpengabdian", controller.GetCountPengabdian)
 	//REST API upload -- sdh digabung
 	//router.POST("/upload", controller.Upload)
 	//router.POST("/uploadpdf", controller.Pdfupload)

@@ -186,7 +186,7 @@
                 <input style="width:400px" type="text" value="http://localhost:8085/api.lihatorganisasi"  disabled/>
                 <a href="export2.php" class="btn btn-dark round">Export File to Excel</a>
                 <a class="btn btn-dark round" href="jsonOrganisasi.html">Lihat Data JSON</a>
-                <a class="btn btn-dark round" href="addorganisasi.html">Tambah Data</a>
+                <!--<a class="btn btn-dark round" href="addorganisasi.html">Tambah Data</a>-->
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
@@ -195,6 +195,7 @@
                             <th>Jabatan</th>
                             <th>Periode</th>
                             <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -248,7 +249,8 @@
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
                         arrayReturn.push([data.data[i].nama, data.data[i].nama_organisasi, data.data[i].jabatan_mhs, data.data[i].periode,  
-                            data.data[i].status]);
+                            data.data[i].status,
+                            '<button data-toggle="tooltip" title="Insert" class="btn btn-dark round" onclick="window.location.href=`addorganisasi.html`">Insert</button>']);
                     }
                     
                 inittable(arrayReturn);

@@ -195,6 +195,7 @@
                             <th>Penyelenggara</th>
                             <th>Tempat Kegiatan</th>
                             <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -256,7 +257,7 @@
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
                         arrayReturn.push([data.data[i].nama, data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].tempat_kegiatan,data.data[i].status,
-                        ]);
+                        '<button data-toggle="tooltip" title="Insert" class="btn btn-dark round" onclick="window.location.href=`addprestasinon.html`">Insert</button>']);
                     }
                     
                 inittable(arrayReturn);

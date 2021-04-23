@@ -193,6 +193,7 @@
                             <th>Nama Program</th>
                             <th>Tahun Kegiatan</th>
                             <th>Status</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -248,7 +249,8 @@
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
                         arrayReturn.push([data.data[i].nama, data.data[i].nama_program, data.data[i].tahun_kegiatan, 
-                            data.data[i].status]);
+                            data.data[i].status,
+                            '<button data-toggle="tooltip" title="Insert" class="btn btn-dark round" onclick="window.location.href=`addpengabdian.html`">Insert</button>']);
                     }
                     
                 inittable(arrayReturn);

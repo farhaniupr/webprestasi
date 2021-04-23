@@ -183,7 +183,7 @@
                 <input style="width:400px" type="text" value="http://localhost:8085/api.lihatmahasiswa"  disabled/>
                 <a href="export5.php" class="btn btn-dark round">Export File to Excel</a>
                 <a class="btn btn-dark round" href="jsonMhs.html">Lihat Data JSON</a>
-                <a class="btn btn-dark round" href="addmahasiswa.html">Tambah Data</a>
+                <!--<a class="btn btn-dark round" href="addmahasiswa.html">Tambah Data</a>-->
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
@@ -191,6 +191,7 @@
                             <th>NIM</th>
                             <th>Fakultas</th>
                             <th>Program Studi</th>
+                            <th>Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -241,7 +242,8 @@
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {
 						//var desc = data.data[i].body;   , data.data[i].programstudi, data.data[i].nohp, data.data[i].email, data.data[i].                      
-                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi]);
+                        arrayReturn.push([data.data[i].nama, data.data[i].nim, data.data[i].fakultas, data.data[i].programstudi,
+                        '<button data-toggle="tooltip" title="Insert" class="btn btn-dark round" onclick="window.location.href=`addmahasiswa.html`">Insert</button>']);
 					}
                 inittable(arrayReturn);
                 }

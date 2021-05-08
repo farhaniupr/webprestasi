@@ -181,7 +181,7 @@
                 Data Evaluasi Tahunan Fakultas
             </div>
             <div class="card-body table-responsive">
-                <canvas id="chartprestasi" style="width: auto; height: 50px;"></canvas> 
+                <div id="chartprestasi" style="width:auto; height:300px;"></div> 
                 <!--<div id="chartprestasinon" style="width:auto; height:300px;"></div> -->
             </div>
         </div>
@@ -200,253 +200,109 @@
     <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>        
     <script type="text/javascript" src="assets/js/gstatic2/loader.js"></script>
     <script src="assets/js/chartquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
     <script>
-    //$(document).ready(function() {
-    let year = [];
-    let ekonomi = [];
-    $.ajax({
+        // Visualization API with the 'corechart' package.
+        google.load('visualization', '1', {packages:['corechart'], callback: drawChart});  
+
+        function drawChart() {
+        $.ajax({
                 url: "http://localhost:8085/evaluasifakultasEkonomi",
                 dataType: "json",
                 type: "GET",
                 contentType: "application/json; charset=utf-8",
                 success: function (data) {
-                    //console.log(data.data)
-                    if (data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        year.push(item.year)
-                        ekonomi.push(item.ekonomi)
-                    });
-                    //console.log(year);
-                    //console.log(ekonomi);
-                }                    
-                }
-    });   
-    let teknik = [];
-    $.ajax({
-                url: "http://localhost:8085/evaluasifakultasTeknik",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        teknik.push(item.teknik)
-                    });
-                    //console.log(teknik);
-                    }
-                }
-    });   
-    let fisip = [];
-    $.ajax({
-                url: "http://localhost:8085/evaluasifakultasFisip",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    //console.log("test ", data);
-                    if (data.data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        fisip.push(item.fisip)
-                    });
-                    //console.log(teknik);
-                }
-                }
-    }); 
-    let kedokteran = [];
-    $.ajax({
-                url: "http://localhost:8085/evaluasifakultasKedokteran",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        kedokteran.push(item.kedokteran)
-                    });
-                }
-                    //console.log(teknik);
-                }
-    }); 
-    let matematika = [];
-    $.ajax({
-                url: "http://localhost:8085/evaluasifakultasMtk",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        matematika.push(item.matematika)
-                    });
-                }
-                    //console.log(teknik);
-                }
-    }); 
-    let hukum = [];
-    $.ajax({
-                url: "http://localhost:8085/evaluasifakultasHukum",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        hukum.push(item.hukum)
-                    });
-                }
-                    //console.log(teknik);
-                }
-    }); 
-    let keguruan = [];
-    $.ajax({
-                url: "http://localhost:8085/evaluasifakultasGuru",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        keguruan.push(item.keguruan)
-                    });
-                }
-                    //console.log(teknik);
-                }
-    }); 
-    let pertanian = [];
-    $.ajax({
-                url: "http://localhost:8085/evaluasifakultasPertanian",
-                dataType: "json",
-                type: "GET",
-                contentType: "application/json; charset=utf-8",
-                success: function (data) {
-                    if (data.data != null){
-                    data = JSON.parse(JSON.stringify(data.data));
-                    
-                    data.forEach((item) => {
-                        pertanian.push(item.pertanian)
-                    });
-                }
-                    //console.log(teknik);
-                }
-    }); 
+                    var data1 = new google.visualization.DataTable();
+                   
+                    data1.addColumn('string', 'year');
+                    data1.addColumn('number', 'ekonomi');
+                        // Define an array and assign columns for the chart.
+                    $.each(data.data, function (index, value) {
+                        console.log(data1.addRow([value.year, value.ekonomi]));
 
-    new Chart(document.getElementById("chartprestasi"), {
-    type: 'line',
-    data: {
-    //labels: [2018, 2019, 2020, 2021, 2022, 2023],
-    labels : year,
-    datasets: [{ 
-        data: ekonomi,    
-        label: "Ekonomi",
-        borderColor: "#3e95cd",
-        cubicInterpolationMode: 'monotone',
-        tension: 0.4,
-        pointBorderColor: "#3e95cd",
-        pointBackgroundColor: "#3e95cd",
-        pointBorderWidth: 1,
-        fill: false
-      }, { 
-        data: teknik,
-        label: "Teknik",
-        borderColor: "#8e5ea2",
-        pointBorderColor: "#8e5ea2",
-        pointBackgroundColor: "#8e5ea2",
-        pointBorderWidth: 4,
-        fill: false,
-        tension: 0.8
-      },{ 
-        data: fisip,
-        label: "Fisip",
-        borderColor: "#3cba9f",
-        pointBorderColor: "#3cba9f",
-        pointBackgroundColor: "#3cba9f",
-        pointBorderWidth: 5,
-        fill: false,
-        tension: 0.8
-      },
-      { 
-        data: kedokteran,
-        label: "Kedokteran",
-        borderColor: "#e8c3b9",
-        pointBorderColor: "#e8c3b9",
-        pointBackgroundColor: "#e8c3b9",
-        pointBorderWidth: 6,
-        fill: false,
-        tension: 0.8
-      },
-      { 
-        data: matematika,
-        label: "Matematika",
-        borderColor: "#c45850",
-        pointBorderColor: "#c45850",
-        pointBackgroundColor: "#c45850",
-        pointBorderWidth: 7,
-        fill: false,
-        tension: 0.8
-      },
-      { 
-        data: hukum,
-        label: "Hukum",
-        borderColor: "yellow",
-        pointBorderColor: "yellow",
-        pointBackgroundColor: "yellow",
-        pointBorderWidth: 8,
-        fill: false,
-        tension: 0.8
-      },
-      { 
-        data: keguruan,
-        label: "Keguruan",
-        borderColor: "green",
-        pointBorderColor: "green",
-        pointBackgroundColor: "green",
-        pointBorderWidth: 9,
-        fill: false,
-        tension: 0.8
-      },
-      { 
-        data: pertanian,
-        label: "Pertanian",
-        borderColor: "brown",
-        pointBorderColor: "brown",
-        pointBackgroundColor: "brown",
-        pointBorderWidth: 3,
-        fill: false,
-        tension: 0.8
-      },
-    ]
-  },
-    options: {
-        scales: {
-            yAxes: [{
-               ticks: {
-                  beginAtZero: true
-               }
-            }]
-         }
-    }});
+                    });
+                    
+                $.ajax({
+                        url: "http://localhost:8085/evaluasifakultasTeknik",
+                        dataType: "json",
+                        type: "GET",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            var data2 = new google.visualization.DataTable();
+                            data2.addColumn('string', 'year');
+                            data2.addColumn('number', 'teknik');
+
+                            $.each(data.data, function (index, value) {
+                                data2.addRow([value.year, value.teknik]);
+                            });
+                            var joinedData = google.visualization.data.join(data1, data2, 'full', [[0,0]], [1], [1]);
+
+                            $.ajax({
+                            url: "http://localhost:8085/evaluasifakultasGuru",
+                            dataType: "json",
+                            type: "GET",
+                            contentType: "application/json; charset=utf-8",
+                            success: function (data) {
+                                var data3 = new google.visualization.DataTable();
+                                data3.addColumn('string', 'year');
+                                data3.addColumn('number', 'keguruan');
+
+                                $.each(data.data, function (index, value) {
+                                    data3.addRow([value.year, value.keguruan]);
+                                });
+
+                                var joinedData2 = google.visualization.data.join(joinedData, data3, 'full', [[0, 0]], [1,2], [1]);
+
+                                $.ajax({
+                                url: "http://localhost:8085/evaluasifakultasHukum",
+                                dataType: "json",
+                                type: "GET",
+                                contentType: "application/json; charset=utf-8",
+                                success: function (data) {
+                                    var data4 = new google.visualization.DataTable();
+                                    data4.addColumn('string', 'year');
+                                    data4.addColumn('number', 'hukum');
+                                        
+                                    if (data != null && data.data !=null){
+                                    $.each(data.data, function (index, value) {
+                                        data4.addRow([value.year, value.hukum]);
+                                    });
+                                    }
+                                
+                                    var joinedData3 = google.visualization.data.join(joinedData2, data4, 'full', [[0, 0]], [1,2,3], [1]);    
 
 
-    //var ctx = document.getElementById('chartprestasi').getContext('2d');
-    //new Chart(ctx, options);
-    document.body.style.zoom = "96%"
-    //document.body.style.zoom = "100%"  
+                                    var chart = new google.visualization.LineChart(document.querySelector('#chartprestasi'));
+                                    
+                                    chart.draw(joinedData3, {
+                                        interpolateNulls: true,
+                                        title: 'Evaluasi Universitas',
+                                        curveType: 'function',
+                                    }); 
+                                    
+                                    $.ajax({
+                                    url: "http://localhost:8085/evaluasifakultasHukum",
+                                    dataType: "json",
+                                    type: "GET",
+                                    contentType: "application/json; charset=utf-8",
+                                    success: function (data) {                                    
+                                        var data4 = new google.visualization.DataTable();
+                                        data5.addColumn('string', 'year');
+                                        data5.addColumn('number', 'hukum');
+                                            
+                                        if (data != null && data.data !=null){
+                                        $.each(data.data, function (index, value) {
+                                            data4.addRow([value.year, value.hukum]);
+                                        });
+                                        }
+
+                                        var joinedData4 = google.visualization.data.join(joinedData3, data5, 'full', [[0, 0]], [1,2,3,4], [1]);    
+                                    
+                                    }});
+                                }});                      
+                            }});  
+                        }});                                              
+                    }});
+    }
     </script>
     
     <script src="assets/js/axios.min.js"></script>

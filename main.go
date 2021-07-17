@@ -3,7 +3,6 @@ package main
 import (
 	"net/http"
 
-	"github.com/gin-gonic/contrib/cors"
 	"github.com/gin-gonic/gin"
 
 	"prestasi/app/controller"
@@ -27,21 +26,6 @@ func CORS(c *gin.Context) {
 
 func main() {
 	router := gin.Default()
-	cfg := cors.DefaultConfig()
-
-	cfg.AllowAllOrigins = true
-	cfg.AllowCredentials = true
-	//cfg.AddAllowedHeaders("Access-Control-Allow-Origin", "*")
-	//cfg.AddAllowedHeaders("Authorization")
-
-	cfg.AllowedMethods = []string{"GET", "POST", "PUT", "DELETE", "OPTIONS"}
-	cfg.AllowedHeaders = []string{"Authorization", "Origin", "Accept", "X-Requested-With", " Content-Type", "Access-Control-Request-Method", "Access-Control-Request-Headers"}
-
-	//cfg.AllowAllOrigins =
-
-	//router.Use(cors.New(cfg))
-	//router.Use(gin.Logger())
-	///router.Use(gin.Recovery())
 
 	router.Use(CORS)
 

@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/slide.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
     
     <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
@@ -183,8 +184,19 @@
                <!-- <br></br><a href="export2.php" class="btn icon icon-left btn-success">Export File</a>-->
             </div>
             <div class="card-body">
-                
-                <a class="btn btn-primary" href="addorganisasi.html">Tambah Data</a>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <!-- <a class="btn btn-primary" href="addprestasinon.html">Tambah Data</a> </div> -->
+                    <a class="btn btn-primary" href="addorganisasi.html">Tambah Data</a> </div>
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-3" >
+                        <label class="switch">
+                            <input class="switch-input" type="checkbox" checked/>
+                            <span class="switch-label" data-on="Setuju" data-off="T. Setuju"></span> 
+                            <span class="switch-handle"></span> 
+                        </label>
+                    </div>
+                </div>
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
@@ -223,12 +235,6 @@
 
     <!--ajax-->
     <script src="assets/vendors/simple-datatables/jquery.min.js"></script>-->
-    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.3/js/dataTables.colReorder.min.js"></script>-->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.js"></script>-->
     <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
 
     <script src="assets/js/axios.min.js"></script>
@@ -248,7 +254,7 @@
         var arrayReturn = [];
 
             $.ajax({
-                url : "http://localhost:8085/lihatorganisasi",
+                url : "http://localhost:8085/lihatorganisasi_st",
                 async: false,
                 dataType: 'json',
                 headers:{
@@ -309,6 +315,22 @@
             })
             .catch(error => console.error(error));
             };
+
+            document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelector('input[type="checkbox"]');
+            
+            
+            checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                // do this
+                // console.log('Checked');
+                
+            } else {
+                
+                window.location="kelolaorganisasi_tst.html"
+              }
+            });
+            });
     </script>
 </body>
 </html>

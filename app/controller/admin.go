@@ -125,11 +125,47 @@ func GetOrganisasi(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": organisasi})
 }
 
+func GetOrganisasiST(c *gin.Context) {
+	var organisasi []ResultOrganisasi
+	//models.DB.Find(&organisasi)
+	models.DB.Table("organisasis").Where("status = ?", "setuju").Select("organisasis.idorganisasi, organisasis.idmhs, organisasis.namaorganisasi, organisasis.jabatanmhs, organisasis.periode, organisasis.unggahsk, organisasis.status, mahasiswas.nama").
+		Joins("left join mahasiswas on mahasiswas.idmhs = organisasis.idmhs").Scan(&organisasi)
+	c.JSON(http.StatusOK, gin.H{"data": organisasi})
+}
+
+func GetOrganisasiTST(c *gin.Context) {
+	var organisasi []ResultOrganisasi
+	//models.DB.Find(&organisasi)
+	models.DB.Table("organisasis").Where("status = ?", "").Select("organisasis.idorganisasi, organisasis.idmhs, organisasis.namaorganisasi, organisasis.jabatanmhs, organisasis.periode, organisasis.unggahsk, organisasis.status, mahasiswas.nama").
+		Joins("left join mahasiswas on mahasiswas.idmhs = organisasis.idmhs").Scan(&organisasi)
+	c.JSON(http.StatusOK, gin.H{"data": organisasi})
+}
+
 func GetPengabdian(c *gin.Context) {
 	var pengabdian []Pengabdian
 	//models.DB.Find(&pengabdian)
 
 	models.DB.Table("pengabdians").Select("pengabdians.idpengabdian, pengabdians.idmhs, pengabdians.namaprogram, pengabdians.tahunkegiatan, pengabdians.unggahsurat, pengabdians.status, mahasiswas.nama, mahasiswas.idmhs").
+		Joins("left join mahasiswas on mahasiswas.idmhs = pengabdians.idmhs").Scan(&pengabdian)
+
+	c.JSON(http.StatusOK, gin.H{"data": pengabdian})
+}
+
+func GetPengabdianTST(c *gin.Context) {
+	var pengabdian []Pengabdian
+	//models.DB.Find(&pengabdian)
+
+	models.DB.Table("pengabdians").Where("status = ?", "").Select("pengabdians.idpengabdian, pengabdians.idmhs, pengabdians.namaprogram, pengabdians.tahunkegiatan, pengabdians.unggahsurat, pengabdians.status, mahasiswas.nama, mahasiswas.idmhs").
+		Joins("left join mahasiswas on mahasiswas.idmhs = pengabdians.idmhs").Scan(&pengabdian)
+
+	c.JSON(http.StatusOK, gin.H{"data": pengabdian})
+}
+
+func GetPengabdianST(c *gin.Context) {
+	var pengabdian []Pengabdian
+	//models.DB.Find(&pengabdian)
+
+	models.DB.Table("pengabdians").Where("status = ?", "setuju").Select("pengabdians.idpengabdian, pengabdians.idmhs, pengabdians.namaprogram, pengabdians.tahunkegiatan, pengabdians.unggahsurat, pengabdians.status, mahasiswas.nama, mahasiswas.idmhs").
 		Joins("left join mahasiswas on mahasiswas.idmhs = pengabdians.idmhs").Scan(&pengabdian)
 
 	c.JSON(http.StatusOK, gin.H{"data": pengabdian})
@@ -144,7 +180,25 @@ func GetPrestasi(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{"data": result})
 }
 
-func GetPrestasiCondition(c *gin.Context) {
+func GetPrestasiConditionTS(c *gin.Context) {
+	//var prestasi []models.Prestasi
+	var result []Result
+
+	models.DB.Table("prestasis").Select("prestasis.idmhs, prestasis.namakegiatan, prestasis.jumlah, mahasiswas.nama, prestasis.idprestasi, prestasis.namapenyelenggaraan, prestasis.url, prestasis.kategorikegiatan, prestasis.tingkatkegiatan, prestasis.hasilkegiatan, prestasis.tempatkegiatan, prestasis.tanggalawal, prestasis.tanggalakhir, prestasis.unggahsertifikat, prestasis.unggahsurattugas, prestasis.unggahfoto, prestasis.status").
+		Joins("left join mahasiswas on mahasiswas.idmhs = prestasis.idmhs").Where("status = ?", "").Scan(&result)
+	c.JSON(http.StatusOK, gin.H{"data": result})
+}
+
+func GetPrestasiConditionST(c *gin.Context) {
+	//var prestasi []models.Prestasi
+	var result []Result
+
+	models.DB.Table("prestasis").Select("prestasis.idmhs, prestasis.namakegiatan, prestasis.jumlah, mahasiswas.nama, prestasis.idprestasi, prestasis.namapenyelenggaraan, prestasis.url, prestasis.kategorikegiatan, prestasis.tingkatkegiatan, prestasis.hasilkegiatan, prestasis.tempatkegiatan, prestasis.tanggalawal, prestasis.tanggalakhir, prestasis.unggahsertifikat, prestasis.unggahsurattugas, prestasis.unggahfoto, prestasis.status").
+		Joins("left join mahasiswas on mahasiswas.idmhs = prestasis.idmhs").Where("status = ?", "setuju").Scan(&result)
+	c.JSON(http.StatusOK, gin.H{"data": result})
+}
+
+func GetPrestasiConditionTST(c *gin.Context) {
 	//var prestasi []models.Prestasi
 	var result []Result
 
@@ -159,6 +213,24 @@ func GetPrestasinon(c *gin.Context) {
 
 	models.DB.Table("prestasinonkompetisis").Select("prestasinonkompetisis.idmhs, prestasinonkompetisis.namakegiatan, mahasiswas.nama, prestasinonkompetisis.idprestasinon, prestasinonkompetisis.namapenyelenggaraan,	 prestasinonkompetisis.tempatkegiatan, prestasinonkompetisis.tanggalawal, prestasinonkompetisis.tanggalakhir, prestasinonkompetisis.unggahsertifikat, prestasinonkompetisis.unggahsurattugas, prestasinonkompetisis.unggahfoto, prestasinonkompetisis.status").
 		Joins("left join mahasiswas on mahasiswas.idmhs = prestasinonkompetisis.idmhs").Scan(&result)
+	c.JSON(http.StatusOK, gin.H{"data": result})
+}
+
+func GetPrestasinonST(c *gin.Context) {
+	//var prestasi []models.Prestasi
+	var result []Prestasinonkompetisi
+
+	models.DB.Table("prestasinonkompetisis").Select("prestasinonkompetisis.idmhs, prestasinonkompetisis.namakegiatan, mahasiswas.nama, prestasinonkompetisis.idprestasinon, prestasinonkompetisis.namapenyelenggaraan,	 prestasinonkompetisis.tempatkegiatan, prestasinonkompetisis.tanggalawal, prestasinonkompetisis.tanggalakhir, prestasinonkompetisis.unggahsertifikat, prestasinonkompetisis.unggahsurattugas, prestasinonkompetisis.unggahfoto, prestasinonkompetisis.status").
+		Joins("left join mahasiswas on mahasiswas.idmhs = prestasinonkompetisis.idmhs").Where("status = ?", "setuju").Scan(&result)
+	c.JSON(http.StatusOK, gin.H{"data": result})
+}
+
+func GetPrestasinonTST(c *gin.Context) {
+	//var prestasi []models.Prestasi
+	var result []Prestasinonkompetisi
+
+	models.DB.Table("prestasinonkompetisis").Select("prestasinonkompetisis.idmhs, prestasinonkompetisis.namakegiatan, mahasiswas.nama, prestasinonkompetisis.idprestasinon, prestasinonkompetisis.namapenyelenggaraan,	 prestasinonkompetisis.tempatkegiatan, prestasinonkompetisis.tanggalawal, prestasinonkompetisis.tanggalakhir, prestasinonkompetisis.unggahsertifikat, prestasinonkompetisis.unggahsurattugas, prestasinonkompetisis.unggahfoto, prestasinonkompetisis.status").
+		Joins("left join mahasiswas on mahasiswas.idmhs = prestasinonkompetisis.idmhs").Where("status = ?", "").Scan(&result)
 	c.JSON(http.StatusOK, gin.H{"data": result})
 }
 

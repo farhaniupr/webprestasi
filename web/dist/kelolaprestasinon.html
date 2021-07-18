@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/slide.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
     
     <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
@@ -183,7 +184,19 @@
             <!--<br></br><a href="export3.php" class="btn icon icon-left btn-success">Export File</a>-->
             </div>
             <div class="card-body">
-                <a class="btn btn-primary" href="addprestasinon.html">Tambah Data</a>
+                
+                <div class="row">
+                    <div class="col-sm-3">
+                    <a class="btn btn-primary" href="addprestasinon.html">Tambah Data</a> </div>
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-3" >
+                        <label class="switch">
+                            <input class="switch-input" type="checkbox" checked/>
+                            <span class="switch-label" data-on="Setuju" data-off="T. Setuju"></span> 
+                            <span class="switch-handle"></span> 
+                        </label>
+                    </div>
+                </div>
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
@@ -248,7 +261,7 @@
         var token = window.localStorage.getItem('token');
         
         $.ajax({
-                url : "http://localhost:8085/lihatprestasinon",
+                url : "http://localhost:8085/lihatprestasinon_st",
                 async: false,
                 dataType: 'json',
                 headers:{
@@ -313,6 +326,32 @@
             .catch(error => console.error(error));
             };
 
+            function DeleteM(prestasi) {
+            axios.delete(`http://localhost:8085/deleteprestasi/${prestasi}`)
+                .then(response => {
+                console.log('Prestasi is removed', prestasi);                
+                
+                location.reload();
+            })
+            .catch(error => console.error(error));
+            };
+
+            document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelector('input[type="checkbox"]');
+            
+            
+            checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                // do this
+                // console.log('Checked');
+                
+            } else {
+                // do that
+                // console.log('Not checked');
+                window.location="kelolaprestasinon_tst.html"
+              }
+            });
+            });
     </script>
 </body>
 </html>

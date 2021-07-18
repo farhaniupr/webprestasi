@@ -190,7 +190,7 @@
                     <div class="col-sm-6"></div>
                     <div class="col-sm-3" >
                         <label class="switch">
-                            <input class="switch-input" type="checkbox" checked/>
+                            <input class="switch-input" type="checkbox"/>
                             <span class="switch-label" data-on="Setuju" data-off="T. Setuju"></span> 
                             <span class="switch-handle"></span> 
                         </label>
@@ -260,7 +260,7 @@
         var token = window.localStorage.getItem('token');
        
             $.ajax({
-                url : "http://localhost:8085/lihatprestasi_st",
+                url : "http://localhost:8085/lihatprestasi_tst",
                 async: false,
                 dataType: 'json',
                 headers:{
@@ -332,11 +332,11 @@
             if (checkbox.checked) {
                 // do this
                 // console.log('Checked');
+                window.location="kelolaprestasikompetisi.html"
                 
             } else {
                 // do that
                 // console.log('Not checked');
-                window.location="kelolaprestasikompetisi_tst.html"
               }
             });
             });

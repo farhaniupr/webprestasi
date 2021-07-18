@@ -161,7 +161,7 @@
     <div class="page-title">
         <div class="row">
             <div class="col-12 col-md-6 order-md-1 order-last">
-                <h3>Data Prestasi Kompetisi</h3>
+                <h3>Data Prestasi Non-Kompetisi</h3>
 
                 <!--
                 <p class="text-subtitle text-muted">We use 'simple-datatables' made by @fiduswriter. You can check the full documentation <a href="https://github.com/fiduswriter/Simple-DataTables/wiki">here</a>.</p>
@@ -171,7 +171,7 @@
                 <nav aria-label="breadcrumb" class='breadcrumb-header'>
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a href="index.html">Dashboard</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Prestasi Kompetisi</li>
+                        <li class="breadcrumb-item active" aria-current="page">Prestasi Non-Kompetisi</li>
                     </ol>
                 </nav>
             </div>
@@ -181,28 +181,29 @@
         <div class="card">
             <div class="card-header">
                 Data table
-            <!--  <br></br><a href="export1.php" class="btn icon icon-left btn-success">Export File</a> -->
+            <!--<br></br><a href="export3.php" class="btn icon icon-left btn-success">Export File</a>-->
             </div>
             <div class="card-body">
+                
                 <div class="row">
                     <div class="col-sm-3">
-                    <a class="btn btn-primary" href="addprestasi.html">Tambah Data</a></div>                                 
+                    <a class="btn btn-primary" href="addprestasinon.html">Tambah Data</a> </div>
                     <div class="col-sm-6"></div>
                     <div class="col-sm-3" >
                         <label class="switch">
-                            <input class="switch-input" type="checkbox" checked/>
+                            <input class="switch-input" type="checkbox"/>
                             <span class="switch-label" data-on="Setuju" data-off="T. Setuju"></span> 
                             <span class="switch-handle"></span> 
                         </label>
                     </div>
-                </div>           
+                </div>
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
                             <th>Nama Mahasiswa</th>
                             <th>Nama Kegiatan</th>
                             <th>Penyelenggara</th>
-                            <th>Kategori Kelompok</th>
+                            <th>Tempat Kegiatan</th>
                             <th>Sertifikat</th>
                             <th>Surat Tugas</th>
                             <th>Foto</th>
@@ -235,13 +236,7 @@
 
 
     <!--ajax-->
-    <script src="assets/vendors/simple-datatables/jquery.min.js"></script>
-    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.3/js/dataTables.colReorder.min.js"></script>-->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.js"></script>-->
+    <script src="assets/vendors/simple-datatables/jquery.min.js"></script>-->
     <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
 
     <script src="assets/js/axios.min.js"></script>
@@ -258,9 +253,9 @@
 
         var arrayReturn = [];
         var token = window.localStorage.getItem('token');
-       
-            $.ajax({
-                url : "http://localhost:8085/lihatprestasi_st",
+        
+        $.ajax({
+                url : "http://localhost:8085/lihatprestasinon_tst",
                 async: false,
                 dataType: 'json',
                 headers:{
@@ -269,25 +264,25 @@
                 success: function (data) {
                     //console.log(data.length);
 					for (var i = 0, len = data.data.length; i < len; i++) {                                      
-                        arrayReturn.push([data.data[i].nama, data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].kategori_kegiatan, 
+                        arrayReturn.push([data.data[i].nama, data.data[i].nama_kegiatan, data.data[i].nama_penyelenggaraan, data.data[i].tempat_kegiatan, 
                             '<center>'+data.data[i].unggah_sertifikat+'<br></br><a target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_sertifikat+'">Lihat</a>', 
                             '<center>'+data.data[i].unggah_surat_tugas+'<br></br><a target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_surat_tugas+'">Lihat</a>', 
                             '<center>'+data.data[i].unggah_foto+'<br></br><a target="_blank" rel="noopener noreferrer" class="btn btn-sm btn-warning" href="image/'+data.data[i].unggah_foto+'">Lihat</a>', 
                             data.data[i].status,
-                            '<center><a href="#" onclick="return TSetuju('+data.data[i].Idprestasi+')" class="btn icon icon-left btn-danger"><i data-feather="alert-circle"></i>Tidak</a>'+'<br></br>'+
-                            '<a href="#" onclick="return Setuju('+data.data[i].Idprestasi+')" class="btn icon icon-left btn-success"><i data-feather="check-circle"></i>Setuju</a>', 
-                            '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editprestasi.html?id='+data.data[i].Idprestasi+'`" >Edit</button>'+"<br></br> "
-                            +'<button onclick="DeleteM('+data.data[i].Idprestasi+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
+                            '<center><a href="#" onclick="return TSetuju('+data.data[i].Idprestasinon+')" class="btn icon icon-left btn-danger"><i data-feather="alert-circle"></i>Tidak</a>'+'<br></br>'+
+                            '<a href="#" onclick="return Setuju('+data.data[i].Idprestasinon+')" class="btn icon icon-left btn-success"><i data-feather="check-circle"></i>Setuju</a>', 
+                            '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editprestasinon.html?id='+data.data[i].Idprestasinon+'`" >Edit</button>'+"<br></br> "
+                            +'<button onclick="DeleteM('+data.data[i].Idprestasinon+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
                     }
                     
                 inittable(arrayReturn);
                 }
             });
 
-            function Setuju(prestasi){
-                axios.put(`http://localhost:8085/editsetujuprestasi/${prestasi}`, {"status" : "setuju"})
+            function Setuju(prestasinon){
+                axios.put(`http://localhost:8085/editsetujuprestasinon/${prestasinon}`, {"status" : "setuju"})
                 .then(response => {
-                console.log('Prestasi-setuju  is edited', prestasi);                
+                console.log('Prestasinon-setuju  is edited', prestasinon);                
                 location.reload();
                 //$('#table1').DataTable("aaData" : data);
                 //load()
@@ -296,10 +291,11 @@
             .catch(error => console.error(error));
             }
 
-            function TSetuju(prestasi){
-                axios.put(`http://localhost:8085/edittsetujuprestasi/${prestasi}`, {"status" : "tidak setuju"})
+
+            function TSetuju(prestasinon){
+                axios.put(`http://localhost:8085/edittsetujuprestasinon/${prestasinon}`, {"status" : "tidak setuju"})
                 .then(response => {
-                console.log('Prestasi-setuju  is edited', prestasi);                
+                console.log('Prestasinon-setuju  is edited', prestasinon);                
                 location.reload();
             })
             .catch(error => console.error(error));
@@ -313,6 +309,16 @@
                // }
             } );
     	    }
+
+            function DeleteM(prestasinon) {
+            axios.delete(`http://localhost:8085/deleteprestasinon/${prestasinon}`)
+                .then(response => {
+                console.log('Prestasinon is removed', prestasinon);                
+                
+                location.reload();
+            })
+            .catch(error => console.error(error));
+            };
 
             function DeleteM(prestasi) {
             axios.delete(`http://localhost:8085/deleteprestasi/${prestasi}`)
@@ -332,15 +338,14 @@
             if (checkbox.checked) {
                 // do this
                 // console.log('Checked');
+                window.location="kelolaprestasinon.html"
                 
             } else {
                 // do that
                 // console.log('Not checked');
-                window.location="kelolaprestasikompetisi_tst.html"
               }
             });
             });
-       
     </script>
 </body>
 </html>

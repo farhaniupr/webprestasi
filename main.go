@@ -54,7 +54,20 @@ func main() {
 	router.GET("/lihatprodi", middleware.Auth, controller.GetProdi)
 
 	//get for dashboard
-	router.GET("/lihatprestasidash", middleware.Auth, controller.GetPrestasiCondition)
+	router.GET("/lihatprestasidash", middleware.Auth, controller.GetPrestasiConditionTS)
+
+	//get for conidition
+	router.GET("/lihatprestasi_st", middleware.Auth, controller.GetPrestasiConditionST)
+	router.GET("/lihatprestasi_tst", middleware.Auth, controller.GetPrestasiConditionTST)
+
+	router.GET("/lihatpengabdian_tst", middleware.Auth, controller.GetPengabdianTST)
+	router.GET("/lihatpengabdian_st", middleware.Auth, controller.GetPengabdianST)
+
+	router.GET("/lihatprestasinon_st", middleware.Auth, controller.GetPrestasinonST)
+	router.GET("/lihatprestasinon_tst", middleware.Auth, controller.GetPrestasinonTST)
+
+	router.GET("/lihatorganisasi_st", middleware.Auth, controller.GetOrganisasiST)
+	router.GET("/lihatorganisasi_tst", middleware.Auth, controller.GetOrganisasiTST)
 
 	//get 1 row
 	router.GET("/lihatmahasiswa/:idmhs", middleware.Auth, controller.GetOneMahasiswa)

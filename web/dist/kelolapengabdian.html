@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/vendors/simple-datatables/style.css">
     <link rel="stylesheet" href="assets/vendors/perfect-scrollbar/perfect-scrollbar.css">
     <link rel="stylesheet" href="assets/css/app.css">
+    <link rel="stylesheet" href="assets/css/slide.css">
     <link rel="shortcut icon" href="assets/images/logoupr.png" type="image/x-icon">
     
     <!--<link rel="stylesheet" href="assets/vendors/Datatable/datatables.css">-->
@@ -183,7 +184,18 @@
                <!-- <br></br><a href="export4.php" class="btn icon icon-left btn-success">Export File</a>-->
             </div>
             <div class="card-body">
-                <a class="btn btn-primary" href="addpengabdian.html ">Tambah Data</a>
+                <div class="row">
+                    <div class="col-sm-3">
+                    <a class="btn btn-primary" href="addpengabdian.html">Tambah Data</a></div>             
+                    <div class="col-sm-6"></div>
+                    <div class="col-sm-3" >
+                        <label class="switch">
+                            <input class="switch-input" type="checkbox" checked/>
+                            <span class="switch-label" data-on="Setuju" data-off="T. Setuju"></span> 
+                            <span class="switch-handle"></span> 
+                        </label>
+                    </div>
+                </div>             
                 <table class='table table-striped' id="table1" >
                     <thead>
                         <tr>
@@ -219,14 +231,7 @@
 
 
 
-    <!--ajax-->
     <script src="assets/vendors/simple-datatables/jquery.min.js"></script>-->
-    <!--<script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
-    <script type="text/javascript" src="https://cdn.datatables.net/colreorder/1.5.3/js/dataTables.colReorder.min.js"></script>-->
-    <!--<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.css"/>
-    <script type="text/javascript" src="https://cdn.datatables.net/r/dt/dt-1.10.9/datatables.min.js"></script>-->
     <script type="text/javascript" src="assets/vendors/simple-datatables/sdatatables.min.js"></script>
 
     <script src="assets/js/axios.min.js"></script>
@@ -245,7 +250,7 @@
         var token = window.localStorage.getItem('token');
         
             $.ajax({
-                url : "http://localhost:8085/lihatpengabdian",
+                url : "http://localhost:8085/lihatpengabdian_st",
                 async: false,
                 dataType: 'json',
                 headers:{
@@ -261,11 +266,18 @@
                             '<a href="#" onclick="return Setuju('+data.data[i].Idpengabdian+')" class="btn icon icon-left btn-success"><i data-feather="check-circle"></i>Setuju</a>', 
                             '<center><button data-toggle="tooltip" title="Edit" class="btn btn-dark round" onclick="window.location.href=`editpengabdian.html?id='+data.data[i].Idpengabdian+'`" >Edit</button>'+"<br></br> "
                             +'<button onclick="DeleteM('+data.data[i].Idpengabdian+')" data-toggle="tooltip" class="btn btn-dark round"">Hapus</button>']);
-                    }
-                    
-                inittable(arrayReturn);
+                    }                    
+                //inittable(arrayReturn);
+                $('#table1').DataTable( {
+                "aaData": arrayReturn
+                })
+                //$('#table1').DataTable().clear().destroy();
                 }
             });
+
+            function sleep(ms) {
+                return new Promise(resolve => setTimeout(resolve, ms));
+            }
 
             function Setuju(pengabdian){
                 axios.put(`http://localhost:8085/editsetujupengabdian/${pengabdian}`, {"status" : "setuju"})
@@ -306,7 +318,27 @@
             })
             .catch(error => console.error(error));
             };
+     
             
+
+            document.addEventListener('DOMContentLoaded', function () {
+            var checkbox = document.querySelector('input[type="checkbox"]');
+            
+            
+            checkbox.addEventListener('change', function () {
+            if (checkbox.checked) {
+                // do this
+                // console.log('Checked');
+                
+            } else {
+                // do that
+                // console.log('Not checked');
+                window.location="kelolapengabdian_tst.html"
+              }
+            });
+            });
+            
+
     </script>
 </body>
 </html>
